@@ -11,7 +11,7 @@ import android.view.ViewGroup;
  * Created by pampers on 12/19/2017.
  */
 
-public class Profili extends Fragment {
+public class ProfilFragment extends Fragment {
 
 
     @Nullable
@@ -26,7 +26,7 @@ public class Profili extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Profili");
+        getActivity().setTitle("ProfilFragment");
 
 
     }

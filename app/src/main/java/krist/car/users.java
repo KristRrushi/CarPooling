@@ -11,15 +11,11 @@ public class users {
     String id;
 
 
-
-
     public users(String id,String userName, String userPhone) {
 
         this.id = id;
         this.userName = userName;
         this.userPhone = userPhone;
-
-
     }
 
 

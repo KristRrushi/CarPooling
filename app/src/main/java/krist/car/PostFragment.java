@@ -31,7 +31,7 @@ import java.util.Locale;
  * Created by pampers on 12/19/2017.
  */
 
-public class Posto extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class PostFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     Button btnPost;
     Calendar myCalendar = Calendar.getInstance();
@@ -43,7 +43,7 @@ public class Posto extends Fragment implements AdapterView.OnItemSelectedListene
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference dataPost = database.getReference("trips");
 
-    public Posto(){
+    public PostFragment(){
 
     }
 
@@ -64,8 +64,8 @@ public class Posto extends Fragment implements AdapterView.OnItemSelectedListene
         super.onViewCreated(view, savedInstanceState);
 
 
-        txtTime = (TextView) getView().findViewById(R.id.txtDate);
-        txtDate = (TextView) getView().findViewById(R.id.txtTime);
+        txtTime = (TextView) getView().findViewById(R.id.txtTime);
+        txtDate = (TextView) getView().findViewById(R.id.txtDate);
         sStartCity = (Spinner) getView().findViewById(R.id.listStart);
         sEndCity = (Spinner) getView().findViewById(R.id.listEnd);
         sSeats = (Spinner) getView().findViewById(R.id.listSeats);
@@ -216,19 +216,15 @@ public class Posto extends Fragment implements AdapterView.OnItemSelectedListene
         final String mberritja = sEndCity.getSelectedItem().toString();
         final String vendet = sSeats.getSelectedItem().toString();
 
-       /* FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
         idauth.getUid();
 
-        String id = idauth.getUid();*/
+        String id = idauth.getUid();
 
-        usersPost userspost = new usersPost(nisja,mberritja, data, ora, vendet);
-
-
-        dataPost.setValue(userspost);
+        TripsModel userspost = new TripsModel(id,nisja,mberritja, data, ora, vendet);
 
 
-
-
+        dataPost.push().setValue(userspost);
 
 
     }

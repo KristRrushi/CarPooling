@@ -1,10 +1,14 @@
 package krist.car;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by pampers on 12/19/2017.
  */
 
-public class usersPost {
+
+public class TripsModel {
 
 
     private String vNisja;
@@ -12,16 +16,19 @@ public class usersPost {
     private  String data;
     private   String ora;
     private String vendet;
+    private String idShofer;
 
-    public  usersPost (String vNisja, String vMberritja, String data, String ora, String vendet){
 
+    public TripsModel(){}
 
+    public TripsModel(String idShofer,String vNisja, String vMberritja, String data, String ora, String vendet){
+
+        this.idShofer = idShofer;
         this.vNisja = vNisja;
         this.vMberritja = vMberritja;
         this.data = data;
         this.ora = ora;
         this.vendet = vendet;
-
 
     }
 
@@ -45,4 +52,10 @@ public class usersPost {
     public String getVendet() {
         return vendet;
     }
+
+    public String getIdShofer() {
+        return idShofer;
+    }
+
+
 }

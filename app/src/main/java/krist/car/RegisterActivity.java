@@ -39,11 +39,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registeractivity);
 
-        txtEmail = (EditText) findViewById(R.id.emailRegister);
-        txtPass = (EditText) findViewById(R.id.passRegister);
-        txtName = (EditText) findViewById(R.id.nameRegister);
-        txtPhone = (EditText) findViewById(R.id.phoneRegister);
-        btnRegister = (Button) findViewById(R.id.buttonRegister);
+        txtEmail =  findViewById(R.id.emailRegister);
+        txtPass =  findViewById(R.id.passRegister);
+        txtName =  findViewById(R.id.nameRegister);
+        txtPhone =  findViewById(R.id.phoneRegister);
+        btnRegister =  findViewById(R.id.buttonRegister);
         mAuth = FirebaseAuth.getInstance();
         databaseUsers = FirebaseDatabase.getInstance().getReference("users");
 
@@ -73,50 +73,47 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private void registerUser() {
 
-        final String email1 = txtEmail.getText().toString().trim();
-        final String pass2 = txtPass.getText().toString().trim();
+        final String email = txtEmail.getText().toString().trim();
+        final String pass = txtPass.getText().toString().trim();
         final String name = txtName.getText().toString().trim();
         final String phone = txtPhone.getText().toString().trim();
 
         if (!TextUtils.isEmpty(name)) {
 
 
-            FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
-            idauth.getUid();
+            mAuth.createUserWithEmailAndPassword(email, pass)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Intent myIntent = new Intent(RegisterActivity.this,
+                                        MainActivity.class);
 
-            String id = idauth.getUid();
+                                Toast.makeText(RegisterActivity.this, "suskese", Toast.LENGTH_SHORT).show();
+
+                                FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
+                                idauth.getUid();
+                                String id = idauth.getUid();
+                                users users = new users(id, name, phone);
+
+                                databaseUsers.child(id).setValue(users);
+
+                                startActivity(myIntent);
+                            }
+                            else Toast.makeText(RegisterActivity.this,task.getException().getMessage() , Toast.LENGTH_LONG).show();
+                        }
+                    });
 
 
-
-
-            users users = new users(id, name, phone);
-
-            databaseUsers.child(id).setValue(users);
 
 
         }
         if (TextUtils.isEmpty(name)) {
             //pass bosh
             Toast.makeText(this, "Fusni emrin dhe mbiemrin", Toast.LENGTH_SHORT).show();
-
-            return;
         }
 
 
-        mAuth.createUserWithEmailAndPassword(email1, pass2)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Intent myIntent = new Intent(RegisterActivity.this,
-                                    MainActivity.class);
-
-                            Toast.makeText(RegisterActivity.this, "suskese", Toast.LENGTH_SHORT).show();
-
-                            startActivity(myIntent);
-                        }
-                    }
-                });
 
 
     }

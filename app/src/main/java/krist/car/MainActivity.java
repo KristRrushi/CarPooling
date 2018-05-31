@@ -1,7 +1,5 @@
 package krist.car;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -83,13 +81,13 @@ public class MainActivity extends AppCompatActivity
 
         switch (id){
             case R.id.nav_menu1:
-                fragment = new Kerko();
+                fragment = new KerkoFragment();
                 break;
             case R.id.nav_menu2:
-                fragment = new Posto();
+                fragment = new PostFragment();
                 break;
             case R.id.nav_menu3:
-                fragment = new Profili();
+                fragment = new ProfilFragment();
                 break;
         }
 

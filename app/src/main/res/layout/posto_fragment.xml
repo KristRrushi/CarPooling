@@ -1,0 +1,113 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <Spinner
+        android:id="@+id/listStart"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_alignBottom="@+id/tvStart"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Spinner
+        android:id="@+id/listEnd"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvEnd"
+        android:layout_alignLeft="@+id/listStart"
+        android:layout_alignStart="@+id/listStart" />
+
+    <TextView
+        android:id="@+id/tvStart"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Qyteti i nisjes"
+        android:textSize="23dp" />
+
+    <TextView
+        android:id="@+id/tvEnd"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Destinacioni"
+        android:textSize="23dp"
+        android:layout_below="@+id/listStart"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="45dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtTime"
+        android:textSize="23dp"
+        android:hint="Zgjidh Oren"
+        android:layout_marginTop="49dp"
+        android:focusable="false"
+        android:longClickable="false"
+        android:background="#CCCCCC"
+        android:layout_below="@+id/listEnd"
+        android:layout_alignRight="@+id/listEnd"
+        android:layout_alignEnd="@+id/listEnd" />
+
+    <EditText
+        android:id="@+id/txtDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Zgjidh Daten"
+        android:textSize="23dp"
+        android:focusable="false"
+        android:longClickable="false"
+        android:background="#CCCCCC"
+        android:layout_alignBaseline="@+id/txtTime"
+        android:layout_alignBottom="@+id/txtTime"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/btnPostPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Posto"
+        android:onClick="show"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/tvEnd"
+        android:layout_toEndOf="@+id/tvEnd"
+        android:layout_marginBottom="61dp" />
+
+    <Spinner
+        android:id="@+id/listSeats"
+        android:layout_width="100dp"
+
+        android:layout_height="40dp"
+        android:layout_marginBottom="62dp"
+
+        android:layout_above="@+id/btnPostPost"
+        android:layout_alignLeft="@+id/btnPostPost"
+        android:layout_alignStart="@+id/btnPostPost"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvSeats"
+        android:textSize="23dp"
+        android:text="Nr i vendeve"
+
+        android:layout_alignBottom="@+id/listSeats"
+        android:layout_alignRight="@+id/txtDate"
+        android:layout_alignEnd="@+id/txtDate"
+        android:layout_alignTop="@+id/listSeats" />
+
+</RelativeLayout>

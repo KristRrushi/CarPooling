@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="krist.car.RegisterActivity">
+
+    <EditText
+        android:id="@+id/nameRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Emer Mbiemer"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_above="@+id/phoneRegister"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp" />
+
+    <EditText
+        android:id="@+id/passRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberPassword"
+        android:hint="Fjalekalimi"
+        android:layout_marginBottom="75dp"
+        android:layout_above="@+id/phoneRegister"
+        android:layout_alignLeft="@+id/nameRegister"
+        android:layout_alignStart="@+id/nameRegister" />
+
+    <EditText
+        android:id="@+id/emailRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="Email"
+
+        android:layout_alignBottom="@+id/passRegister"
+        android:layout_alignLeft="@+id/passRegister"
+        android:layout_alignStart="@+id/passRegister"
+        android:layout_marginBottom="50dp" />
+
+    <EditText
+        android:id="@+id/phoneRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="phone"
+        android:selectAllOnFocus="false"
+        android:hint="Telefoni"
+        android:layout_above="@+id/buttonRegister"
+        android:layout_alignLeft="@+id/passRegister"
+        android:layout_alignStart="@+id/passRegister"
+        android:layout_marginBottom="50dp" />" />
+
+    <Button
+        android:id="@+id/buttonRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="REGJISTROHU"
+
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp" />
+
+</RelativeLayout>

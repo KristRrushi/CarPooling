@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">car</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="textview">TextView</string>
+
+    <string-array name="qytetet_shqiperis">
+        <item>Tirana</item>
+        <item>Durresi</item>
+        <item>Vlora</item>
+        <item>Korca</item>
+        <item>Elbasani</item>
+        <item>Shkodra</item>
+        <item>Fieri</item>
+        <item>Berati</item>
+        <item>Lushnja</item>
+        <item>Pogradeci</item>
+        <item>Kavaja</item>
+        <item>Laci</item>
+        <item>Lezha</item>
+        <item>Kukesi</item>
+        <item>Gjirokastra</item>
+        <item>Kruja</item>
+        <item>Saranda</item>
+        <item>Peshkopia</item>
+        <item>Librazhdi</item>
+        <item>Tepelena</item>
+        <item>Permeti</item>
+        <item>Erseka</item>
+        <item>Himara</item>
+        <item>Leskoviku</item>
+    </string-array>
+
+    <string-array name="nr_vendeve">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+</resources>

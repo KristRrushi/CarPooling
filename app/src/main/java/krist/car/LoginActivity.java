@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
        /* progressDialog.setMessage("");
         progressDialog.show();*/
 
-        firebaseAuth.signInWithEmailAndPassword(email, pass)
+        firebaseAuth.signInWithEmailAndPassword("krist2@gmail.com", "123456789")
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

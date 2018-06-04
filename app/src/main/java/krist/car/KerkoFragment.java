@@ -56,7 +56,6 @@ public class KerkoFragment extends Fragment {
         getActivity().setTitle("KerkoFragment");
 
         recyclerView = view.findViewById(R.id.list_trips);
-        recyclerView.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);

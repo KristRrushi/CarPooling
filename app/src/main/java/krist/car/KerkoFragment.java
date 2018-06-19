@@ -81,6 +81,15 @@ public class KerkoFragment extends Fragment {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //Search
+                Iterator<TripsModel> iterator = tripsModelList.iterator();
+                while(iterator.hasNext()){
+                    TripsModel trip = iterator.next();
+                    if(!trip.getvNisja().equals("Fieri"))
+                        iterator.remove();
+                }
+                adapter.notifyDataSetChanged();
                 //firebaseUserSearch();
             }
         });
@@ -116,6 +125,7 @@ public class KerkoFragment extends Fragment {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                     TripsModel trip = dataSnapshot.getValue(TripsModel.class);
+                    trip.setTripID(dataSnapshot.getKey());
                     tripsModelList.add(trip);
                     adapter.notifyDataSetChanged();
             }

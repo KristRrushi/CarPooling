@@ -53,7 +53,7 @@ public class DetajeActivity extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-    DatabaseReference databaseUsers = database.getReference("usersdetails");
+    DatabaseReference databaseUsers = database.getReference("users");
 
 
 
@@ -64,7 +64,7 @@ public class DetajeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detaje);
 
-
+        mAuth = FirebaseAuth.getInstance();
         btnZgjidh = findViewById(R.id.fotoMakine);
         btnNgarko = findViewById(R.id.btnNgarko);
         txtmodeli = findViewById(R.id.modeliMakina);
@@ -104,9 +104,7 @@ public class DetajeActivity extends AppCompatActivity {
 
         String id;
 
-        FirebaseUser iaduth = FirebaseAuth.getInstance().getCurrentUser();
-
-        id = iaduth.getUid();
+        id = mAuth.getCurrentUser().getUid();
 
 
 
@@ -117,7 +115,7 @@ public class DetajeActivity extends AppCompatActivity {
 
 
 
-        databaseUsers.child(id).setValue(detajetModel);
+        databaseUsers.child(id).child("detaje").setValue(detajetModel);
 
 
 //       PostFragment postFragment = new PostFragment();
@@ -151,9 +149,10 @@ public class DetajeActivity extends AppCompatActivity {
         if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK){
 
 
+            String uid = mAuth.getCurrentUser().getUid();
 
             Uri uri = data.getData();
-            StorageReference filepath = mStorageRef.child("Photos").child(uri.getLastPathSegment());
+            StorageReference filepath = mStorageRef.child(uid).child(uri.getLastPathSegment());
 
             filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override

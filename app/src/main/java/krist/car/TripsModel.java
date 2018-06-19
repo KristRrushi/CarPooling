@@ -15,11 +15,14 @@ public class TripsModel {
 
     private String vNisja;
     private String vMberritja;
-    private  String data;
-    private   String ora;
+    private String data;
+    private String ora;
     private String vendet;
     private String idShofer;
     private String usersId;
+
+
+    private String tripID;
 
 
     public TripsModel(){}
@@ -76,6 +79,14 @@ public class TripsModel {
 
     public void setVendet(String vendet) {
         this.vendet = vendet;
+    }
+
+    public String getTripID() {
+        return tripID;
+    }
+
+    public void setTripID(String tripID) {
+        this.tripID = tripID;
     }
 
     public String getIdShofer() {

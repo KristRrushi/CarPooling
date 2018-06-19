@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity
 
                     case R.id.nav_posto:
 
+                        //bej fragment tj
                         setFragment(postFragment);
                         return true;
 

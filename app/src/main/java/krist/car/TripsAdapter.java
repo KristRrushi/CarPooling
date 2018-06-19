@@ -38,8 +38,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
         public TextView vNisja, vMberritja, data, ora;
         public Button list_button;
         FirebaseUser idauth;
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference dataPost = database.getReference("trips");
+
 
 
         public ViewHolder(View v) {
@@ -66,7 +65,6 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
 
 
 
-                    dataPost.setValue(id);
 
 
 
@@ -100,7 +98,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
 
 
     @Override
-    public void onBindViewHolder(@NonNull final TripsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final TripsAdapter.ViewHolder holder, final int position) {
         holder.vMberritja.setText(dataSet.get(position).getvMberritja());
         holder.vNisja.setText(dataSet.get(position).getvNisja());
         holder.data.setText(dataSet.get(position).getData());
@@ -110,8 +108,8 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
         holder.list_item_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                Toast.makeText(v.getContext(), dataSet.get(position).getTripID(), Toast.LENGTH_SHORT).show();
+                //Krijo Dialog per tripID kalo te trpi  id e usert qe e zgjedh ///
             }
         });
 

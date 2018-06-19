@@ -55,8 +55,10 @@ public class PostFragment extends Fragment implements AdapterView.OnItemSelected
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //if user has car
         return inflater.inflate(R.layout.posto_fragment, container, false);
-
+        //else
+       // return inflater.inflate(R.layout.activity_detaje, container, false);
 
     }
 

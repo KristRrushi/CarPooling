@@ -2,6 +2,7 @@ package krist.car;
 
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.recyclerview.extensions.ListAdapter;
@@ -12,7 +13,10 @@ import android.view.CollapsibleActionView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
+
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -39,6 +43,8 @@ public class KerkoFragment extends Fragment {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private List<TripsModel> tripsModelList;
+    private EditText search;
+    ImageButton btnSearch;
 
     @Nullable
     @Override
@@ -47,6 +53,8 @@ public class KerkoFragment extends Fragment {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
+
+
         return inflater.inflate(R.layout.kerko_fragment, container, false);
     }
 
@@ -54,6 +62,9 @@ public class KerkoFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         getActivity().setTitle("KerkoFragment");
+
+        search = view.findViewById(R.id.search);
+        btnSearch = view.findViewById(R.id.btnSearchKerkoFragment);
 
         recyclerView = view.findViewById(R.id.list_trips);
 
@@ -65,8 +76,29 @@ public class KerkoFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
+
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //firebaseUserSearch();
+            }
+        });
+
+
         super.onViewCreated(view, savedInstanceState);
     }
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public void onStart() {

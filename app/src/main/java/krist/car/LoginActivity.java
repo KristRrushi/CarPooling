@@ -53,13 +53,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
 
-
     }
 
     private void registerUser() {
 
         final String email = editTextEmail.getText().toString().trim();
         final String pass = editTextPassword.getText().toString().trim();
+
+
 
        /* if (TextUtils.isEmpty(email)) {
             //email bosh
@@ -78,7 +79,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
        /* progressDialog.setMessage("");
         progressDialog.show();*/
 
-        firebaseAuth.signInWithEmailAndPassword("krist2@gmail.com", "123456789")
+        //firebaseAuth.signInWithEmailAndPassword("krist2@gmail.com", "123456789")
+        firebaseAuth.signInWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

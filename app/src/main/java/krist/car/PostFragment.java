@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +21,12 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -221,13 +226,19 @@ public class PostFragment extends Fragment implements AdapterView.OnItemSelected
 
         String id = idauth.getUid();
 
+
         TripsModel userspost = new TripsModel(id,nisja,mberritja, data, ora, vendet);
 
 
         dataPost.push().setValue(userspost);
 
 
+
+
+
     }
+
+
 
 
 

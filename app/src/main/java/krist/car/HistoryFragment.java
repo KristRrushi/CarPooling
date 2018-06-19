@@ -45,8 +45,8 @@ public class HistoryFragment extends Fragment implements OnFragmentInteractionLi
         viewPager = view.findViewById(R.id.history_view_pager);
         historyPagerAdapter = new HistoryPagerAdapter(getChildFragmentManager());
 
-        historyPagerAdapter.addFragment(new FragmentHistoryDriver(),"Shembull");
-        historyPagerAdapter.addFragment(new FragmentHistoryDriver(),"Shembull tjeter");
+        historyPagerAdapter.addFragment(new FragmentHistoryDriver(),"Shofer");
+        historyPagerAdapter.addFragment(new FragmentHistoryDriver(),"Pasagjer");
 
 
         viewPager.setAdapter(historyPagerAdapter);

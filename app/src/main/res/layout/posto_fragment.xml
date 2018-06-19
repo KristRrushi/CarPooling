@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/posto_fragment">
 
 
     <Spinner
@@ -25,9 +26,12 @@
         android:id="@+id/tvStart"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="52dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Qyteti i nisjes"
@@ -37,77 +41,76 @@
         android:id="@+id/tvEnd"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/tvStart"
+        android:layout_alignLeft="@+id/tvStart"
+        android:layout_marginTop="128dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Destinacioni"
-        android:textSize="23dp"
-        android:layout_below="@+id/listStart"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="45dp" />
+        android:textSize="23dp" />
 
     <EditText
+        android:id="@+id/txtTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtTime"
-        android:textSize="23dp"
-        android:hint="Zgjidh Oren"
-        android:layout_marginTop="49dp"
-        android:focusable="false"
-        android:longClickable="false"
+        android:layout_alignStart="@+id/listSeats"
+        android:layout_alignLeft="@+id/listSeats"
+        android:layout_alignTop="@+id/txtDate"
         android:background="#CCCCCC"
-        android:layout_below="@+id/listEnd"
-        android:layout_alignRight="@+id/listEnd"
-        android:layout_alignEnd="@+id/listEnd" />
+        android:focusable="false"
+        android:hint="Zgjidh Oren"
+        android:longClickable="false"
+        android:textSize="23dp" />
 
     <EditText
         android:id="@+id/txtDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Zgjidh Daten"
-        android:textSize="23dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="200dp"
+        android:background="#CCCCCC"
         android:focusable="false"
         android:longClickable="false"
-        android:background="#CCCCCC"
-        android:layout_alignBaseline="@+id/txtTime"
-        android:layout_alignBottom="@+id/txtTime"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:text="Zgjidh Daten"
+        android:textSize="23dp" />
 
     <Button
         android:id="@+id/btnPostPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Posto"
-        android:onClick="show"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/tvEnd"
-        android:layout_toEndOf="@+id/tvEnd"
-        android:layout_marginBottom="61dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="149dp"
+        android:onClick="show"
+        android:text="Posto" />
 
     <Spinner
         android:id="@+id/listSeats"
         android:layout_width="100dp"
 
         android:layout_height="40dp"
-        android:layout_marginBottom="62dp"
 
-        android:layout_above="@+id/btnPostPost"
-        android:layout_alignLeft="@+id/btnPostPost"
-        android:layout_alignStart="@+id/btnPostPost"
-        android:layout_marginLeft="40dp"
-        android:layout_marginStart="40dp" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="53dp"
+        android:layout_marginRight="53dp"/>
 
     <TextView
+        android:id="@+id/tvSeats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvSeats"
-        android:textSize="23dp"
-        android:text="Nr i vendeve"
+        android:layout_alignStart="@+id/txtDate"
+        android:layout_alignLeft="@+id/txtDate"
 
-        android:layout_alignBottom="@+id/listSeats"
-        android:layout_alignRight="@+id/txtDate"
-        android:layout_alignEnd="@+id/txtDate"
-        android:layout_alignTop="@+id/listSeats" />
+        android:layout_centerVertical="true"
+
+        android:text="Nr i vendeve"
+        android:textSize="23dp" />
 
 </RelativeLayout>

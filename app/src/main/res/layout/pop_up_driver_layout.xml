@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#e6e6e6">
+
+
+
+
+
+
+
+
+    <ListView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pop_up_driver_list"></ListView>
+
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pop_up_driver_list"
+        android:layout_marginTop="10dp"
+        android:text="Mbyll"
+        android:id="@+id/btn_pop_co_mbyll"/>
+
+
+
+
+
+</RelativeLayout>

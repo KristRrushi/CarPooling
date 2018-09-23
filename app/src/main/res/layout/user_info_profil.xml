@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="#e6e6e6">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kredencialet"
+        android:id="@+id/kredenciale"
+        android:padding="7dp"
+        android:layout_marginTop="10dp"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/layout_kredenciaoe"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/kredenciale"
+        android:background="#cdffffff"
+
+        >
+
+        <TextView
+            android:id="@+id/user_info_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="kristrrushi@gmail.com"
+            android:background="@drawable/user_info_shape"
+            android:textColor="#000000"
+            android:padding="7dp"
+
+
+            />
+
+
+        <TextView
+            android:id="@+id/user_info_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="**************"
+            android:textColor="#000000"
+            android:background="@drawable/user_info_shape"
+            android:padding="7dp"
+
+            />
+
+
+
+    </LinearLayout>
+
+
+
+
+
+    <TextView
+        android:id="@+id/txt_user_info_profili"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profili"
+        android:layout_below="@+id/layout_kredenciaoe"
+        android:layout_marginTop="20dp"
+        android:padding="7dp"/>
+
+    <LinearLayout
+        android:id="@+id/layout_user_info_profili"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_user_info_profili"
+        android:orientation="vertical"
+        android:background="#cdffffff">
+
+        <TextView
+            android:id="@+id/user_info_emri_mbiemri"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Krist Rrushiiiii"
+            android:background="@drawable/user_info_shape"
+            android:textColor="#000000"
+            android:padding="7dp"/>
+
+        <TextView
+            android:id="@+id/user_info_tel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0695768251"
+            android:textColor="#000000"
+            android:background="@drawable/user_info_shape"
+            android:padding="7dp"/>
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/txt_user_info_profili_mak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_user_info_profili"
+        android:text="Makina"
+        android:layout_marginTop="20dp"
+
+        android:padding="7dp"/>
+
+
+    <LinearLayout
+        android:id="@+id/layout_user_info_mak"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#cdffffff"
+        android:layout_below="@id/txt_user_info_profili_mak">
+
+        <TextView
+            android:id="@+id/user_info_marka"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FIAT"
+            android:background="@drawable/user_info_shape"
+            android:textColor="#000000"
+            android:padding="7dp"/>
+
+        <TextView
+
+            android:id="@+id/user_info_modeli"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Panda"
+            android:background="@drawable/user_info_shape"
+            android:textColor="#000000"
+            android:padding="7dp"/>
+
+        <TextView
+            android:id="@+id/user_info_targa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="AA814EK"
+            android:background="@drawable/user_info_shape"
+            android:textColor="#000000"
+            android:padding="7dp"/>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_update"
+        android:layout_below="@id/layout_user_info_mak"
+        android:layout_marginTop="15dp"
+        android:text="NDRYSHO TE DHENAT"/>
+
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_dil"
+        android:layout_below="@id/btn_update"
+        android:layout_marginTop="10dp"
+        android:text="DIL"/>
+
+
+
+
+
+</RelativeLayout>

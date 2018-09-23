@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HistoryFragment">
+    tools:context=".HistoryFragment"
+    android:background="#ffffff">
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/main_content"
@@ -22,22 +23,25 @@
             app:tabMaxWidth="0dp"
             app:tabGravity="fill"
             android:id="@+id/result_tabs"
-            android:background="@color/colorAccent"
-            app:tabTextColor="@android:color/white"
-            app:tabSelectedTextColor="@android:color/white"
-            app:tabIndicatorColor="@color/colorPrimary"
+            android:background="@color/colorPrimary"
+            app:tabTextColor="#ffffff"
+            app:tabSelectedTextColor="#ffffff"
+            app:tabIndicatorColor="#ed517d"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabMode="fixed"/>
     </android.support.design.widget.AppBarLayout>
 
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/history_view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/history_view_pager"
+
+           android:layout_marginTop="-20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="#ffffff"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </android.support.design.widget.CoordinatorLayout>
 </RelativeLayout>

@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,7 +25,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText txtEmail, txtPass, txtName, txtPhone;
+    private EditText  txtName, txtPhone;
+    private TextView txtEmail, txtPass;
+
     private Button btnRegister;
     private FirebaseAuth mAuth;
 

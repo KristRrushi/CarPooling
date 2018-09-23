@@ -12,6 +12,11 @@
         android:title="@string/nav_posto" />
     <item
         android:id="@+id/nav_profili"
+        android:icon="@drawable/image_historia2"
+        android:title="Historia" />
+
+    <item
+        android:id="@+id/nav_profili2"
         android:icon="@drawable/baseline_perm_identity_black_24dp"
-        android:title="@string/nav_profili" />
+        android:title="Profili" />
 </menu>

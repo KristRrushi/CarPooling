@@ -2,7 +2,11 @@ package krist.car;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.media.MediaCrypto;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
@@ -38,15 +42,20 @@ import java.util.Locale;
 
 public class PostFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
+
     Button btnPost;
     Calendar myCalendar = Calendar.getInstance();
-    TextView txtTime;
-    TextView txtDate;
+    //TextView txtTime;
+    //TextView txtDate;
     Spinner sStartCity;
     Spinner sEndCity;
     Spinner sSeats;
+    String uRL;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference dataPost = database.getReference("trips");
+    DatabaseReference imageUp = database.getReference("imageUploads");
+
+    private Button txtTime,txtDate;
 
     public PostFragment(){
 
@@ -56,6 +65,43 @@ public class PostFragment extends Fragment implements AdapterView.OnItemSelected
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //if user has car
+
+
+        FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
+        final String id = idauth.getUid();
+
+
+
+        imageUp.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Upload upload = dataSnapshot.getValue(Upload.class);
+
+                String uID = upload.getmImageUrl().toString();
+
+
+
+                uRL = uID;
+
+                Log.v("Listener ", uID);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+
+
+
+
+        });
+
+
+
+
         return inflater.inflate(R.layout.posto_fragment, container, false);
         //else
        // return inflater.inflate(R.layout.activity_detaje, container, false);
@@ -71,12 +117,16 @@ public class PostFragment extends Fragment implements AdapterView.OnItemSelected
         super.onViewCreated(view, savedInstanceState);
 
 
-        txtTime = (TextView) getView().findViewById(R.id.txtTime);
-        txtDate = (TextView) getView().findViewById(R.id.txtDate);
+        txtTime = (Button) getView().findViewById(R.id.txtTime);
+        txtDate = (Button) getView().findViewById(R.id.txtDate);
         sStartCity = (Spinner) getView().findViewById(R.id.listStart);
         sEndCity = (Spinner) getView().findViewById(R.id.listEnd);
         sSeats = (Spinner) getView().findViewById(R.id.listSeats);
         btnPost = (Button) getView().findViewById(R.id.btnPostPost);
+
+
+
+
 
         sStartCity.setOnItemSelectedListener(this);
         sEndCity.setOnItemSelectedListener(this);
@@ -205,40 +255,83 @@ public class PostFragment extends Fragment implements AdapterView.OnItemSelected
 
 
 
+
+
+
+
+
+
     public void onClick(View v) {
 
         if (v == btnPost) {
 
-            postUserInfo();
+
+            FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
+            final String id = idauth.getUid();
+
+
+
+
+
+            postUserInfo(id);
         }
 
 
     }
 
-    private void postUserInfo() {
+
+
+
+    private void postUserInfo(String id) {
+
+
+
+
+
+
+
+
+
+
 
         final String ora = txtTime.getText().toString().trim();
         final String data = txtDate.getText().toString().trim();
         final String nisja = sStartCity.getSelectedItem().toString();
         final String mberritja = sEndCity.getSelectedItem().toString();
         final String vendet = sSeats.getSelectedItem().toString();
-
-        FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
-        idauth.getUid();
-
-        String id = idauth.getUid();
+        final String uri = uRL;
 
 
-        TripsModel userspost = new TripsModel(id,nisja,mberritja, data, ora, vendet);
+        Log.v("pospot", mberritja);
 
 
-        dataPost.push().setValue(userspost);
+
+
+
+
+
+        Toast.makeText(getActivity(),uRL,Toast.LENGTH_LONG).show();
+
+        String pushKey = dataPost.push().getKey();
+
+        TripsModel userspost = new TripsModel(id,nisja,mberritja, data, ora, vendet,uRL,pushKey);
+
+
+
+
+
+
+
+        dataPost.child(pushKey).setValue(userspost);
 
 
 
 
 
     }
+
+
+
 
 
 

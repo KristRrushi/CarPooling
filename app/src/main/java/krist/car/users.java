@@ -6,16 +6,17 @@ package krist.car;
 
 public class users {
 
-    String userName;
-    String userPhone;
+    String emri;
+    String phone;
     String id;
 
+    public users(){};
 
-    public users(String id,String userName, String userPhone) {
+    public users(String id, String emri, String phone) {
 
         this.id = id;
-        this.userName = userName;
-        this.userPhone = userPhone;
+        this.emri = emri;
+        this.phone = phone;
     }
 
 
@@ -23,9 +24,21 @@ public class users {
 
     public String getId(){return id;}
 
-    public String getUserName() {
-        return userName;
+    public String getEmri() {
+        return emri;
     }
 
-    public String getUserPhone() {return userPhone; }
+    public String getPhone() {return phone; }
+
+    public void setEmri(String emri) {
+        this.emri = emri;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

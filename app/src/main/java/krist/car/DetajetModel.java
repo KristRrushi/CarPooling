@@ -6,6 +6,8 @@ public class DetajetModel {
     String markaMak;
     String modeliMak;
     String targaMak;
+    String emri;
+    String phone;
 
 
     public String getId() {
@@ -42,11 +44,39 @@ public class DetajetModel {
         this.targaMak = targaMak;
     }
 
-    public DetajetModel(String id,String markaMak, String modeliMak, String targaMak) {
+    public String getEmri() {
+        return emri;
+    }
+
+    public void setEmri(String emri) {
+        this.emri = emri;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public DetajetModel(String id, String emri, String phone, String markaMak, String modeliMak, String targaMak) {
 
         this.id = id;
         this.markaMak = markaMak;
         this.modeliMak = modeliMak;
         this.targaMak = targaMak;
+        this.emri = emri;
+        this.phone = phone;
     }
+
+    public DetajetModel(String emri, String tel){
+
+        this.emri = emri;
+        this.phone = tel;
+
+    }
+
+    public DetajetModel(){}
+
 }

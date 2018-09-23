@@ -54,6 +54,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
 
+
+
     }
 
     private void registerUser() {
@@ -106,7 +108,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         } else {
                             Intent myIntent = new Intent(LoginActivity.this,
-                                    DetajeActivity.class);
+                                    MainActivity.class);
 
                             Toast toast = Toast.makeText(LoginActivity.this, "Hyrje e suksesshme", Toast.LENGTH_LONG);
                             toast.show();

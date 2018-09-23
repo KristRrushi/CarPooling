@@ -1,9 +1,10 @@
 package krist.car;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.net.Uri;
+import android.widget.ProgressBar;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by pampers on 12/19/2017.
@@ -20,6 +21,8 @@ public class TripsModel {
     private String vendet;
     private String idShofer;
     private String usersId;
+    private String uri;
+    private Map<String, Object> map = new HashMap<>();
 
 
     private String tripID;
@@ -27,7 +30,7 @@ public class TripsModel {
 
     public TripsModel(){}
 
-    public TripsModel(String idShofer,String vNisja, String vMberritja, String data, String ora, String vendet){
+    public TripsModel(String idShofer,String vNisja, String vMberritja, String data, String ora, String vendet, String uri,String tripID){
 
         this.idShofer = idShofer;
         this.vNisja = vNisja;
@@ -35,11 +38,35 @@ public class TripsModel {
         this.data = data;
         this.ora = ora;
         this.vendet = vendet;
+        this.uri = uri;
+
+        this.tripID = tripID;
+
+    }
+
+    public TripsModel(String idShofer,String vNisja, String vMberritja, String data, String ora, String vendet, String uri){
+
+        this.idShofer = idShofer;
+        this.vNisja = vNisja;
+        this.vMberritja = vMberritja;
+        this.data = data;
+        this.ora = ora;
+        this.vendet = vendet;
+        this.uri = uri;
+
 
 
     }
 
 
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
 
     public String getvNisja() {
         return vNisja;
@@ -96,4 +123,6 @@ public class TripsModel {
     public void setIdShofer(String idShofer) {
         this.idShofer = idShofer;
     }
+
+
 }

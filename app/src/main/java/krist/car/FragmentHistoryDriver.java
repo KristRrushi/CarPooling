@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +39,7 @@ public class FragmentHistoryDriver extends Fragment  {
 
     private RecyclerView recyclerView ;
     private RecyclerView.LayoutManager layoutManager;
-    private RecyclerView.Adapter adapter;
+    private HistoryDriverAdapter adapter;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private List<TripsModel> tripsModelList;
@@ -57,7 +59,7 @@ public class FragmentHistoryDriver extends Fragment  {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.kerko_fragment, container, false);
+        return inflater.inflate(R.layout.co_driver_recycle, container, false);
     }
 
 
@@ -65,20 +67,50 @@ public class FragmentHistoryDriver extends Fragment  {
 
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
 
         idauth = FirebaseAuth.getInstance().getCurrentUser();
 
-        recyclerView = view.findViewById(R.id.list_trips);
+        recyclerView = view.findViewById(R.id.co_driver_recycle_list);
 
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
         tripsModelList = new ArrayList<>();
-        adapter = new TripsAdapter(tripsModelList);
+        adapter = new HistoryDriverAdapter(tripsModelList);
         recyclerView.setAdapter(adapter);
+
+
+       /* RecyclerView.ItemDecoration divider = new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(divider);
+
+
+        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+
+
+
+
+
+
+
+            }
+        });
+
+
+
+        helper.attachToRecyclerView(recyclerView);
+
+*/
+
     }
 
 
@@ -107,6 +139,9 @@ public class FragmentHistoryDriver extends Fragment  {
 
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+
+                tripsModelList.clear();
 
                 TripsModel trip = dataSnapshot.getValue(TripsModel.class);
                 if(trip.getIdShofer().equals(id))

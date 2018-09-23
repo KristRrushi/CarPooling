@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
+<!--
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,14 +15,10 @@
         android:layout_height="match_parent" />
 
 
-
-
-
-
     <Button
         android:id="@+id/fotoMakine"
         android:layout_width="185dp"
-        android:layout_height="41dp"
+        android:layout_height="45dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
@@ -39,14 +36,14 @@
     <EditText
         android:id="@+id/markaMakina"
         android:layout_width="183dp"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:hint="Marka e makines"
         android:ems="10"
+        android:hint="Marka e makines"
         app:layout_constraintBottom_toTopOf="@+id/modeliMakina"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -55,14 +52,14 @@
     <EditText
         android:id="@+id/modeliMakina"
         android:layout_width="182dp"
-        android:layout_height="29dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="12dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:hint="Modeli i makines"
         android:ems="10"
+        android:hint="Modeli i makines"
         app:layout_constraintBottom_toTopOf="@+id/targaMakina"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -70,7 +67,7 @@
     <EditText
         android:id="@+id/targaMakina"
         android:layout_width="182dp"
-        android:layout_height="34dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
@@ -95,4 +92,183 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-</android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/capture"
+    >
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+
+
+
+        <LinearLayout
+
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:layout_gravity="center"
+            android:background="#cc214654">
+
+            <Button
+                android:id="@+id/fotoMakine"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="NGARKO FOTO TE MAKINES"
+                android:background="@drawable/border"
+                android:textColor="#ffffff"
+
+                />
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical"
+                android:background="@drawable/border"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MARKA E MAKINES"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/markaMakina"
+
+                    android:layout_width="234dp"
+                    android:layout_height="40dp"
+
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    android:ems="10"
+                    android:background="#11000000"
+                    />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MODELI I MAKINES"
+                    android:textSize="20sp"
+                    android:textColor="#ffffff"/>
+
+                <EditText
+                    android:id="@+id/modeliMakina"
+
+                    android:layout_width="234dp"
+                    android:layout_height="40dp"
+
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    android:background="#11000000"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:background="@drawable/border"
+                android:padding="5dp"
+
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TARGA"
+                    android:textSize="20sp"
+                    android:textColor="#ffffff"/>
+
+                <EditText
+
+                    android:id="@+id/targaMakina"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="234dp"
+                    android:layout_height="40dp"
+
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    android:background="#11000000"/>
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/progress_bar"
+            android:layout_marginTop="10dp"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+
+
+        <Button
+            android:id="@+id/btnNgarko"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="NGARKO TE DHENAT"
+            android:background="@drawable/button_rectangle"
+            android:layout_marginTop="25dp"/>
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

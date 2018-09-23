@@ -1,10 +1,236 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/posto_fragment">
+    android:id="@+id/posto_fragment"
+    android:padding="10dp"
+    android:background="#e6e6e6">
 
 
-    <Spinner
+
+
+
+
+
+        <TextView
+            android:id="@+id/txt_detajet_udhetimit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detajet e udhetimit"
+            android:layout_marginTop="10dp"
+            android:padding="7dp"/>
+
+
+
+
+
+        <LinearLayout
+            android:id="@+id/posto_nisja_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/user_info_shape"
+
+            android:layout_below="@id/txt_detajet_udhetimit">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Qyteti i nisjes"
+                android:textColor="#000000"
+                android:padding="7dp"/>
+
+
+            <Spinner
+                android:id="@+id/listStart"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:padding="7dp"
+
+
+
+
+
+                ></Spinner>
+
+
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/posto_mberritja_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/user_info_shape"
+
+            android:layout_below="@+id/posto_nisja_layout"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Qyteti i mberritjjes"
+                android:textColor="#000000"
+                android:padding="7dp"
+                />
+
+
+            <Spinner
+                android:id="@+id/listEnd"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:padding="7dp"
+
+
+
+
+                ></Spinner>
+
+
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/posto_vendet_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/user_info_shape"
+
+            android:layout_below="@+id/posto_mberritja_layout"
+            android:layout_marginTop="10dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vendet e lira"
+                android:textColor="#000000"
+                android:padding="7dp"/>
+
+
+            <Spinner
+                android:id="@+id/listSeats"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:padding="7dp"
+
+
+
+
+                ></Spinner>
+
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/posto_data_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/user_info_shape"
+
+            android:layout_below="@+id/posto_vendet_layout"
+            android:layout_marginTop="10dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ora : "
+                android:textColor="#000000"
+                android:padding="7dp"/>
+
+
+            <Button
+                android:id="@+id/txtTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:text="ora"
+                android:layout_marginLeft="30dp"
+                android:padding="7dp"
+                />
+
+
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/posto_ora_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/user_info_shape"
+
+            android:layout_below="@+id/posto_data_layout"
+            android:layout_marginTop="10dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data : "
+                android:textColor="#000000"
+                android:padding="7dp"/>
+
+
+            <Button
+
+                android:id="@+id/txtDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:text="Data"
+                android:layout_marginLeft="30dp"
+                android:padding="7dp"
+
+
+                />
+
+
+
+
+
+        </LinearLayout>
+
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnPostPost"
+            android:layout_below="@id/posto_ora_layout"
+            android:layout_marginTop="15dp"
+            android:text="POSTO"/>
+
+</RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+    <!-- <Spinner
         android:id="@+id/listStart"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
@@ -16,6 +242,7 @@
 
     <Spinner
         android:id="@+id/listEnd"
+
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tvEnd"
@@ -112,5 +339,249 @@
 
         android:text="Nr i vendeve"
         android:textSize="23dp" />
+-->
 
-</RelativeLayout>
+
+
+
+
+
+  <!--   layout me ngjyra
+
+
+  <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:layout_marginTop="100dp"
+            android:background="@drawable/border"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="QYTETI I NISJES"
+                android:textSize="20sp"
+                android:textColor="#ffffff"/>
+
+            <Spinner
+                android:id="@+id/listStart"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+
+
+
+                ></Spinner>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:layout_marginTop="30dp"
+            android:background="@drawable/border"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DESTINACIONI"
+                android:textSize="20sp"
+                android:textColor="#ffffff"/>
+
+            <Spinner
+                android:id="@+id/listEnd"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+
+                />
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:layout_marginTop="30dp"
+            android:background="@drawable/border"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VENDET E LIRA"
+                android:textSize="20sp"
+                android:textColor="#ffffff"/>
+
+            <Spinner
+
+                android:id="@+id/listSeats"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+
+
+
+                ></Spinner>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:layout_marginTop="30dp"
+            android:background="@drawable/border"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ZGJIDH OREN"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                />
+
+            <Button
+                android:id="@+id/txtTime"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textColor="#ffffff"
+                android:text="ORA"
+                android:layout_marginLeft="30dp"
+                android:background="#cf265c74"/>
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:layout_marginTop="30dp"
+            android:background="@drawable/border"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ZGJIDH DATEN"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                />
+
+            <Button
+
+                android:id="@+id/txtDate"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textColor="#ffffff"
+                android:text="DATA"
+                android:layout_marginLeft="30dp"
+                android:background="#cf265c74"/>
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+        <Button
+            android:id="@+id/btnPostPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_rectangle"
+            android:text="POSTO"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+-->
+
+
+
+
+
+
+
+

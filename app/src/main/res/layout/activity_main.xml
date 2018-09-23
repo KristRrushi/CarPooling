@@ -9,6 +9,19 @@
     tools:openDrawer="start">
 
 
+
+    <FrameLayout
+        android:id="@+id/main_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/main_nav"
+        android:background="#64ffffff"
+
+        >
+
+    </FrameLayout>
+
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/main_nav"
         android:layout_width="match_parent"
@@ -18,16 +31,6 @@
         android:layout_alignParentStart="true"
         app:menu="@menu/nav_items"></android.support.design.widget.BottomNavigationView>
 
-    <FrameLayout
-        android:id="@+id/main_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/main_nav"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true">
-
-    </FrameLayout>
 
 
 </RelativeLayout>

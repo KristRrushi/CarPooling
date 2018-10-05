@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Filter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,12 +43,16 @@ public class HistoryDriverAdapter extends RecyclerView.Adapter<HistoryDriverAdap
         FirebaseUser idauth;
         private FirebaseAuth mAuth;
         private StorageReference mStorageRef;
+        private TextView vendetkrist;
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         DatabaseReference databaseUsers = database.getReference("users");
 
         DatabaseReference dataTrips = database.getReference("trips");
+
+        public RelativeLayout viewBackground;
+        public LinearLayout viewForeground;
 
 
 
@@ -63,6 +69,12 @@ public class HistoryDriverAdapter extends RecyclerView.Adapter<HistoryDriverAdap
             data = list_item_view.findViewById(R.id.new_ora);
             ora = list_item_view.findViewById(R.id.new_data);
             vendet = list_item_view.findViewById(R.id.new_vendet);
+
+           // vendetkrist = list_item_view.findViewById(R.id.krist_vendet);
+
+            viewBackground = list_item_view.findViewById(R.id.view_background);
+            viewForeground = list_item_view.findViewById(R.id.view_foreground);
+
 
 
             idauth = FirebaseAuth.getInstance().getCurrentUser();
@@ -120,7 +132,11 @@ public class HistoryDriverAdapter extends RecyclerView.Adapter<HistoryDriverAdap
         holder.vendet.setText(dataSet.get(position).getVendet());
         Picasso.get().load(dataSet.get(position).getUri()).fit().centerCrop().into(holder.imageView);
 
+
+
+
        // String id = dataSet.get(position).getTripID();
+
 
 
 
@@ -177,6 +193,16 @@ public class HistoryDriverAdapter extends RecyclerView.Adapter<HistoryDriverAdap
 
 
 
+
+    public void removeItem(int position){
+
+        String id = dataSet.get(position).getTripID();
+        dataTrips.child(id).setValue(null);
+
+        dataSet.remove(position);
+        notifyItemRemoved(position);
+
+    }
 
 
 }

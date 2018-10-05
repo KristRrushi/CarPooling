@@ -19,7 +19,7 @@ import java.util.List;
 public class PopUpDriver extends AppCompatActivity  {
 
     private ListView listView;
-    private ArrayList<PassToTrips> listPassToTrips;
+    private ArrayList<PopUpDriverListModel> listPassToTrips;
 
     private PopUpDriverAdapter adapter;
     private FirebaseDatabase database;
@@ -75,14 +75,23 @@ public class PopUpDriver extends AppCompatActivity  {
         reference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                PassToTrips model = dataSnapshot.getValue(PassToTrips.class);
+              /*  PassToTrips model = dataSnapshot.getValue(PassToTrips.class);
                 String emri = model.getEmri();
                 Log.v("E<RI", emri);
                 System.out.println(emri);
                 System.out.println("krist");
 
                 listPassToTrips.add(model);
+                adapter.notifyDataSetChanged();*/
+
+
+                PopUpDriverListModel model1 = dataSnapshot.getValue(PopUpDriverListModel.class);
+
+                listPassToTrips.add(model1);
                 adapter.notifyDataSetChanged();
+
+
+
 
             }
 

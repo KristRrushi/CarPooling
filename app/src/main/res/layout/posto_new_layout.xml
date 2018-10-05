@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relative_main"
+    android:background="#ffffff">
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/main_imag_posto"
+        android:src="@drawable/fromatob"
+        android:scaleType="centerCrop"
+        android:elevation="3dp"
+        />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/main_imag_posto"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/linear_nisja">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_person"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nisja"
+            android:textColor="#000000"
+            android:textSize="21sp"
+            android:layout_marginLeft="7dp"/>
+
+    </LinearLayout>
+
+
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_nisja"
+        android:layout_marginLeft="50dp"
+        android:hint="Zgjidh qytetin e nisjes"
+        android:id="@+id/emailRegister"
+        android:completionThreshold="1"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/emailRegister"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/linear_modelimakina">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_person"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Destinacioni"
+            android:textColor="#000000"
+            android:textSize="21sp"
+            android:layout_marginLeft="7dp"/>
+
+    </LinearLayout>
+
+
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_modelimakina"
+        android:layout_marginLeft="50dp"
+        android:hint="Zgjidh qytetin e mberritjes"
+        android:id="@+id/passRegister"
+        android:completionThreshold="1"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relative_data_ora"
+        android:layout_below="@+id/passRegister"
+        android:paddingTop="10dp"
+        android:layout_marginTop="5dp">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linear_data"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_person"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data e nisjes"
+                android:textColor="#000000"
+                android:textSize="21sp"
+                android:layout_marginLeft="7dp"/>
+
+
+
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Zgjidh daten"
+            android:layout_below="@+id/linear_data"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="4dp"
+            android:id="@+id/cardIdNumberRegister"/>
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_ora"
+
+            android:text="Ora e nisjes"
+            android:textColor="#000000"
+            android:textSize="21sp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentRight="true"
+
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/txt_ora"
+            android:layout_below="@+id/linear_data"
+            android:text="Zgjidh oren"
+            android:layout_alignLeft="@+id/txt_ora"
+            android:layout_marginTop="4dp"
+            android:id="@+id/btn_foto_personale_register"
+            />
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="2dp"
+            android:layout_height="80dp"
+           android:layout_toStartOf="@+id/txt_ora"
+            android:layout_marginRight="15dp"
+
+            android:background="#000000"
+
+
+
+            android:layout_toLeftOf="@+id/txt_ora" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relative_pasagjer_cmimi"
+        android:layout_below="@+id/relative_data_ora"
+        android:paddingTop="10dp"
+        android:layout_marginTop="5dp">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linear_pasagjer"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_person"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Numri i vendeve"
+                android:textColor="#000000"
+                android:textSize="21sp"
+                android:layout_marginLeft="7dp"/>
+
+
+
+
+
+        </LinearLayout>
+
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:hint="Vendet             "
+            android:textSize="15dp"
+            android:layout_below="@+id/linear_pasagjer"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="-10dp"
+            android:id="@+id/post_new_vendet"
+            android:inputType="number"
+            />
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_cmimi"
+
+            android:text="Cmimi"
+            android:textColor="#000000"
+            android:textSize="21sp"
+            android:layout_marginRight="99dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentRight="true"
+
+            />
+
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/txt_cmimi"
+            android:layout_below="@+id/linear_pasagjer"
+            android:hint="2000             "
+            android:layout_alignLeft="@+id/txt_cmimi"
+            android:id="@+id/post_new_cmimi"
+            android:textSize="15dp"
+            android:layout_marginTop="-10dp"
+            android:inputType="number"
+            />
+
+        <View
+            android:id="@+id/divider4"
+            android:layout_width="2dp"
+            android:layout_height="80dp"
+            android:layout_toStartOf="@+id/txt_cmimi"
+            android:layout_marginRight="15dp"
+
+            android:background="#000000"
+
+
+
+            android:layout_toLeftOf="@+id/txt_cmimi" />
+
+
+    </RelativeLayout>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="Posto"
+        android:textSize="18dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/buttonRegister"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:textAllCaps="false"
+        android:background="@drawable/button_post"
+        />
+
+
+
+
+
+</RelativeLayout>

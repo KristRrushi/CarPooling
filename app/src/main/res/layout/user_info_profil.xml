@@ -17,6 +17,7 @@
 
 
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -86,26 +87,162 @@
         android:orientation="vertical"
         android:background="#cdffffff">
 
-        <TextView
-            android:id="@+id/user_info_emri_mbiemri"
+
+        <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Krist Rrushiiiii"
+            android:orientation="horizontal"
             android:background="@drawable/user_info_shape"
-            android:textColor="#000000"
-            android:padding="7dp"/>
+            android:padding="7dp">
 
-        <TextView
-            android:id="@+id/user_info_tel"
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Emri : "
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimary"/>
+
+
+
+            <EditText
+                android:id="@+id/user_info_emri_mbiemri"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Krist Rrushiiiii"
+                android:textColor="#000000"
+                android:background="@color/fui_transparent"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="0695768251"
-            android:textColor="#000000"
+            android:orientation="horizontal"
             android:background="@drawable/user_info_shape"
-            android:padding="7dp"/>
+            android:padding="7dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tel : "
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimary"/>
 
 
 
+            <EditText
+                android:id="@+id/user_info_tel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0695768251"
+                android:textColor="#000000"
+                android:background="@color/fui_transparent"/>
+
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/user_info_shape"
+            android:padding="7dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mosha : "
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimary"/>
+
+
+
+
+            <EditText
+                android:id="@+id/user_info_mosha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="25"
+                android:textColor="#000000"
+                android:background="@color/fui_transparent"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/user_info_shape"
+            android:padding="7dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gjinia : "
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimary"/>
+
+
+
+
+            <EditText
+                android:id="@+id/user_info_gjinia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mashkull"
+                android:textColor="#000000"
+                android:background="@color/fui_transparent"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/user_info_shape"
+            android:padding="7dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NP : "
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimary"/>
+
+
+
+
+
+            <EditText
+                android:id="@+id/user_info_personalNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CV345345"
+                android:textColor="#000000"
+                android:background="@color/fui_transparent"/>
+
+
+
+        </LinearLayout>
 
 
 
@@ -132,33 +269,138 @@
         android:background="#cdffffff"
         android:layout_below="@id/txt_user_info_profili_mak">
 
-        <TextView
-            android:id="@+id/user_info_marka"
+        <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="FIAT"
+            android:orientation="horizontal"
             android:background="@drawable/user_info_shape"
-            android:textColor="#000000"
-            android:padding="7dp"/>
+            android:padding="7dp">
 
-        <TextView
 
-            android:id="@+id/user_info_modeli"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Marka : "
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimary"/>
+
+
+
+
+
+            <EditText
+                android:id="@+id/user_info_marka"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FIAT"
+
+                android:textColor="#000000"
+                android:background="@color/fui_transparent"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Panda"
+            android:orientation="horizontal"
             android:background="@drawable/user_info_shape"
-            android:textColor="#000000"
-            android:padding="7dp"/>
+            android:padding="7dp">
 
-        <TextView
-            android:id="@+id/user_info_targa"
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Modeli : "
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimary"/>
+
+
+
+
+            <EditText
+
+                android:id="@+id/user_info_modeli"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Panda"
+                android:background="@color/fui_transparent"
+                android:textColor="#000000"
+                />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="AA814EK"
+            android:orientation="horizontal"
             android:background="@drawable/user_info_shape"
-            android:textColor="#000000"
-            android:padding="7dp"/>
+            android:padding="7dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Targa : "
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimary"/>
+
+
+
+
+            <EditText
+                android:id="@+id/user_info_targa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="AA814EK"
+                android:background="@color/fui_transparent"
+                android:textColor="#000000"
+                />
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/user_info_shape"
+            android:padding="7dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ngjyra : "
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimary"/>
+
+
+
+
+
+            <EditText
+                android:id="@+id/user_info_ngjyra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="AA814EK"
+                android:background="@color/fui_transparent"
+                android:textColor="#000000"
+                />
+
+
+
+        </LinearLayout>
+
 
 
 
@@ -177,7 +419,9 @@
         android:id="@+id/btn_update"
         android:layout_below="@id/layout_user_info_mak"
         android:layout_marginTop="15dp"
-        android:text="NDRYSHO TE DHENAT"/>
+        android:text="NDRYSHO TE DHENAT"
+        android:textColor="#ffffff"
+        android:background="@color/colorPrimary"/>
 
 
 
@@ -187,7 +431,10 @@
         android:id="@+id/btn_dil"
         android:layout_below="@id/btn_update"
         android:layout_marginTop="10dp"
-        android:text="DIL"/>
+        android:text="DIL"
+        android:background="#fa315b"
+        android:textColor="#ffffff"/>
+
 
 
 

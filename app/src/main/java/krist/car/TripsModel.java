@@ -22,6 +22,7 @@ public class TripsModel {
     private String idShofer;
     private String usersId;
     private String uri;
+    private String cmimi;
     private Map<String, Object> map = new HashMap<>();
 
 
@@ -30,7 +31,7 @@ public class TripsModel {
 
     public TripsModel(){}
 
-    public TripsModel(String idShofer,String vNisja, String vMberritja, String data, String ora, String vendet, String uri,String tripID){
+    public TripsModel(String idShofer,String vNisja, String vMberritja, String data, String ora, String vendet, String uri,String tripID, String cmimi){
 
         this.idShofer = idShofer;
         this.vNisja = vNisja;
@@ -41,6 +42,8 @@ public class TripsModel {
         this.uri = uri;
 
         this.tripID = tripID;
+        this.cmimi = cmimi;
+
 
     }
 
@@ -56,9 +59,17 @@ public class TripsModel {
 
 
 
+
     }
 
 
+    public String getCmimi() {
+        return cmimi;
+    }
+
+    public void setCmimi(String cmimi) {
+        this.cmimi = cmimi;
+    }
 
     public String getUri() {
         return uri;

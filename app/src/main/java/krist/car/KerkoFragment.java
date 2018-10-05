@@ -68,6 +68,7 @@ public class KerkoFragment extends Fragment {
     private DatabaseReference databaseReferenceQuery;
     private List<TripsModel> dataSet;
 
+
     private EditText editText;
     android.support.v7.widget.Toolbar toolbar;
 
@@ -182,6 +183,8 @@ public class KerkoFragment extends Fragment {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
         setHasOptionsMenu(true);
+
+        editText = view.findViewById(R.id.txt_edit_search);
 
 
 
@@ -352,7 +355,61 @@ public class KerkoFragment extends Fragment {
 
 
         recyclerView.setAdapter(firebaseRecyclerAdapter);
+
 */
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                Query firebaseQuery =  databaseReferenceQuery.orderByChild("vNisja").startAt(charSequence.toString()).endAt(charSequence.toString() + "\uf8ff");
+
+                firebaseQuery.addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                        TripsModel trip = dataSnapshot.getValue(TripsModel.class);
+                        //trip.setTripID(dataSnapshot.getKey());
+                        tripsModelList.add(trip);
+                        adapter.notifyDataSetChanged();
+
+                    }
+
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+                adapter.getFilter().filter(charSequence.toString());
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
 
@@ -366,7 +423,9 @@ public class KerkoFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-                tripsModelList.clear();
+                System.out.println("There are " + dataSnapshot.getChildrenCount() + " posted trips");
+
+
 
                 TripsModel trip = dataSnapshot.getValue(TripsModel.class);
                 trip.setTripID(dataSnapshot.getKey());
@@ -585,4 +644,8 @@ public class KerkoFragment extends Fragment {
        });
 
     }*/
+
+
+
+
 }

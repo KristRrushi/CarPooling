@@ -1,81 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="#e6e6e6"
+    android:background="#f7f7f7"
     android:padding="10dp">
 
 
-   <LinearLayout
-       android:id="@+id/linear_1"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="horizontal"
-       android:background="@drawable/user_info_shape"
-       android:gravity="center"
-       android:padding="7dp"
-
-       android:layout_marginTop="15dp">
 
     <TextView
-        android:id="@+id/pop_co_emri"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Krist Rrushi"
+        android:text="Profili Shofer"
         android:textColor="#000000"
-         />
+        android:textSize="18sp"
+        android:id="@+id/profili_shofer"
+        android:padding="7dp"
+        android:layout_marginTop="10dp"/>
 
 
-
-
-       <TextView
-
-           android:id="@+id/pop_co_tel"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="0682343552"
-           android:layout_marginLeft="20dp"
-           android:textColor="#000000"
-           />
-
-
-
-   </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="7dp"
-        android:layout_below="@id/linear_1"
-        android:background="@drawable/user_info_shape"
         android:orientation="horizontal"
-        android:id="@+id/linear_2"
-        android:layout_marginTop="10dp">
+        android:id="@+id/shofer_linear"
+        android:layout_below="@+id/profili_shofer"
+        android:weightSum="100"
+        android:padding="1dp"
+        android:background="#ffff"
+        android:elevation="5dp"
+        >
 
-        <TextView
-            android:id="@+id/pop_co_marka"
+
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:id="@+id/pop_co_shofer_photo"
+            android:src="@drawable/icon_person"
+            android:layout_weight="30"
+            android:padding="10dp"
+            />
+
+        <LinearLayout
             android:layout_width="wrap_content"
+            android:orientation="vertical"
             android:layout_height="wrap_content"
-            android:text="FIAT"
-            android:textColor="#000000"/>
+            android:layout_weight="70"
+            android:layout_marginLeft="20dp">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:padding="7dp">
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/pop_co_modeli"
-            android:text="PANDA"
-            android:layout_marginLeft="15dp"
-            android:textColor="#000000"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Emri : "
+                    android:textSize="15sp"
+                    android:textColor="@color/colorPrimary"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/pop_co_targa"
-            android:text="AA453CK"
-            android:layout_marginLeft="15dp"
-            android:textColor="#000000"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Krist Rrushi"
+                    android:textColor="#000000"
+                    android:id="@+id/pop_co_emri"/>
+
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:padding="7dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mosha : "
+                    android:textSize="15sp"
+                    android:textColor="@color/colorPrimary"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="25"
+                    android:textColor="#000000"
+                    android:id="@+id/pop_co_mosha"
+                    />
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:padding="7dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gjinia : "
+                    android:textSize="15sp"
+                    android:textColor="@color/colorPrimary"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mashkull"
+                    android:textColor="#000000"
+                    android:id="@+id/pop_co_gjinia"/>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:padding="7dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tel : "
+                    android:textSize="15sp"
+                    android:textColor="@color/colorPrimary"/>
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0682343552"
+                    android:textColor="#000000"
+                    android:id="@+id/pop_co_tel"/>
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
 
 
 
@@ -83,13 +177,206 @@
     </LinearLayout>
 
 
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Detajet e makines"
+        android:id="@+id/profili_makina"
+        android:padding="7dp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/shofer_linear"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        />
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/makina_linear"
+        android:layout_below="@+id/profili_makina"
+        android:weightSum="100"
+        android:background="#ffff"
+        android:padding="1dp"
+        android:elevation="5dp"
+        >
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:id="@+id/pop_co_makina_photo"
+            android:src="@drawable/icon_person"
+            android:layout_weight="30"
+            android:padding="10dp"
+
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="70">
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:padding="7dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Marka : "
+                    android:textSize="15sp"
+                    android:textColor="@color/colorPrimary"/>
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Fiat"
+                    android:textColor="#000000"
+                    android:id="@+id/pop_co_marka"/>
+
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:padding="7dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Modeli : "
+                    android:textSize="15sp"
+                    android:textColor="@color/colorPrimary"/>
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Panda"
+                    android:textColor="#000000"
+                    android:id="@+id/pop_co_modeli"
+                    />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:padding="7dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Targa : "
+                    android:textSize="15sp"
+                    android:textColor="@color/colorPrimary"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="AA*14EK"
+                    android:textColor="#000000"
+                    android:id="@+id/pop_co_targa"/>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:padding="7dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ngjyra : "
+                    android:textSize="15sp"
+                    android:textColor="@color/colorPrimary"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Jeshile"
+                    android:textColor="#000000"
+                    android:id="@+id/pop_co_ngjyra"/>
+
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linear_2"
-        android:layout_marginTop="10dp"
-        android:text="ok"
-        android:id="@+id/btn_pop_co_mbyll"/>
+        android:layout_below="@+id/makina_linear"
+        android:layout_marginTop="20dp"
+        android:text="Mbyll"
+        android:id="@+id/btn_pop_co_mbyll"
+        android:textAllCaps="false"
+        android:background="@drawable/button_post"
+        android:textColor="#000000"
+        android:textSize="18dp"/>
+
 
 
 

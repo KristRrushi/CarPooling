@@ -8,7 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +19,10 @@ import java.util.List;
 public class PopUpDriverAdapter extends BaseAdapter{
 
     Context c;
-    ArrayList<PassToTrips> dataSet;
+    ArrayList<PopUpDriverListModel> dataSet;
 
 
-    public PopUpDriverAdapter(Context c, ArrayList<PassToTrips> dataSet) {
+    public PopUpDriverAdapter(Context c, ArrayList<PopUpDriverListModel> dataSet) {
         this.c = c;
         this.dataSet = dataSet;
     }
@@ -50,11 +53,21 @@ public class PopUpDriverAdapter extends BaseAdapter{
 
         TextView name = (TextView) view.findViewById(R.id.emri_pop_up_driver);
         TextView phone = (TextView) view.findViewById(R.id.tel_pop_up_driver);
+        TextView mosha = (TextView) view.findViewById(R.id.mosha_pop_up_driver);
+        TextView gjinia = (TextView) view.findViewById(R.id.gjinia_pop_up_driver);
+        ImageView foto = (ImageView) view.findViewById(R.id.foto_pop_up_driver);
 
-        final PassToTrips passToTrips = (PassToTrips) this.getItem(i);
 
-        name.setText(passToTrips.getEmri());
-        phone.setText(passToTrips.getPhone());
+
+
+        final  PopUpDriverListModel popUpDriverListModel = (PopUpDriverListModel) this.getItem(i);
+
+        name.setText(popUpDriverListModel.getEmri());
+        phone.setText(popUpDriverListModel.getPhone());
+        mosha.setText(popUpDriverListModel.getMosha());
+        gjinia.setText(popUpDriverListModel.getGjinia());
+        Picasso.get().load(popUpDriverListModel.getImageUrl()).fit().centerCrop().into(foto);
+
 
 
 

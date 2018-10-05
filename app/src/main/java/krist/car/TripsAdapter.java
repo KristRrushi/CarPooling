@@ -1,5 +1,6 @@
 package krist.car;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.usage.NetworkStats;
@@ -13,7 +14,9 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.INotificationSideChannel;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,11 +40,15 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+
+
 
 import static android.content.ContentValues.TAG;
 import static android.support.v4.content.ContextCompat.getCodeCacheDir;
@@ -162,6 +169,10 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
 
 
 
+
+
+
+
                 //.fit().centerCrop().into(holder.imageView);
 
         //Picasso.get().load(dataSet.get(position).getIdShofer()).into(holder.imageView);
@@ -187,27 +198,25 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
 
             @Override
             public void onClick(View v) {
-               Toast.makeText(v.getContext(), dataSet.get(position).getTripID(), Toast.LENGTH_SHORT).show();
+              // Toast.makeText(v.getContext(), dataSet.get(position).getTripID(), Toast.LENGTH_SHORT).show();
                 //Krijo Dialog per tripID kalo te trpi  id e usert qe e zgjedh ///
 
+                FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
 
-                String shoferId = dataSet.get(position).getIdShofer();
-                String tripId = dataSet.get(position).getTripID();
-                Intent myIntent = new Intent(v.getContext(), PopUpActivity.class);
-
+                String id = idauth.getUid();
 
 
-                Bundle bundle = new Bundle();
-                bundle.putString("shoferID", shoferId);
-                bundle.putString("tripID", tripId);
-                myIntent.putExtra("bS",bundle);
+                if(dataSet.get(position).getVendet().equals("0")){
+                    Toast.makeText(v.getContext(), "Udhetim i plotesuar 0 vende te lira", Toast.LENGTH_LONG).show();
+                }else if(dataSet.get(position).getIdShofer().equals(id)){
+                    Toast.makeText(v.getContext(), "Udhetim i postuar nga ju", Toast.LENGTH_LONG).show();
+                }else {
 
 
-                Log.v(TAG, "Kalimi id");
-
-               v.getContext().startActivity(myIntent);
-
-
+                    String shoferId = dataSet.get(position).getIdShofer();
+                    String tripId = dataSet.get(position).getTripID();
+                    Intent myIntent = new Intent(v.getContext(), PopUpActivity.class);
+                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) v.getContext(),holder.imageView, ViewCompat.getTransitionName(holder.imageView));
 
 
 
@@ -215,18 +224,18 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
 
 
 
+                    Bundle bundle = new Bundle();
+                    bundle.putString("shoferID", shoferId);
+                    bundle.putString("tripID", tripId);
+                    myIntent.putExtra("bS", bundle);
 
 
+                    Log.v(TAG, "Kalimi id");
+
+                    v.getContext().startActivity(myIntent, optionsCompat.toBundle());
 
 
-
-
-
-
-
-
-
-
+                }
 
 
 
@@ -237,7 +246,23 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
 
 
 
-              // ngjit id e userit te tripi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                // ngjit id e userit te tripi
 
 
                /* String tripId = dataSet.get(position).getTripID();

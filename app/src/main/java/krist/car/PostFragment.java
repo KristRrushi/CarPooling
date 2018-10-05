@@ -2,9 +2,6 @@ package krist.car;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
-import android.media.MediaCrypto;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,10 +11,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -30,7 +29,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -40,7 +38,7 @@ import java.util.Locale;
  * Created by pampers on 12/19/2017.
  */
 
-public class PostFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class PostFragment extends Fragment {
 
 
     Button btnPost;
@@ -51,11 +49,37 @@ public class PostFragment extends Fragment implements AdapterView.OnItemSelected
     Spinner sEndCity;
     Spinner sSeats;
     String uRL;
+    private EditText cmimi;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference dataPost = database.getReference("trips");
     DatabaseReference imageUp = database.getReference("imageUploads");
 
     private Button txtTime,txtDate;
+
+
+
+   //------------------ new layout
+
+
+    private AutoCompleteTextView mNisja, mMberritja;
+    private TextView mData, mOra;
+    private EditText mCmimi, mVendet;
+    private Button posto;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public PostFragment(){
 
@@ -75,15 +99,22 @@ public class PostFragment extends Fragment implements AdapterView.OnItemSelected
         imageUp.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Upload upload = dataSnapshot.getValue(Upload.class);
+             /*   Upload upload = dataSnapshot.getValue(Upload.class);
 
-                String uID = upload.getmImageUrl().toString();
+                String uID = upload.getImageCarUrl().toString();
 
 
 
                 uRL = uID;
 
-                Log.v("Listener ", uID);
+                Log.v("Listener ", uID);*/
+
+
+                UploadUsersImage model = dataSnapshot.getValue(UploadUsersImage.class);
+
+                String uID = model.getImageUrl().toString();
+
+                uRL = uID;
 
 
             }
@@ -102,7 +133,8 @@ public class PostFragment extends Fragment implements AdapterView.OnItemSelected
 
 
 
-        return inflater.inflate(R.layout.posto_fragment, container, false);
+
+        return inflater.inflate(R.layout.posto_new_layout, container, false);
         //else
        // return inflater.inflate(R.layout.activity_detaje, container, false);
 
@@ -117,140 +149,161 @@ public class PostFragment extends Fragment implements AdapterView.OnItemSelected
         super.onViewCreated(view, savedInstanceState);
 
 
-        txtTime = (Button) getView().findViewById(R.id.txtTime);
-        txtDate = (Button) getView().findViewById(R.id.txtDate);
-        sStartCity = (Spinner) getView().findViewById(R.id.listStart);
-        sEndCity = (Spinner) getView().findViewById(R.id.listEnd);
-        sSeats = (Spinner) getView().findViewById(R.id.listSeats);
-        btnPost = (Button) getView().findViewById(R.id.btnPostPost);
+
+        String[] qytetet = getResources().getStringArray(R.array.qytetet_shqiperis);
+
+
+        mNisja = view.findViewById(R.id.emailRegister);
+        mMberritja = view.findViewById(R.id.passRegister);
+        mData = view.findViewById(R.id.cardIdNumberRegister);
+        mOra = view.findViewById(R.id.btn_foto_personale_register);
+        mVendet = view.findViewById(R.id.post_new_vendet);
+        mCmimi = view.findViewById(R.id.post_new_cmimi);
+        posto = view.findViewById(R.id.buttonRegister);
 
 
 
 
 
-        sStartCity.setOnItemSelectedListener(this);
-        sEndCity.setOnItemSelectedListener(this);
-        sSeats.setOnItemSelectedListener(this);
-        btnPost.setOnClickListener(this);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, qytetet);
+        mNisja.setAdapter(adapter);
+        mMberritja.setAdapter(adapter);
 
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.qytetet_shqiperis,
-                android.R.layout.simple_spinner_item);
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        sStartCity.setAdapter(adapter);
-        sEndCity.setAdapter(adapter);
-
-
-        ArrayAdapter<CharSequence> adapterSeats = ArrayAdapter.createFromResource(getActivity(), R.array.nr_vendeve,
-                android.R.layout.simple_spinner_item);
-
-        adapterSeats.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sSeats.setAdapter(adapterSeats);
-
-
-        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
+        mData.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
-            }
-
-        };
-
-        txtTime.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                new DatePickerDialog(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            public void onClick(View view) {
+                dataPicker();
             }
         });
 
 
-        final TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
-
+        mOra.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                myCalendar.set(Calendar.MINUTE, minute);
-                updateLabelTime();
-            }
-
-
-        };
-
-        txtDate.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                new TimePickerDialog(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog, time, myCalendar
-                        .get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE), false).show();
+            public void onClick(View view) {
+                timePicker();
             }
         });
 
 
 
+
+
+
+
+        posto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
+                final String id = idauth.getUid();
+
+
+
+
+
+                postUserInfo(id);
+
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
-    public void showTimePickerDialog(View v) {
 
+
+
+    public void dataPicker(){
+
+        new DatePickerDialog(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog, date, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
 
     }
+
+
+
+    final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            // TODO Auto-generated method stub
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateLabel();
+        }
+
+    };
+
 
     private void updateLabel() {
         String myFormat = "dd/MM/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        txtTime.setText(sdf.format(myCalendar.getTime()));
+        mData.setText(sdf.format(myCalendar.getTime()));
     }
+
+
+
+
+
+    public void timePicker(){
+
+        new TimePickerDialog(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog, time, myCalendar
+                .get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE), false).show();
+
+    }
+
+
+   final TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
+
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            myCalendar.set(Calendar.MINUTE, minute);
+            updateLabelTime();
+        }
+
+
+    };
+
+
+
+
+
+
+
 
 
     private void updateLabelTime() {
         String myFormat = "hh:mm a";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
 
-        txtDate.setText(sdf.format(myCalendar.getTime()));
-    }
-
-
-
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-        Spinner spinner = (Spinner) parent;
-        if (spinner.getId() == R.id.listStart) {
-
-            String qytetinisjes = (String) parent.getItemAtPosition(position);
-            Toast.makeText(parent.getContext(), qytetinisjes, Toast.LENGTH_SHORT).show();
-
-        } else if (spinner.getId() == R.id.listEnd) {
-
-            String qytetimerritjes = (String) parent.getItemAtPosition(position);
-            Toast.makeText(parent.getContext(), qytetimerritjes, Toast.LENGTH_SHORT).show();
-            Log.d("krist", qytetimerritjes);
-
-        } else if (spinner.getId() == R.id.listSeats) {
-
-            String vendet = (String) parent.getItemAtPosition(position);
-            Toast.makeText(parent.getContext(), vendet, Toast.LENGTH_SHORT).show();
-
-        }
-
-    }
-
-
-
-    public void onNothingSelected(AdapterView<?> parent) {
-
+        mOra.setText(sdf.format(myCalendar.getTime()));
     }
 
 
@@ -261,23 +314,10 @@ public class PostFragment extends Fragment implements AdapterView.OnItemSelected
 
 
 
-    public void onClick(View v) {
-
-        if (v == btnPost) {
-
-
-            FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
-            final String id = idauth.getUid();
 
 
 
 
-
-            postUserInfo(id);
-        }
-
-
-    }
 
 
 
@@ -294,12 +334,13 @@ public class PostFragment extends Fragment implements AdapterView.OnItemSelected
 
 
 
-        final String ora = txtTime.getText().toString().trim();
-        final String data = txtDate.getText().toString().trim();
-        final String nisja = sStartCity.getSelectedItem().toString();
-        final String mberritja = sEndCity.getSelectedItem().toString();
-        final String vendet = sSeats.getSelectedItem().toString();
+        final String ora = mOra.getText().toString().trim();
+        final String data = mData.getText().toString().trim();
+        final String nisja = mNisja.getText().toString();
+        final String mberritja = mMberritja.getText().toString();
+        final String vendet = mVendet.getText().toString();
         final String uri = uRL;
+        final String price = mCmimi.getText().toString().trim();
 
 
         Log.v("pospot", mberritja);
@@ -314,7 +355,7 @@ public class PostFragment extends Fragment implements AdapterView.OnItemSelected
 
         String pushKey = dataPost.push().getKey();
 
-        TripsModel userspost = new TripsModel(id,nisja,mberritja, data, ora, vendet,uRL,pushKey);
+        TripsModel userspost = new TripsModel(id,nisja,mberritja, data, ora, vendet,uRL,pushKey, price);
 
 
 

@@ -1,6 +1,7 @@
 package krist.car;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +85,7 @@ public class FragmentHistoryDriver extends Fragment  {
         recyclerView.setAdapter(adapter);
 
 
-       /* RecyclerView.ItemDecoration divider = new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL);
+        RecyclerView.ItemDecoration divider = new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(divider);
 
 
@@ -102,14 +104,55 @@ public class FragmentHistoryDriver extends Fragment  {
 
 
 
+
+                adapter.removeItem(viewHolder.getAdapterPosition());
+
+
+
+
+
             }
+
+
+            @Override
+            public void onChildDrawOver(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                final View foregroundView = ((HistoryDriverAdapter.ViewHolder) viewHolder).viewForeground;
+                getDefaultUIUtil().onDrawOver(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive);
+            }
+
+
+
+            @Override
+            public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                final View foregroundView = ((HistoryDriverAdapter.ViewHolder) viewHolder).viewForeground;
+                getDefaultUIUtil().clearView(foregroundView);
+            }
+
+
+            @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                final View foregroundView = ((HistoryDriverAdapter.ViewHolder) viewHolder).viewForeground;
+
+                getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive);
+            }
+
+
+
         });
 
 
 
         helper.attachToRecyclerView(recyclerView);
 
-*/
+
+
+
+
+
+
+
+
+
 
     }
 
@@ -120,7 +163,11 @@ public class FragmentHistoryDriver extends Fragment  {
         super.onStart();
         getAllTrips();
 
+
     }
+
+
+
 
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -140,8 +187,6 @@ public class FragmentHistoryDriver extends Fragment  {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-
-                tripsModelList.clear();
 
                 TripsModel trip = dataSnapshot.getValue(TripsModel.class);
                 if(trip.getIdShofer().equals(id))

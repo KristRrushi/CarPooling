@@ -9,18 +9,47 @@ public class users {
     String emri;
     String phone;
     String id;
+    String birthday;
+    String gener;
+    String personalIdNumber;
+
 
     public users(){};
 
-    public users(String id, String emri, String phone) {
+    public users(String id, String emri, String phone, String birthday, String gener, String personalIdNumber) {
 
         this.id = id;
         this.emri = emri;
         this.phone = phone;
+        this.birthday = birthday;
+        this.gener = gener;
+        this.personalIdNumber = personalIdNumber;
     }
 
 
+    public String getBirthday() {
+        return birthday;
+    }
 
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getGener() {
+        return gener;
+    }
+
+    public void setGener(String gener) {
+        this.gener = gener;
+    }
+
+    public String getPersonalIdNumber() {
+        return personalIdNumber;
+    }
+
+    public void setPersonalIdNumber(String personalIdNumber) {
+        this.personalIdNumber = personalIdNumber;
+    }
 
     public String getId(){return id;}
 

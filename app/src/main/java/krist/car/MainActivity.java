@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity{
                     case R.id.nav_profili2:
                         setFragment(userInfoFragment);
 
+
                         return true;
 
 

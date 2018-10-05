@@ -7,15 +7,20 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
@@ -33,10 +38,21 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class DetajeActivity extends AppCompatActivity {
 
 
-    private EditText txtmodeli, txtmarka, txttarga;
+    private AutoCompleteTextView acModeli, acMarka, acNgjyra;
+
+    private TextView zgjidhFoto;
+
+
+
+
+    private EditText txtmodeli, txtmarka, txttarga, txtNgjyra;
+
     private Button btnZgjidh, btnNgarko;
 
     private ProgressBar mProgresBar;
@@ -66,19 +82,53 @@ public class DetajeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detaje);
 
         mAuth = FirebaseAuth.getInstance();
-        btnZgjidh = findViewById(R.id.fotoMakine);
+       /* btnZgjidh = findViewById(R.id.fotoMakine);
         btnNgarko = findViewById(R.id.btnNgarko);
-        txtmodeli = findViewById(R.id.modeliMakina);
+        txtmodeli = findViewById(R.id.markaMakina);
         txtmarka = findViewById(R.id.markaMakina);
-        txttarga = findViewById(R.id.targaMakina);
-        mProgresBar = findViewById(R.id.progress_bar);
+
+        txtNgjyra = findViewById(R.id.ngjyraMakina);
+*/
+
+        acMarka = findViewById(R.id.emailRegister);
+        acModeli =  findViewById(R.id.passRegister);
+        acNgjyra = findViewById(R.id.cardIdNumberRegister);
+        zgjidhFoto = findViewById(R.id.btn_foto_personale_register);
+        txttarga = findViewById(R.id.phoneRegister);
+
+        btnNgarko = findViewById(R.id.buttonRegister);
+
+        String[] modeliArray = getResources().getStringArray(R.array.modelet_makina);
+        String[] markaArray = getResources().getStringArray(R.array.marka_makina);
+        String[] ngjyraArray = getResources().getStringArray(R.array.ngjyrat_makina);
+
+
+
+
+        ArrayAdapter<String> adapterMarka = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, markaArray);
+        ArrayAdapter<String> adapterModeli = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, modeliArray);
+        ArrayAdapter<String> adapterNgjyra = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ngjyraArray);
+
+
+
+        acMarka.setAdapter(adapterMarka);
+        acModeli.setAdapter(adapterModeli);
+        acNgjyra.setAdapter(adapterNgjyra);
 
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("imageUploads");
 
 
-        btnZgjidh.setOnClickListener(new View.OnClickListener() {
+     /*   btnZgjidh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chooseImage();
+            }
+        });
+*/
+
+        zgjidhFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 chooseImage();
@@ -86,16 +136,23 @@ public class DetajeActivity extends AppCompatActivity {
         });
 
 
+
+
         btnNgarko.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                getDetail();
+                //getDetail();
                 uploadFile();
+                uploadDetails2();
+                //fromActivityToMain();
 
 
             }
         });
+
+
+
 
 
     }
@@ -118,8 +175,11 @@ public class DetajeActivity extends AppCompatActivity {
                     users users = child.getValue(krist.car.users.class);
                     String emri = users.getEmri();
                     String phone = users.getPhone();
+                    String birthday = users.getBirthday();
+                    String gener = users.getGener();
+                    String personalIdNumber = users.getPersonalIdNumber();
 
-                    uploadDetails(emri, phone);
+                    uploadDetails(emri, phone,birthday,gener,personalIdNumber);
 
 
                 }
@@ -135,12 +195,12 @@ public class DetajeActivity extends AppCompatActivity {
     }
 
 
-    private void uploadDetails(String emri, String phone) {
+    private void uploadDetails(String emri, String phone, String birthday, String gener, String personalIdNumber) {
 
 
-        final String marka = txtmarka.getText().toString().trim();
-        final String modeli = txtmodeli.getText().toString().trim();
-        final String targa = txttarga.getText().toString().trim();
+        final String marka = acMarka.getText().toString().trim();
+        final String modeli = acModeli.getText().toString().trim();
+        final String targa = acNgjyra.getText().toString().trim();
 
         String id;
 
@@ -187,6 +247,43 @@ public class DetajeActivity extends AppCompatActivity {
 */
 
     }
+
+
+
+   private void uploadDetails2(){
+
+
+       final String marka = acMarka.getText().toString().trim();
+       final String modeli = acModeli.getText().toString().trim();
+       final String targa = txttarga.getText().toString().trim().toUpperCase();
+       final String ngjyra = acNgjyra.getText().toString().trim();
+
+       String id;
+
+       id = mAuth.getCurrentUser().getUid();
+
+
+       Map<String, Object> mapMak = new HashMap<String, Object>();
+
+       mapMak.put("markaMak", marka);
+       mapMak.put("modeliMak", modeli);
+       mapMak.put("targaMak", targa);
+       mapMak.put("ngjyraMak", ngjyra);
+
+
+       databaseUsers.child(id).updateChildren(mapMak);
+
+
+
+
+
+
+
+   }
+
+
+
+
 
 
     private void chooseImage() {
@@ -272,9 +369,15 @@ public class DetajeActivity extends AppCompatActivity {
 
 
 
-                        Upload upload = new Upload(stringUri);
+                        //Upload upload = new Upload(stringUri);
 
-                        mDatabaseRef.child(id).setValue(upload);
+                        Map<String, Object> mapUri = new HashMap<String, Object>();
+                        mapUri.put("imageCarUrl", stringUri);
+
+
+
+
+                        mDatabaseRef.child(id).updateChildren(mapUri);
 
                         Toast.makeText(DetajeActivity.this, "downloadUri.toString()",Toast.LENGTH_LONG);
 
@@ -311,4 +414,15 @@ public class DetajeActivity extends AppCompatActivity {
 
 
     }
+
+    public void fromActivityToMain(){
+        PostFragment postFragment = new PostFragment();
+
+        FragmentManager fragmentManager = DetajeActivity.this.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.add(R.id.main_frame, postFragment);
+        fragmentTransaction.commit();
+    }
+
 }

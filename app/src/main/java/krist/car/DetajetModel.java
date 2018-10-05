@@ -8,7 +8,43 @@ public class DetajetModel {
     String targaMak;
     String emri;
     String phone;
+    String birthday;
+    String gener;
+    String personalIdNumber;
+    String ngjyraMak;
 
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getGener() {
+        return gener;
+    }
+
+    public void setGener(String gener) {
+        this.gener = gener;
+    }
+
+    public String getPersonalIdNumber() {
+        return personalIdNumber;
+    }
+
+    public void setPersonalIdNumber(String personalIdNumber) {
+        this.personalIdNumber = personalIdNumber;
+    }
+
+    public String getNgjyraMak() {
+        return ngjyraMak;
+    }
+
+    public void setNgjyraMak(String ngjyraMak) {
+        this.ngjyraMak = ngjyraMak;
+    }
 
     public String getId() {
         return id;

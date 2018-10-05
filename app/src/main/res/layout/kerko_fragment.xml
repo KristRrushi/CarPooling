@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -8,7 +9,8 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/toolbar_1">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -22,12 +24,27 @@
 
 
 
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_txt_search"
+        android:hint="Kerko vendin e nisjes"
+        android:layout_below="@+id/toolbar_1"
+        android:background="@drawable/button_post"
+        android:gravity="center"
+         />
+
+
+
+
     <android.support.v7.widget.RecyclerView
 
         android:layout_marginTop="70dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/list_trips"></android.support.v7.widget.RecyclerView>
+        android:id="@+id/list_trips"
+        android:layout_below="@+id/edit_txt_search"></android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
 

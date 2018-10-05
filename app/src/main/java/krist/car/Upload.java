@@ -1,9 +1,16 @@
 package krist.car;
 
 public class Upload {
-    private String mImageUrl;
+    private String imageCarUrl;
 
     private String userId;
+
+
+
+
+
+
+
 
     public String getUserId() {
         return userId;
@@ -13,8 +20,8 @@ public class Upload {
         this.userId = userId;
     }
 
-    public Upload(String mImageUrl){
-        this.mImageUrl = mImageUrl;
+    public Upload(String imageCarUrl){
+        this.imageCarUrl = imageCarUrl;
     }
 
     public Upload(){
@@ -22,11 +29,11 @@ public class Upload {
     }
 
 
-    public String getmImageUrl() {
-        return mImageUrl;
+    public String getImageCarUrl() {
+        return imageCarUrl;
     }
 
-    public void setmImageUrl(String mImageUrl) {
-        this.mImageUrl = mImageUrl;
+    public void setImageCarUrl(String imageCarUrl) {
+        this.imageCarUrl = imageCarUrl;
     }
 }

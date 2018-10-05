@@ -1,217 +1,372 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:padding="10dp"
-    android:background="#e6e6e6">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relative_main"
+    android:background="#ffffff">
 
 
 
-    <TextView
-        android:id="@+id/txt_detajet_udhetimit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Detajet e udhetimit"
-        android:layout_marginTop="10dp"
-        android:padding="7dp"/>
+
+    <!--
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/main_imag_posto"
+            android:src="@drawable/fromatob"
+            android:scaleType="centerCrop"
+            android:elevation="3dp"
+            />
+    -->
 
 
 
 
 
     <LinearLayout
-        android:id="@+id/posto_nisja_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/user_info_shape"
+        android:layout_below="@+id/main_imag_posto"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:id="@+id/linear_nisja">
 
-        android:layout_below="@id/txt_detajet_udhetimit">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_person"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Qyteti i nisjes"
+            android:text="Email"
             android:textColor="#000000"
-            android:padding="7dp"/>
+            android:textSize="21sp"
+            android:layout_marginLeft="7dp"/>
+
+    </LinearLayout>
 
 
-        <Spinner
-        android:id="@+id/listStart"
-        android:layout_width="100dp"
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-           android:layout_marginLeft="20dp"
-            android:padding="7dp"
+        android:layout_below="@+id/linear_nisja"
+        android:layout_marginLeft="50dp"
+        android:hint="kristrrushi@gmail.com"
+        android:id="@+id/emailRegister"
+        android:completionThreshold="1"
+        android:enabled="false"
+        android:layout_marginTop="-10dp"/>
 
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/emailRegister"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/linear_modelimakina">
 
 
-        ></Spinner>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fjalekalimi"
+            android:textColor="#000000"
+            android:textSize="21sp"
+            android:layout_marginLeft="37dp"
+            />
 
 
+    </LinearLayout>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_modelimakina"
+        android:layout_marginLeft="50dp"
+        android:hint="*************"
+        android:id="@+id/passRegister"
+        android:completionThreshold="1"
+        android:enabled="false"
+        android:inputType="numberPassword"
+        android:layout_marginTop="-8dp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/passRegister"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/linear_emri_mbiemri">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_person"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Emri Mbiemri"
+            android:textColor="#000000"
+            android:textSize="21sp"
+            android:layout_marginLeft="7dp"/>
+
+    </LinearLayout>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_emri_mbiemri"
+        android:layout_marginLeft="50dp"
+        android:hint="Krist Rrushi"
+        android:id="@+id/nameRegister"
+        android:completionThreshold="1"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/nameRegister"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/linear_targa">
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Telefoni"
+            android:textColor="#000000"
+            android:textSize="21sp"
+            android:layout_marginLeft="37dp"
+            />
 
 
     </LinearLayout>
 
 
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_targa"
+        android:layout_marginLeft="50dp"
+        android:hint="0682343552"
+        android:id="@+id/phoneRegister"
+        android:inputType="number"/>
+
+
+
     <LinearLayout
-        android:id="@+id/posto_mberritja_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/user_info_shape"
+        android:layout_below="@+id/phoneRegister"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/linear_gjini">
 
-        android:layout_below="@+id/posto_nisja_layout"
-        android:layout_marginTop="10dp">
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Qyteti i mberritjjes"
+            android:text="Gjinia"
             android:textColor="#000000"
-            android:padding="7dp"
+            android:textSize="21sp"
+            android:layout_marginLeft="37dp"
             />
 
 
-        <Spinner
-            android:id="@+id/listEnd"
-            android:layout_width="100dp"
+    </LinearLayout>
+
+
+
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_gjini"
+        android:layout_marginLeft="50dp"
+        android:hint="Mashkull / Femer"
+        android:id="@+id/generRegister"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/generRegister"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/linear_mosha">
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Mosha"
+            android:textColor="#000000"
+            android:textSize="21sp"
+            android:layout_marginLeft="37dp"
+            />
+
+
+    </LinearLayout>
+
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_mosha"
+        android:layout_marginLeft="50dp"
+        android:hint="25"
+        android:id="@+id/birthdayRegister"
+        android:inputType="number"/>
+
+
+
+
+
+
+
+
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relative_data_ora"
+        android:layout_below="@+id/birthdayRegister"
+        android:paddingTop="10dp"
+        android:layout_marginTop="5dp">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linear_data"
+            android:orientation="horizontal"
             android:layout_marginLeft="20dp"
-            android:padding="7dp"
+            android:layout_marginTop="15dp">
 
 
 
 
-            ></Spinner>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nr Personal"
+                android:textColor="#000000"
+                android:textSize="21sp"
+                android:layout_marginLeft="37dp"
+                />
 
 
 
 
-    </LinearLayout>
+
+        </LinearLayout>
+
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="P33465437K              "
+            android:layout_below="@+id/linear_data"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="-10dp"
+
+            android:id="@+id/cardIdNumberRegister"/>
 
 
 
-    <LinearLayout
-        android:id="@+id/posto_vendet_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/user_info_shape"
-
-        android:layout_below="@+id/posto_mberritja_layout"
-        android:layout_marginTop="10dp"
-        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Vendet e lira"
+            android:id="@+id/txt_ora"
+
+            android:text="Foto Personale"
             android:textColor="#000000"
-            android:padding="7dp"/>
-
-
-        <Spinner
-            android:id="@+id/listSeats"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:padding="7dp"
-
-
-
-
-            ></Spinner>
-
-
-
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/posto_data_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/user_info_shape"
-
-        android:layout_below="@+id/posto_vendet_layout"
-        android:layout_marginTop="10dp"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Data : "
-            android:textColor="#000000"
-            android:padding="7dp"/>
-
-
-        <Button
-            android:id="@+id/txtTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#ffffff"
-            android:text="ora"
-            android:layout_marginLeft="30dp"
-            android:padding="7dp"
-            />
-
-
-
-
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/posto_ora_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/user_info_shape"
-
-        android:layout_below="@+id/posto_data_layout"
-        android:layout_marginTop="10dp"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ora : "
-            android:textColor="#000000"
-            android:padding="7dp"/>
-
-
-        <Button
-
-            android:id="@+id/txtDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#ffffff"
-            android:text="Data"
-            android:layout_marginLeft="30dp"
-            android:padding="7dp"
+            android:textSize="21sp"
+            android:layout_marginRight="35dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentRight="true"
 
             />
 
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/txt_ora"
+            android:layout_below="@+id/linear_data"
+            android:text="Zgjidh foto"
+            android:layout_alignLeft="@+id/txt_ora"
+            android:layout_marginTop="2dp"
+            android:id="@+id/btn_foto_personale_register"
+            android:textSize="18dp"
+            android:background="@drawable/button_post"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            />
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="2dp"
+            android:layout_height="80dp"
+            android:layout_toStartOf="@+id/txt_ora"
+            android:layout_marginRight="15dp"
+
+            android:background="#000000"
 
 
 
-    </LinearLayout>
+            android:layout_toLeftOf="@+id/txt_ora" />
+
+
+    </RelativeLayout>
+
 
 
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnPostPost"
-        android:layout_below="@id/posto_ora_layout"
-        android:layout_marginTop="15dp"
-        android:text="POSTO"/>
+        android:textSize="18dp"
+        android:text="Posto"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/buttonRegister"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_post"
+        android:textAllCaps="false"
+        />
+
 
 
 

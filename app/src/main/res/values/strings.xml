@@ -35,12 +35,174 @@
     </string-array>
 
     <string-array name="nr_vendeve">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
+        <item>1 Vend</item>
+        <item>2 Vende</item>
+        <item>3 Vende</item>
+        <item>4 Vende</item>
+        <item>5 Vende</item>
     </string-array>
+
+
+    <string-array name="marka_makina">
+
+        <item>Fiat</item>
+        <item>BMW</item>
+        <item>Mercedez Benz</item>
+        <item>Skoda</item>
+        <item>Ford</item>
+        <item>Volkswagen</item>
+        <item>Honda</item>
+        <item>Hyundai</item>
+        <item>Citroen</item>
+        <item>Kia</item>
+        <item>Nissan</item>
+        <item>Mazda</item>
+        <item>Mitsubishi</item>
+        <item>Alfa Romeo</item>
+        <item>Smart</item>
+        <item>Audi</item>
+        <item>Peugeot</item>
+        <item>Opel</item>
+        <item>Dodge</item>
+        <item>Suzuki</item>
+        <item>Volvo</item>
+        <item>Jeep</item>
+
+
+    </string-array>
+
+
+    <string-array name="modelet_makina">
+
+        <item>Panda</item>
+        <item>Bravo</item>
+        <item>500</item>
+        <item>Uno</item>
+        <item>Diablo</item>
+        <item>500 Max</item>
+        <item>Punto</item>
+        <item>X1</item>
+        <item>X3</item>
+        <item>X4</item>
+        <item>X5</item>
+        <item>X6</item>
+        <item>Seria 5</item>
+        <item>Seria 3</item>
+        <item>Seria 7</item>
+        <item>Seria 4</item>
+        <item>Seria 8</item>
+        <item>Z4</item>
+        <item>A-Class</item>
+        <item>C-Class</item>
+        <item>E-Class</item>
+        <item>B-Class</item>
+        <item>G-Class</item>
+        <item>CLA</item>
+        <item>ML</item>
+        <item>GLK</item>
+        <item>GL</item>
+        <item>S-Class</item>
+        <item>CLS</item>
+        <item>GLA</item>
+        <item>Fabia</item>
+        <item>Octavia</item>
+        <item>Yeti</item>
+        <item>Superb</item>
+        <item>Rapid</item>
+        <item>Kamiq</item>
+        <item>Focus</item>
+        <item>Escape</item>
+        <item>Fiesta</item>
+        <item>Explorer</item>
+        <item>Ka</item>
+        <item>Mondeo</item>
+        <item>C-Max</item>
+        <item>Kuga</item>
+        <item>Golf 5</item>
+        <item>Golf 6</item>
+        <item>Golf 7</item>
+        <item>Passat</item>
+        <item>Caddy</item>
+        <item>Arteon</item>
+        <item>Jetta</item>
+        <item>Polo</item>
+        <item>Tiguan</item>
+        <item>Tuareg</item>
+        <item>Sharan</item>
+        <item>Civic</item>
+        <item>Amaze</item>
+        <item>City</item>
+        <item>i20</item>
+        <item>Santa Fe</item>
+        <item>Atos</item>
+        <item>Accent</item>
+        <item>C1</item>
+        <item>C4</item>
+        <item>DS</item>
+        <item>C2</item>
+        <item>Cactus</item>
+        <item>A1</item>
+        <item>A6</item>
+        <item>A3</item>
+        <item>A4</item>
+        <item>A5</item>
+        <item>Fiat</item>
+        <item>Q3</item>
+        <item>Q5</item>
+        <item>Q7</item>
+        <item>S7</item>
+
+
+
+
+
+
+    </string-array>
+
+
+    <string-array name="ngjyrat_makina">
+
+        <item>Kuqe</item>
+        <item>Zeze</item>
+        <item>Kafe</item>
+        <item>Gri</item>
+        <item>Jeshile</item>
+        <item>Blu</item>
+        <item>Bardhe</item>
+        <item>Verdhe</item>
+        <item>Vishnje</item>
+        <item>Portokalli</item>
+
+
+
+
+
+
+    </string-array>
+
+
+
+    <string-array name="gener" >
+        <item>Mashkull</item>
+        <item>Femer</item>
+
+    </string-array>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <string name="title_activity_historia">HistoriaActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>

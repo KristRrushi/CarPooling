@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -150,6 +151,9 @@ public class DetajeActivity extends AppCompatActivity {
 
             }
         });
+
+
+
 
 
 
@@ -401,6 +405,18 @@ public class DetajeActivity extends AppCompatActivity {
 
 
                     }
+                }
+            }).addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+
+                    Toast.makeText(DetajeActivity.this, "Foto u ngarkua ", Toast.LENGTH_LONG).show();
+
+
+
+
+
+
                 }
             });
 

@@ -45,6 +45,8 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-storage:4.1.0'
     implementation files('libs/CircleImageView-master/gradle/wrapper/gradle-wrapper.jar')
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+
 }
 
 

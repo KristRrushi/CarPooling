@@ -99,7 +99,7 @@ public class PostFragment extends Fragment {
         imageUp.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-             /*   Upload upload = dataSnapshot.getValue(Upload.class);
+              Upload upload = dataSnapshot.getValue(Upload.class);
 
                 String uID = upload.getImageCarUrl().toString();
 
@@ -107,14 +107,10 @@ public class PostFragment extends Fragment {
 
                 uRL = uID;
 
-                Log.v("Listener ", uID);*/
+                Log.v("Listener ", uID);
 
 
-                UploadUsersImage model = dataSnapshot.getValue(UploadUsersImage.class);
 
-                String uID = model.getImageUrl().toString();
-
-                uRL = uID;
 
 
             }

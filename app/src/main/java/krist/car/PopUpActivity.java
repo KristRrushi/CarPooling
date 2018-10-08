@@ -80,7 +80,7 @@ public class PopUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pop_up__activity_new);
+        setContentView(R.layout.popupactivitymain_prove);
         setTitle("Detajet e metejshme. Konfirmo");
 
 
@@ -149,36 +149,6 @@ public class PopUpActivity extends AppCompatActivity {
 
         Log.v(TAG,"Query exe");
 
-      /*  query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                System.out.println(dataSnapshot.getValue());
-
-                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-
-                Log.v(TAG,"mbushja e popup");
-
-                for (DataSnapshot child: children) {
-                    DialogModel dialogModel = child.getValue(DialogModel.class);
-
-                    Log.v(TAG,"mbushja e popup2");
-
-                    etEmri.setText(dialogModel.getEmri());
-                    etTel.setText(dialogModel.getPhone());
-                    etTarga.setText(dialogModel.getTargaMak());
-                    etModeli.setText(dialogModel.getModeliMak());
-                    etMarka.setText(dialogModel.getMarkaMak());
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
 
 
 
@@ -564,8 +534,8 @@ public class PopUpActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 DialogModel model = dataSnapshot.getValue(DialogModel.class);
-                cmimi.setText( "Cmimi total i udhetimi eshte : " + model.getCmimi()+" Leke. \n" +
-                        "Cmimi total i udhetimi ndahet ne perpjestim te drejte me totalin e pasagjerve (PERFSHIRE DHE SHOFERIN)"
+                cmimi.setText( "Cmimi i udhetimi per person eshte : " + model.getCmimi()+" Leke. \n" +
+                        "Cmim eshte i vendosur nga vete shoferi."
                 );
                 cmimi.setTextColor(Color.RED);
             }

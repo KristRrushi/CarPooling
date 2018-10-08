@@ -2,6 +2,7 @@ package krist.car;
 
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.drm.DrmStore;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -126,6 +128,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
+       // btnRegister.setVisibility(View.GONE);
 
 
     }
@@ -158,8 +161,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Intent myIntent = new Intent(RegisterActivity.this,
-                                        MainActivity.class);
+
 
                                 Toast.makeText(RegisterActivity.this, "suskese", Toast.LENGTH_SHORT).show();
 
@@ -172,7 +174,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                                     databaseUsers.child(id).setValue(users);
 
-                                    startActivity(myIntent);
+
 
 
 
@@ -259,6 +261,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         Log.v("klick", stringUri);
                         Log.v("String","benibeniebenibeiniebni");
 
+
+
+
                         FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
                         String id = idauth.getUid();
 
@@ -272,7 +277,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                         mDatabaseRef.child(id).setValue(uploadUsersImage);
 
-                        Toast.makeText(RegisterActivity.this, "downloadUri.toString()",Toast.LENGTH_LONG);
+
 
 
 
@@ -284,6 +289,23 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
                     }
+                }
+            }).addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+
+
+
+
+
+
+                    Toast.makeText(RegisterActivity.this, "Foto u ngarkua me sukses", Toast.LENGTH_LONG).show();
+                    Intent myIntent = new Intent(RegisterActivity.this,
+                            MainActivity.class);
+
+                    startActivity(myIntent);
+
+
                 }
             });
 

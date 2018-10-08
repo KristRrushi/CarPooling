@@ -7,9 +7,10 @@
         android:icon="@drawable/baseline_search_black_24dp"
         android:title="@string/nav_kerko" />
     <item
+
         android:id="@+id/nav_posto"
         android:icon="@drawable/baseline_directions_car_black_24dp"
-        android:title="@string/nav_posto" />
+        android:title="Posto" />
     <item
         android:id="@+id/nav_profili"
         android:icon="@drawable/image_historia2"
@@ -18,5 +19,10 @@
     <item
         android:id="@+id/nav_profili2"
         android:icon="@drawable/baseline_perm_identity_black_24dp"
-        android:title="Profili" />
+        android:title="Profili"
+        />
+
+
+
+
 </menu>

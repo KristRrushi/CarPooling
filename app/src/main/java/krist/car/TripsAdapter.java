@@ -90,7 +90,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
 
             list_item_view = v;
 
-            imageView = list_item_view.findViewById(R.id.img_mak);
+            imageView = list_item_view.findViewById(R.id.foto);
             vNisja = list_item_view.findViewById(R.id.new_nisja);
             vMberritja = list_item_view.findViewById(R.id.new_mberritja);
             data = list_item_view.findViewById(R.id.new_ora);
@@ -135,7 +135,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
     @Override
     public TripsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View trips_view = LayoutInflater.from(parent.getContext())
-                            .inflate(R.layout.trips_list_item_2,parent,false);
+                            .inflate(R.layout.ketubehetcdogje,parent,false);
 
 
 
@@ -216,7 +216,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
                     String shoferId = dataSet.get(position).getIdShofer();
                     String tripId = dataSet.get(position).getTripID();
                     Intent myIntent = new Intent(v.getContext(), PopUpActivity.class);
-                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) v.getContext(),holder.imageView, ViewCompat.getTransitionName(holder.imageView));
+                   ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) v.getContext(),holder.imageView, ViewCompat.getTransitionName(holder.imageView));
 
 
 
@@ -232,8 +232,9 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
 
                     Log.v(TAG, "Kalimi id");
 
-                    v.getContext().startActivity(myIntent, optionsCompat.toBundle());
+                   v.getContext().startActivity(myIntent, optionsCompat.toBundle());
 
+                    //v.getContext().startActivity(myIntent);
 
                 }
 

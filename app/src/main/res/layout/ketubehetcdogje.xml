@@ -2,285 +2,132 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/relative_main"
-    android:background="#ffffff">
+android:background="@drawable/cardborder"
+    android:layout_marginBottom="10dp"
+    android:elevation="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
 
 
+    >
 
-
-<!--
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/main_imag_posto"
-        android:src="@drawable/fromatob"
+        android:layout_height="250dp"
+        android:id="@+id/foto"
+        android:src="@drawable/capture"
         android:scaleType="centerCrop"
-        android:elevation="3dp"
-        />
--->
+        android:transitionName="transition"
 
 
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/main_imag_posto"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="25dp"
-        android:id="@+id/linear_nisja">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_person"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Email"
-            android:textColor="#000000"
-            android:textSize="21sp"
-            android:layout_marginLeft="7dp"/>
-
-    </LinearLayout>
-
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linear_nisja"
-        android:layout_marginLeft="50dp"
-        android:hint="kristrrushi@gmail.com"
-        android:id="@+id/emailRegister"
-        android:completionThreshold="1"
-        android:enabled="false"
-        android:layout_marginTop="-10dp"/>
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/emailRegister"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/linear_modelimakina">
-
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fjalekalimi"
-            android:textColor="#000000"
-            android:textSize="21sp"
-            android:layout_marginLeft="37dp"
-            />
-
-
-    </LinearLayout>
-
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linear_modelimakina"
-        android:layout_marginLeft="50dp"
-        android:hint="*************"
-        android:id="@+id/passRegister"
-        android:completionThreshold="1"
-        android:enabled="false"
-        android:inputType="numberPassword"
-        android:layout_marginTop="-8dp"/>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/passRegister"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp"
-        android:id="@+id/linear_emri_mbiemri">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_person"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Emri Mbiemri"
-            android:textColor="#000000"
-            android:textSize="21sp"
-            android:layout_marginLeft="7dp"/>
-
-    </LinearLayout>
-
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linear_emri_mbiemri"
-        android:layout_marginLeft="50dp"
-        android:hint="Krist Rrushi"
-        android:id="@+id/nameRegister"
-        android:completionThreshold="1"/>
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/nameRegister"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp"
-        android:id="@+id/linear_targa">
-
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Telefoni"
-            android:textColor="#000000"
-            android:textSize="21sp"
-            android:layout_marginLeft="37dp"
-            />
-
-
-    </LinearLayout>
-
-
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linear_targa"
-        android:layout_marginLeft="50dp"
-        android:hint="0682343552"
-        android:id="@+id/phoneRegister"
-        android:inputType="number"/>
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/phoneRegister"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp"
-        android:id="@+id/linear_gjini">
-
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Gjinia"
-            android:textColor="#000000"
-            android:textSize="21sp"
-            android:layout_marginLeft="37dp"
-            />
-
-
-    </LinearLayout>
-
-
-
-    <AutoCompleteTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linear_gjini"
-        android:layout_marginLeft="50dp"
-        android:hint="Mashkull / Femer"
-        android:id="@+id/generRegister"
         />
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
+
+
+
+        android:id="@+id/view_foreground"
         android:orientation="horizontal"
-        android:layout_below="@+id/generRegister"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp"
-        android:id="@+id/linear_mosha">
+        android:layout_below="@+id/foto"
+      android:padding="5dp"
 
 
+        >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mosha"
-            android:textColor="#000000"
-            android:textSize="21sp"
-            android:layout_marginLeft="37dp"
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_person"
+            android:id="@+id/img_mak"
+
             />
-
-
-    </LinearLayout>
-
-
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linear_mosha"
-        android:layout_marginLeft="50dp"
-        android:hint="25"
-        android:id="@+id/birthdayRegister"
-        android:inputType="number"/>
-
-
-
-
-
-
-
-
-
-
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/relative_data_ora"
-        android:layout_below="@+id/birthdayRegister"
-        android:paddingTop="10dp"
-        android:layout_marginTop="5dp">
 
 
         <LinearLayout
             android:layout_width="wrap_content"
+            android:orientation="vertical"
             android:layout_height="wrap_content"
-            android:id="@+id/linear_data"
-            android:orientation="horizontal"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp">
+
+
+            >
 
 
 
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nr Personal"
-                android:textColor="#000000"
-                android:textSize="21sp"
-                android:layout_marginLeft="37dp"
-                />
+                android:id="@+id/destinaciooni_liner"
+                android:orientation="horizontal"
+
+
+                >
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NISJA"
+                    android:textSize="25dp"
+
+                    android:id="@+id/new_nisja"
+                    android:textColor="#000000"
+                    />
+
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MBERRITHJA"
+                    android:textSize="25dp"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/new_mberritja"
+                    android:textColor="#000000"/>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:text="DATA"
+                    android:textColor="#000000"
+                    android:id="@+id/new_data"/>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ORA"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/new_ora"
+                    android:textColor="#000000"/>
+
+
+
+            </LinearLayout>
+
 
 
 
@@ -289,84 +136,63 @@
         </LinearLayout>
 
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="P33465437K              "
-            android:layout_below="@+id/linear_data"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="-10dp"
-
-            android:id="@+id/cardIdNumberRegister"/>
-
-
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txt_ora"
-
-            android:text="Foto Personale"
-            android:textColor="#000000"
-            android:textSize="21sp"
-            android:layout_marginRight="35dp"
-            android:layout_marginTop="15dp"
-            android:layout_alignParentRight="true"
-
-            />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/txt_ora"
-            android:layout_below="@+id/linear_data"
-            android:text="Zgjidh foto"
-            android:layout_alignLeft="@+id/txt_ora"
-            android:layout_marginTop="2dp"
-            android:id="@+id/btn_foto_personale_register"
-            android:textSize="18dp"
-            android:background="@drawable/button_post"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingTop="3dp"
-            android:paddingBottom="3dp"
-            />
-
         <View
-            android:id="@+id/divider3"
-            android:layout_width="2dp"
-            android:layout_height="80dp"
-            android:layout_toStartOf="@+id/txt_ora"
-            android:layout_marginRight="15dp"
+            android:id="@+id/divider"
+            android:layout_width="1dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
 
-            android:background="#000000"
-
-
-
-            android:layout_toLeftOf="@+id/txt_ora" />
+            android:layout_marginLeft="40dp"
+            android:layout_height="match_parent"
+            android:background="#000000" />
 
 
-    </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+
+
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vendet"
+                android:textSize="23dp"
+                android:textColor="#000000"
+
+                android:layout_marginTop="2dp"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="5"
+                android:textSize="20dp"
+                android:id="@+id/new_vendet"
+
+
+
+                android:textColor="#fd9a05"/>
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 
 
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
 
-        android:text="Posto"
-        android:textSize="18dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:id="@+id/buttonRegister"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/button_post"
-        android:textAllCaps="false"
-        />
+
+
 
 
 

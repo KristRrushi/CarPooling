@@ -1,40 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+
+
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/relative_main">
+        android:id="@+id/relative_main"
+        android:background="#009BCE">
+
+
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+               app:titleTextColor="#ffff"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                android:theme="@style/ToolBarStyle"
+                app:title="Profili"
+                app:titleMarginStart="25dp"
+
+                />
+
+
+
 
 
         <RelativeLayout
+            android:layout_below="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/relative_foto_makine"
-            android:background="#f7f7f7"
-            android:paddingBottom="10dp">
+            android:background="@drawable/layout_upper_corners"
+
+
+            >
 
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_centerInParent="true"
-
                 android:id="@+id/foto_user"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="20dp"
+                app:civ_border_width="1dp"
+                app:civ_border_color="#2f000000"
+
+
+
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ndrysho Foto Profili"
-               android:textColor="@color/colorPrimary"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/foto_user"
-                android:layout_marginTop="50dp"
-                />
 
 
 
@@ -81,6 +105,10 @@
                     android:textSize="16dp"
                     android:layout_marginLeft="100dp"
                     android:id="@+id/user_info_emri_mbiemri"
+                    android:enabled="false"
+                    android:textColor="#6b6b6b"
+                    android:maxLines="1"
+
 
 
                     />
@@ -117,6 +145,9 @@
                     android:textSize="16dp"
                     android:layout_marginLeft="100dp"
                     android:id="@+id/user_info_email"
+                    android:enabled="false"
+                    android:textColor="#6b6b6b"
+                    android:maxLines="1"
 
                     />
 
@@ -152,6 +183,9 @@
                     android:textSize="16dp"
                     android:layout_marginLeft="100dp"
                     android:id="@+id/user_info_tel"
+                    android:enabled="false"
+                    android:textColor="#6b6b6b"
+                    android:maxLines="1"
                     />
 
 
@@ -185,6 +219,9 @@
                     android:textSize="16dp"
                     android:layout_marginLeft="100dp"
                     android:id="@+id/user_info_gjinia"
+                    android:enabled="false"
+                    android:textColor="#6b6b6b"
+                    android:maxLines="1"
 
                     />
 
@@ -220,8 +257,10 @@
                     android:layout_centerVertical="true"
                     android:textSize="16dp"
                     android:layout_marginLeft="100dp"
-
+                    android:maxLines="1"
                     android:id="@+id/user_info_mosha"
+                    android:enabled="false"
+                    android:textColor="#6b6b6b"
 
                     />
 
@@ -257,6 +296,9 @@
                     android:textSize="16dp"
                     android:layout_marginLeft="100dp"
                     android:id="@+id/user_info_personalNumber"
+                    android:enabled="false"
+                    android:textColor="#6b6b6b"
+                    android:maxLines="1"
 
 
                     />
@@ -291,19 +333,7 @@
 
 
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_post"
 
-
-
-            android:layout_below="@+id/linear_makina_info"
-            android:layout_marginTop="30dp"
-            android:textAllCaps="false"
-            android:textSize="18dp"
-            android:text="Rruaj Ndryshimet"
-            android:id="@+id/btn_change_info"/>
 
 
     </RelativeLayout>

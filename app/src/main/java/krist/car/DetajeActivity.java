@@ -3,6 +3,7 @@ package krist.car;
 
 
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,8 +12,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -42,27 +45,22 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DetajeActivity extends AppCompatActivity {
+public class DetajeActivity extends AppCompatActivity  implements View.OnFocusChangeListener{
 
 
     private AutoCompleteTextView acModeli, acMarka, acNgjyra;
-
     private TextView zgjidhFoto;
-
-
-
-
-    private EditText txtmodeli, txtmarka, txttarga, txtNgjyra;
-
-    private Button btnZgjidh, btnNgarko;
-
+    private EditText  txttarga;
+    private Button btnNgarko;
     private ProgressBar mProgresBar;
-
-    private ImageView imageView;
-
     private Uri filePath;
+    private Toolbar toolbar;
+
+
 
     private final int PICK_IMAGE_REQUEST = 1;
+
+
 
 
     private StorageReference mStorageRef;
@@ -83,21 +81,28 @@ public class DetajeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detaje);
 
         mAuth = FirebaseAuth.getInstance();
-       /* btnZgjidh = findViewById(R.id.fotoMakine);
-        btnNgarko = findViewById(R.id.btnNgarko);
-        txtmodeli = findViewById(R.id.markaMakina);
-        txtmarka = findViewById(R.id.markaMakina);
 
-        txtNgjyra = findViewById(R.id.ngjyraMakina);
-*/
 
         acMarka = findViewById(R.id.emailRegister);
         acModeli =  findViewById(R.id.passRegister);
         acNgjyra = findViewById(R.id.cardIdNumberRegister);
         zgjidhFoto = findViewById(R.id.btn_foto_personale_register);
         txttarga = findViewById(R.id.phoneRegister);
-
         btnNgarko = findViewById(R.id.buttonRegister);
+        mProgresBar = findViewById(R.id.progres_detajet_activity);
+        mProgresBar.setVisibility(View.INVISIBLE);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbarRegjMakine);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startMainActivity();
+            }
+        });
+
+
+
 
         String[] modeliArray = getResources().getStringArray(R.array.modelet_makina);
         String[] markaArray = getResources().getStringArray(R.array.marka_makina);
@@ -121,13 +126,7 @@ public class DetajeActivity extends AppCompatActivity {
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("imageUploads");
 
 
-     /*   btnZgjidh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chooseImage();
-            }
-        });
-*/
+
 
         zgjidhFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,10 +142,12 @@ public class DetajeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //getDetail();
-                uploadFile();
+
+
                 uploadDetails2();
-                //fromActivityToMain();
+
+
+
 
 
             }
@@ -155,102 +156,13 @@ public class DetajeActivity extends AppCompatActivity {
 
 
 
-
+        viewHideSoftKeyBoard();
 
 
 
     }
 
 
-    private void getDetail() {
-
-        String id;
-
-        id = mAuth.getCurrentUser().getUid();
-
-        Query query = databaseUsers.orderByKey().equalTo(id);
-
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-
-                for (DataSnapshot child : children) {
-                    users users = child.getValue(krist.car.users.class);
-                    String emri = users.getEmri();
-                    String phone = users.getPhone();
-                    String birthday = users.getBirthday();
-                    String gener = users.getGener();
-                    String personalIdNumber = users.getPersonalIdNumber();
-
-                    uploadDetails(emri, phone,birthday,gener,personalIdNumber);
-
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-    }
-
-
-    private void uploadDetails(String emri, String phone, String birthday, String gener, String personalIdNumber) {
-
-
-        final String marka = acMarka.getText().toString().trim();
-        final String modeli = acModeli.getText().toString().trim();
-        final String targa = acNgjyra.getText().toString().trim();
-
-        String id;
-
-        id = mAuth.getCurrentUser().getUid();
-
-
-        DetajetModel detajetModel = new DetajetModel(id, emri, phone, marka, modeli, targa);
-
-
-        databaseUsers.child(id).setValue(detajetModel);
-
-
-
-      /*  final Intent intent = new Intent(DetajeActivity.this , MainActivity.class);
-        startActivity(intent);*/
-
-
-      /*PostFragment postFragment = new PostFragment();
-       FragmentTransaction transaction = getFragmentManager().beginTransaction();
-       transaction.replace(R.id.main_frame, postFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();*/
-
-
-
-
-
-
-
-
-
-
-
-      /*  Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent1 = new Intent(DetajeActivity.this, PostFragment.class);
-                startActivity(intent1);
-            }
-        }, 3000);
-
-
-*/
-
-    }
 
 
 
@@ -266,18 +178,29 @@ public class DetajeActivity extends AppCompatActivity {
 
        id = mAuth.getCurrentUser().getUid();
 
-
-       Map<String, Object> mapMak = new HashMap<String, Object>();
-
-       mapMak.put("markaMak", marka);
-       mapMak.put("modeliMak", modeli);
-       mapMak.put("targaMak", targa);
-       mapMak.put("ngjyraMak", ngjyra);
+       if(!marka.isEmpty() && !modeli.isEmpty() && !targa.isEmpty() && !ngjyra.isEmpty() && filePath != null) {
 
 
-       databaseUsers.child(id).updateChildren(mapMak);
+           Map<String, Object> mapMak = new HashMap<String, Object>();
+
+           mapMak.put("markaMak", marka);
+           mapMak.put("modeliMak", modeli);
+           mapMak.put("targaMak", targa);
+           mapMak.put("ngjyraMak", ngjyra);
 
 
+           databaseUsers.child(id).updateChildren(mapMak);
+
+           uploadFile();
+
+
+
+
+
+       }else {
+
+       Toast.makeText(DetajeActivity.this, "Plotesoni te gjitha te dhenat" , Toast.LENGTH_LONG).show();
+       }
 
 
 
@@ -305,24 +228,6 @@ public class DetajeActivity extends AppCompatActivity {
 
             filePath = data.getData();
 
-           /* String uid = mAuth.getCurrentUser().getUid();
-
-            Uri uri = data.getData();
-            StorageReference filepath = mStorageRef.child(uid);
-
-
-
-
-            filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(DetajeActivity.this, "Ngarkim i suksesshem.", Toast.LENGTH_LONG).show();
-
-
-
-
-                }
-            });*/
 
 
         }
@@ -339,6 +244,8 @@ public class DetajeActivity extends AppCompatActivity {
 
 
     private void uploadFile() {
+
+        mProgresBar.setVisibility(View.VISIBLE);
 
         Log.v("DEta", "shjion");
 
@@ -366,14 +273,14 @@ public class DetajeActivity extends AppCompatActivity {
                         String stringUri = downloadUri.toString();
 
                         Log.v("klick", stringUri);
-                        Log.v("String","benibeniebenibeiniebni");
+
 
                         FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
                         String id = idauth.getUid();
 
 
 
-                        //Upload upload = new Upload(stringUri);
+
 
                         Map<String, Object> mapUri = new HashMap<String, Object>();
                         mapUri.put("imageCarUrl", stringUri);
@@ -385,18 +292,6 @@ public class DetajeActivity extends AppCompatActivity {
 
                         Toast.makeText(DetajeActivity.this, "downloadUri.toString()",Toast.LENGTH_LONG);
 
-
-                       /* Bundle bundle = new Bundle();
-                        bundle.putString("URi", stringUri);
-
-                        bundle.putExtra
-
-                        FragmentManager m = getSupportFragmentManager();
-                        FragmentTransaction t = m.beginTransaction();
-
-                        PostFragment fragment = new PostFragment();
-                        fragment.setArguments(bundle);
-                        t.commit();*/
 
 
 
@@ -410,7 +305,11 @@ public class DetajeActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(Uri uri) {
 
-                    Toast.makeText(DetajeActivity.this, "Foto u ngarkua ", Toast.LENGTH_LONG).show();
+                    mProgresBar.setVisibility(View.INVISIBLE);
+
+                    Toast.makeText(DetajeActivity.this, "Image Done", Toast.LENGTH_LONG).show();
+
+                    startMainActivity();
 
 
 
@@ -431,14 +330,33 @@ public class DetajeActivity extends AppCompatActivity {
 
     }
 
-    public void fromActivityToMain(){
-        PostFragment postFragment = new PostFragment();
 
-        FragmentManager fragmentManager = DetajeActivity.this.getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        fragmentTransaction.add(R.id.main_frame, postFragment);
-        fragmentTransaction.commit();
+    private void startMainActivity(){
+        Intent intent = new Intent(DetajeActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 
+
+
+    private void hideKeyboard(View view){
+        InputMethodManager inputMethodManager =(InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+    }
+
+
+    @Override
+    public void onFocusChange(View view, boolean b) {
+        if(!view.hasFocus()){
+            hideKeyboard(view);
+        }
+    }
+
+    private void viewHideSoftKeyBoard(){
+        acMarka.setOnFocusChangeListener(this);
+        acModeli.setOnFocusChangeListener(this);
+        acNgjyra.setOnFocusChangeListener(this);
+        txttarga.setOnFocusChangeListener(this);
+
+    }
 }

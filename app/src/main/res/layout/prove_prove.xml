@@ -1,26 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/relative_main"
-    android:background="#ffffff">
+    android:background="#009BCE"
+    android:fitsSystemWindows="true">
 
 
 
 
-    <!--
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:id="@+id/main_imag_posto"
-            android:src="@drawable/fromatob"
-            android:scaleType="centerCrop"
-            android:elevation="3dp"
-            />
-    -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#009BCE">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Regjistrimi"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        android:theme="@style/ToolBarStyle"
+        android:elevation="4dp"
+        app:titleTextColor="#ffffff"
+        app:titleMarginStart="25dp"
+
+
+        >
+
+
+    </android.support.v7.widget.Toolbar>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_register"
+        android:background="@drawable/layout_upper_corners"
+        android:fitsSystemWindows="true">
 
 
 
@@ -30,15 +52,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/main_imag_posto"
+
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="50dp"
         android:id="@+id/linear_nisja">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_person"/>
+            android:src="@drawable/locked"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -56,11 +78,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/linear_nisja"
         android:layout_marginLeft="50dp"
-        android:hint="kristrrushi@gmail.com"
+
         android:id="@+id/emailRegister"
         android:completionThreshold="1"
         android:enabled="false"
-        android:layout_marginTop="-10dp"/>
+        android:layout_marginTop="-10dp"
+        />
 
 
 
@@ -113,7 +136,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_person"/>
+            android:src="@drawable/personal_info_icon"
+            android:paddingTop="2dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -131,9 +155,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/linear_emri_mbiemri"
         android:layout_marginLeft="50dp"
-        android:hint="Krist Rrushi"
+        android:hint="John Wick "
         android:id="@+id/nameRegister"
-        android:completionThreshold="1"/>
+        android:completionThreshold="1"
+        android:imeOptions="actionNext"
+        android:maxLines="1"
+        android:inputType="text"/>
 
 
 
@@ -167,7 +194,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/linear_targa"
         android:layout_marginLeft="50dp"
-        android:hint="0682343552"
+        android:hint="0683344555"
         android:id="@+id/phoneRegister"
         android:inputType="number"/>
 
@@ -205,6 +232,9 @@
         android:layout_marginLeft="50dp"
         android:hint="Mashkull / Femer"
         android:id="@+id/generRegister"
+        android:inputType="text"
+        android:imeOptions="actionNext"
+
         />
 
 
@@ -292,7 +322,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="P33465437K              "
+            android:hint="P33465437K  "
             android:layout_below="@+id/linear_data"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="-10dp"
@@ -332,6 +362,8 @@
             android:paddingRight="8dp"
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
+            android:textColor="#ffffff"
+
             />
 
         <View
@@ -339,7 +371,7 @@
             android:layout_width="2dp"
             android:layout_height="80dp"
             android:layout_toStartOf="@+id/txt_ora"
-            android:layout_marginRight="15dp"
+            android:layout_marginRight="20dp"
 
             android:background="#000000"
 
@@ -349,6 +381,38 @@
 
 
     </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_below="@id/relative_data_ora"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/linear_progres_bar"
+
+
+        android:paddingLeft="57dp"
+
+        >
+
+
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            style="?android:attr/progressBarStyleHorizontal"
+            android:id="@+id/progres_register_activity"
+            android:indeterminate="true"
+            android:indeterminateTint="#8c4747"
+            android:layout_marginTop="20dp"
+
+            />
+
+
+
+
+    </LinearLayout>
+
 
 
 
@@ -361,14 +425,20 @@
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:id="@+id/buttonRegister"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/button_post"
         android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:layout_below="@id/linear_progres_bar"
+
         />
 
 
 
 
-
 </RelativeLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

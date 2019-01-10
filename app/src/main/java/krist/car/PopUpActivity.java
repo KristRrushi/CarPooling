@@ -1,19 +1,16 @@
 package krist.car;
 
-import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
+import android.graphics.PorterDuff;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +45,11 @@ public class PopUpActivity extends AppCompatActivity {
 
     private TextView cmimi;
 
+    private RatingBar ratingBar;
+
     private Button btnMbyll;
+
+    private TextView txtRating;
 
     //-------------
 
@@ -80,8 +81,9 @@ public class PopUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.popupactivitymain_prove);
-        setTitle("Detajet e metejshme. Konfirmo");
+        //setContentView(R.layout.popupactivitymain_prove);
+        setContentView(R.layout.pop_up_main_final);
+
 
 
         etEmri = findViewById(R.id.pop_co_emri);
@@ -108,13 +110,28 @@ public class PopUpActivity extends AppCompatActivity {
         mMakImage = findViewById(R.id.makina_photo);
 
         cmimi = findViewById(R.id.cmimi_pop_main);
+        ratingBar = findViewById(R.id.ratingbar);
+        txtRating = findViewById(R.id.txtRating);
 
-        btnMbyll = findViewById(R.id.mbyll_pop_main);
+
+        //btnMbyll = findViewById(R.id.mbyll_pop_main);
 
         //---------------------
 
 
 
+
+        Toolbar actionToolBar = (Toolbar) findViewById(R.id.toolbar_main_pop_up);
+        setSupportActionBar(actionToolBar);
+
+
+        actionToolBar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.whiteColor), PorterDuff.Mode.SRC_ATOP);
+        actionToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               finish();
+           }
+       });
 
 
 
@@ -136,7 +153,7 @@ public class PopUpActivity extends AppCompatActivity {
         tripId = bundle.getString("tripID");
 
 
-        getUri();
+       // getUri();
 
 
         fillPopUp(shoferId);
@@ -151,190 +168,122 @@ public class PopUpActivity extends AppCompatActivity {
 
 
 
-
-      btnMbyll.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              mbyllfunction();
-          }
-      });
-
-
-
-    }
-
-
-
-    private void getUri(){
-
-
-
-
-        FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
-        final String id = idauth.getUid();
-
-
-        databaseImage.child(shoferId).addValueEventListener(new ValueEventListener() {
+        btnKonfirmo.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                final Upload model = dataSnapshot.getValue(Upload.class);
-                final String uri = model.getImageCarUrl();
-                System.out.println(uri);
-                Log.v("POP ACTIVITY : ", uri);
+            public void onClick(View view) {
 
 
-                btnKonfirmo.setOnClickListener(new View.OnClickListener() {
+
+
+
+                FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
+                final String id = idauth.getUid();
+
+
+                final DatabaseReference databaseUsers = database.getReference("users");
+                final DatabaseReference databaseTrips = database.getReference("trips");
+
+                Log.v(TAG, "onDataChange: 0");
+
+
+                // prove e re
+
+                final DatabaseReference databaseTripsProve = database.getReference("trips").child(tripId);
+
+          /*      databaseTripsProve.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onClick(View view) {
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        TripsModel tripsModel2 = dataSnapshot.getValue(TripsModel.class);
+                        String nisja = tripsModel2.getvNisja();
+                        String mberritja = tripsModel2.getvMberritja();
+                        String ora = tripsModel2.getOra();
+                        String data = tripsModel2.getData();
+                        String vendet = tripsModel2.getVendet();
 
 
 
-
-
-                        FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
-                        final String id = idauth.getUid();
-
-
-                        final DatabaseReference databaseUsers = database.getReference("users");
-                        final DatabaseReference databaseTrips = database.getReference("trips");
-
-                        Log.v(TAG, "onDataChange: 0");
-
-
-                       // prove e re
-
-                        final DatabaseReference databaseTripsProve = database.getReference("trips").child(tripId);
-
-                        databaseTripsProve.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                TripsModel tripsModel2 = dataSnapshot.getValue(TripsModel.class);
-                                String nisja = tripsModel2.getvNisja();
-                                String mberritja = tripsModel2.getvMberritja();
-                                String ora = tripsModel2.getOra();
-                                String data = tripsModel2.getData();
-                                String vendet = tripsModel2.getVendet();
-
-
-                                int vendetInt = Integer.parseInt(vendet);
-
-                                if(vendetInt >=1) {
-
-
-                                    TripsModel tripsModel1 = new TripsModel(shoferId, nisja, mberritja, ora, data, vendet, uri);
-
-                                    databaseUsers.child(id).child("usersTrips").push().setValue(tripsModel1);
-
-                                }
-
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
-
-
-
-
-
-                        //end prove e re
+                        int vendetInt = Integer.parseInt(vendet);
 
 
 
 
 
 
-                        /*Query query1 = databaseTrips.orderByKey().equalTo(tripId);
+                            String pushKey = databaseUsers.child(id).child("usersTrips").push().getKey();
+                            TripsModel tripsModel1 = new TripsModel(shoferId, nisja, mberritja, ora, data, pushKey);
 
-                        query1.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-                                for (DataSnapshot child: children){
-                                    TripsModel tripsModel2 = child.getValue(TripsModel.class);
-                                    String nisja = tripsModel2.getvNisja();
-                                    String mberritja = tripsModel2.getvMberritja();
-                                    String ora = tripsModel2.getOra();
-                                    String data = tripsModel2.getData();
-                                    String vendet = tripsModel2.getVendet();
-                                    String idFalse = "1";
-                                    String uriFALSE = "1";
+                            Log.v(TAG, "futja e trips te pasgjaeir");
+                            databaseUsers.child(id).child("usersTrips").push().setValue(tripsModel1);
 
 
 
 
-                                    int vendetInt = Integer.parseInt(vendet);
+                    }
 
-                                    if(vendetInt >=1) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-
-                                        TripsModel tripsModel1 = new TripsModel(shoferId, nisja, mberritja, ora, data, vendet, uri);
-
-                                        databaseUsers.child(id).child("usersTrips").push().setValue(tripsModel1);
-
-                                    }
+                    }
 
 
 
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-
+                });
 */
 
 
+                databaseTripsProve.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-
-                        vendetfunction();
-
-
-
-                        Intent intent = new Intent(PopUpActivity.this ,MainActivity.class);
-                        startActivity(intent);
-
-
-
-
-
+                        TripsModel tripsModel2 = dataSnapshot.getValue(TripsModel.class);
+                        String nisja = tripsModel2.getvNisja();
+                        String mberritja = tripsModel2.getvMberritja();
+                        String ora = tripsModel2.getOra();
+                        String data = tripsModel2.getData();
+                        String vendet = tripsModel2.getVendet();
 
 
 
+                        int vendetInt = Integer.parseInt(vendet);
+
+
+
+
+
+
+                        String pushKey = databaseUsers.child(id).child("usersTrips").push().getKey();
+                        TripsModel tripsModel1 = new TripsModel(shoferId, nisja, mberritja, ora, data, pushKey);
+
+                        Log.v(TAG, "futja e trips te pasgjaeir");
+                        databaseUsers.child(id).child("usersTrips").push().setValue(tripsModel1);
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
                 });
 
 
 
+                vendetfunction();
+
+
+
+                Intent intent = new Intent(PopUpActivity.this ,MainActivity.class);
+                startActivity(intent);
+
+
+
+
+
+
 
 
 
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-
-
         });
 
 
@@ -342,8 +291,10 @@ public class PopUpActivity extends AppCompatActivity {
 
 
 
-
     }
+
+
+
 
     private void vendetfunction() {
 
@@ -416,6 +367,9 @@ public class PopUpActivity extends AppCompatActivity {
     }
 
 
+
+    //attach pasengers to trips
+
     private void passToTrips(){
 
 
@@ -440,11 +394,11 @@ public class PopUpActivity extends AppCompatActivity {
                    Log.v("EMRI ", name);
 
 
-                   PassToTrips passToTrips = new PassToTrips(name, tel, mosha, gjinia);
+                   PassToTripsModel passToTripsModel = new PassToTripsModel(name, tel, mosha, gjinia);
 
 
 
-                   databaseTrips.child(tripId).child("passengers").child(id).setValue(passToTrips);
+                   databaseTrips.child(tripId).child("passengers").child(id).setValue(passToTripsModel);
 
 
 
@@ -517,6 +471,14 @@ public class PopUpActivity extends AppCompatActivity {
                 mTarga.setText(model.getTargaMak());
                 mNgjyra.setText(model.getNgjyraMak());
 
+                users users = dataSnapshot.getValue(krist.car.users.class);
+
+                ratingBar.setRating(users.getRating());
+
+               String rat = String.valueOf(ratingBar.getRating());
+                txtRating.setText(rat);
+
+
 
 
 
@@ -534,10 +496,10 @@ public class PopUpActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 DialogModel model = dataSnapshot.getValue(DialogModel.class);
-                cmimi.setText( "Cmimi i udhetimi per person eshte : " + model.getCmimi()+" Leke. \n" +
-                        "Cmim eshte i vendosur nga vete shoferi."
+                cmimi.setText( "* Cmimi i udhetimi per person eshte : " + model.getCmimi()+" Leke. \n" +
+                        "* Cmimi eshte i vendosur nga vete shoferi."
                 );
-                cmimi.setTextColor(Color.RED);
+
             }
 
             @Override
@@ -577,17 +539,7 @@ public class PopUpActivity extends AppCompatActivity {
     }
 
 
-    private void mbyllfunction(){
 
-       Intent intent = new Intent(PopUpActivity.this, MainActivity.class);
-
-
-
-
-       startActivity(intent);
-
-
-    }
 
 
 

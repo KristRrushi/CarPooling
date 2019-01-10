@@ -3,13 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#e6e6e6">
+    android:background="#ffffff">
 
 
 
 
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pop_up_driver_txt"
+        android:textColor="#000000"
+        android:layout_centerHorizontal="true"
+        android:text="sdfsdfsfsdfsdfsdf"/>
 
 
     <ListView
@@ -17,7 +24,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/pop_up_driver_list"
-        tools:listitem="@layout/item_list_pop_up_driver"></ListView>
+        tools:listitem="@layout/item_list_pop_up_driver"
+        android:layout_below="@+id/pop_up_driver_txt"
+        android:layout_marginBottom="20dp"></ListView>
 
 
 
@@ -32,7 +41,8 @@
         android:layout_margin="10dp"
         android:textAllCaps="false"
         android:textSize="18dp"
-        android:textColor="#000000"
+        android:textColor="#ffffff"
+
         />
 
 

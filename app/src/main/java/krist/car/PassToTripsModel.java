@@ -1,6 +1,6 @@
 package krist.car;
 
-public class PassToTrips {
+public class PassToTripsModel {
     String emri;
     String phone;
     String mosha;
@@ -13,7 +13,7 @@ public class PassToTrips {
 
 
 
-    public PassToTrips(String name, String phonel, String mosha, String gjinia) {
+    public PassToTripsModel(String name, String phonel, String mosha, String gjinia) {
         this.emri = name;
         this.phone = phonel;
         this.mosha = mosha;
@@ -45,7 +45,7 @@ public class PassToTrips {
         this.imageUrl = imageUrl;
     }
 
-    public PassToTrips(){
+    public PassToTripsModel(){
 
     }
 

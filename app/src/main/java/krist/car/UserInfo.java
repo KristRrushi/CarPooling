@@ -1,20 +1,33 @@
 package krist.car;
 
+import android.Manifest;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.data.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,11 +40,14 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.app.Activity.RESULT_OK;
+import static com.firebase.ui.auth.ui.email.CheckEmailFragment.TAG;
+
 public class UserInfo extends Fragment{
 
 
-    //private TextView email,password, editMakinaHead;
-    private Button updata, updateAll;
+
+
 
     FirebaseDatabase mDatabase;
     DatabaseReference mDatabaseReference;
@@ -45,6 +61,12 @@ public class UserInfo extends Fragment{
 
      private boolean flag;
 
+     private CarCheckAsyncTask carCheck;
+
+
+
+
+
 
 
 
@@ -53,7 +75,10 @@ public class UserInfo extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.scrollview_profili_layout, container, false);
+
 
 
 
@@ -78,17 +103,22 @@ public class UserInfo extends Fragment{
         gjinia = view.findViewById(R.id.user_info_gjinia);
         numriPersona = view.findViewById(R.id.user_info_personalNumber);
         ngjyra = view.findViewById(R.id.user_info_ngjyra);
-       // editMakinaHead = view.findViewById(R.id.txt_user_info_profili_mak);
-        updateAll = view.findViewById(R.id.btn_change_info_all);
 
         imgUser = view.findViewById(R.id.foto_user);
         imgMakina = view.findViewById(R.id.foto_makine);
+
+        carCheck = new CarCheckAsyncTask();
+        carCheck.execute();
+
+
+
 
         flag = false;
 
 
 
-        updata = view.findViewById(R.id.btn_change_info);
+
+
 
         mDatabase = FirebaseDatabase.getInstance();
         FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
@@ -109,9 +139,18 @@ public class UserInfo extends Fragment{
 
         myView.setVisibility(View.GONE);
 
-        updateAll.setVisibility(View.GONE);
 
 
+
+
+
+
+
+
+        Toolbar actionToolBar = (Toolbar) view.findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(actionToolBar);
+
+        setHasOptionsMenu(true);
 
 
 
@@ -125,34 +164,21 @@ public class UserInfo extends Fragment{
     @Override
     public void onStart() {
         super.onStart();
+
         getUserInfo();
 
-       updata.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Toast.makeText(view.getContext(),"krist rrushu", Toast.LENGTH_LONG).show();
-                updateInfoFunction();
-            }
-        });
 
 
-
-       updateAll.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-              updateInfoAllFunction();
-           }
-       });
     }
 
 
+
+
+
+
+
+
     private void getUserInfo(){
-
-
-
-
-
-
 
 
         mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -176,30 +202,11 @@ public class UserInfo extends Fragment{
 
 
 
-                      /*  targa.setText("N/A");
-                        modeli.setText("N/A");
-                        marka.setText("N/A");
-                        ngjyra.setText("N/A");
-                        targa.setEnabled(false);
-                        modeli.setEnabled(false);
-                        marka.setEnabled(false);
-                        ngjyra.setEnabled(false);*/
-                       // editMakinaHead.setText("NUK KENI ASNJE MAKINE EKSIZTUESE");
-                        //editMakinaHead.setTextColor(Color.RED);
-
 
                     }else{
 
                         flag = true;
                         myView.setVisibility(View.VISIBLE);
-                        updata.setVisibility(View.GONE);
-                        updateAll.setVisibility(View.VISIBLE);
-
-
-                       /* targa.setEnabled(true);
-                        modeli.setEnabled(true);
-                        marka.setEnabled(true);
-                        ngjyra.setEnabled(true);*/
                         marka.setText(detajetModel.getMarkaMak());
                         modeli.setText(detajetModel.getModeliMak());
                         targa.setText(detajetModel.getTargaMak());
@@ -243,85 +250,72 @@ public class UserInfo extends Fragment{
     }
 
 
-    private void updateInfoFunction(){
 
 
 
 
-        String mEmri = emri.getText().toString();
-        String mTel = tel.getText().toString();
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.toolbarmenu, menu);
 
-        String mMosha = mosha.getText().toString();
-        String mGjinia = gjinia.getText().toString();
-        String mPersonalNumber = numriPersona.getText().toString();
-
-
+        super.onCreateOptionsMenu(menu,inflater);
+    }
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-            Map<String, Object> emriMap = new HashMap<String, Object>();
-            emriMap.put("emri", mEmri);
-            emriMap.put("phone", mTel);
-            emriMap.put("birthday", mMosha);
-            emriMap.put("gener", mGjinia);
-            emriMap.put("personalIdNumber", mPersonalNumber);
+        switch (item.getItemId()){
+            case R.id.profil_menu :
+                Intent intent = new Intent(getActivity(),ProfiliEdit.class);
+                startActivity(intent);
+                break;
+
+            case R.id.makina_menu :
+
+                checkCar();
 
 
 
-            mDatabaseReference.updateChildren(emriMap);
+
+                break;
+
+            case R.id.dil :
+                Intent intent2 = new Intent(getActivity(), DetajeActivity.class);
+                startActivity(intent2);
+
+
+                break;
 
 
 
+        }
+
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    private void checkCar(){
+
+
+
+
+        if(carCheck.check = true){
+
+            Intent intent1 = new Intent(getActivity(), MakinaEdit.class);
+            startActivity(intent1);
+
+        }else {
+
+            Toast.makeText(getContext(), "Regjistro makine", Toast.LENGTH_LONG).show();
+        }
 
 
 
 
     }
-
-    private void updateInfoAllFunction(){
-
-        String mEmri = emri.getText().toString();
-        String mTel = tel.getText().toString();
-        String mMarka = marka.getText().toString();
-        String mModeli = modeli.getText().toString();
-        String mTarga = targa.getText().toString();
-        String mMosha = mosha.getText().toString();
-        String mGjinia = gjinia.getText().toString();
-        String mPersonalNumber = numriPersona.getText().toString();
-        String mNgjyra = ngjyra.getText().toString();
-
-
-        Map<String, Object> emriMap = new HashMap<String, Object>();
-        emriMap.put("emri", mEmri);
-        emriMap.put("phone", mTel);
-        emriMap.put("birthday", mMosha);
-        emriMap.put("gener", mGjinia);
-        emriMap.put("personalIdNumber", mPersonalNumber);
-
-
-        emriMap.put("markaMak", mMarka);
-        emriMap.put("modeliMak", mModeli);
-        emriMap.put("targaMak", mTarga);
-        emriMap.put("ngjyraMak", mNgjyra);
-
-        mDatabaseReference.updateChildren(emriMap);
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

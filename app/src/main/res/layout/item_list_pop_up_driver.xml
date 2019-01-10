@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:layout_marginBottom="400dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="5dp"
-    android:background="@drawable/user_info_shape"
+    android:background="#ffffff"
+    android:paddingStart="15dp"
+
+
     >
 
 
@@ -14,6 +18,9 @@
         android:layout_height="70dp"
         android:id="@+id/foto_pop_up_driver"
         android:src="@drawable/icon_person"
+        app:civ_border_width="0.5dp"
+        app:civ_border_color="#000000"
+
         />
 
 
@@ -48,7 +55,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tel_pop_up_driver"
             android:text="0423423423"
-            android:textColor="#000000"
+            android:textColor="#488bbe"
             android:textSize="15dp"/>
 
         <LinearLayout

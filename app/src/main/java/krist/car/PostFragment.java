@@ -1,5 +1,6 @@
 package krist.car;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -7,16 +8,17 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -72,16 +74,9 @@ public class PostFragment extends Fragment {
 
 
 
-
-
-
-
-
-
-
-
-
     public PostFragment(){
+
+
 
     }
 
@@ -162,9 +157,16 @@ public class PostFragment extends Fragment {
 
 
 
+
+
+
+
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, qytetet);
         mNisja.setAdapter(adapter);
         mMberritja.setAdapter(adapter);
+
+
 
 
 
@@ -217,6 +219,7 @@ public class PostFragment extends Fragment {
 
 
 
+        hideAllViewsKeyBoard();
 
 
 
@@ -321,15 +324,6 @@ public class PostFragment extends Fragment {
     private void postUserInfo(String id) {
 
 
-
-
-
-
-
-
-
-
-
         final String ora = mOra.getText().toString().trim();
         final String data = mData.getText().toString().trim();
         final String nisja = mNisja.getText().toString();
@@ -338,20 +332,20 @@ public class PostFragment extends Fragment {
         final String uri = uRL;
         final String price = mCmimi.getText().toString().trim();
 
+        final String search = nisja.toLowerCase() + " " + mberritja.toLowerCase();
+
 
         Log.v("pospot", mberritja);
 
 
+        if(!ora.isEmpty() && !data.isEmpty() && !nisja.isEmpty() && !mberritja.isEmpty() && !vendet.isEmpty() && !price.isEmpty()){
 
 
-
-
-
-        Toast.makeText(getActivity(),uRL,Toast.LENGTH_LONG).show();
+            //Toast.makeText(getActivity(),uRL,Toast.LENGTH_LONG).show();
 
         String pushKey = dataPost.push().getKey();
 
-        TripsModel userspost = new TripsModel(id,nisja,mberritja, data, ora, vendet,uRL,pushKey, price);
+        TripsModel userspost = new TripsModel(id,nisja,mberritja, data, ora, vendet,uRL,pushKey, price, search);
 
 
 
@@ -361,14 +355,88 @@ public class PostFragment extends Fragment {
 
         dataPost.child(pushKey).setValue(userspost);
 
+        clearFields();
 
 
+        FragmentTransaction t = this.getFragmentManager().beginTransaction();
+        Fragment fragment1 = new SearchFragment();
+        t.replace(R.id.main_frame, fragment1);
+        t.commit();
+
+
+        }else {
+            Toast.makeText(getActivity(), "Plotesoni te gjitha te dhenat", Toast.LENGTH_LONG).show();
+        }
+
+
+        }
+
+
+
+
+    public void clearFields(){
+
+       mNisja.setText(null);
+       mMberritja.setText(null);
+       mCmimi.setText(null);
+       mVendet.setText(null);
 
 
     }
 
 
 
+
+    private void hideAllViewsKeyBoard(){
+
+        mNisja.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!view.hasFocus()){
+                    hideKeyboard(view);
+                }
+            }
+        });
+
+
+        mMberritja.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!view.hasFocus()){
+                    hideKeyboard(view);
+                }
+            }
+        });
+
+
+        mCmimi.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!view.hasFocus()){
+                    hideKeyboard(view);
+                }
+            }
+        });
+
+        mVendet.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!view.hasFocus()){
+                    hideKeyboard(view);
+                }
+            }
+        });
+
+
+    }
+
+
+
+    private void hideKeyboard(View view){
+        InputMethodManager inputMethodManager =(InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+    }
 
 
 

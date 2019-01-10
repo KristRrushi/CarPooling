@@ -5,40 +5,64 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/relative_main"
-    android:background="#ffffff">
+    android:background="#00AD76">
 
 
 
-    <ImageView
+
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_posto"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/main_imag_posto"
-        android:src="@drawable/fromatob"
-        android:scaleType="centerCrop"
-        android:elevation="3dp"
-        />
+        android:layout_height="wrap_content"
+        app:title="Posto Udhetim"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        android:theme="@style/ToolBarStyle"
+        android:elevation="4dp"
+        app:titleTextColor="#ffffff"
 
+       app:titleMarginStart="25dp"
+
+
+        >
+
+
+    </android.support.v7.widget.Toolbar>
+
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_posto"
+        android:background="@drawable/layout_upper_corners"
+
+        >
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/main_imag_posto"
+
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="50dp"
         android:id="@+id/linear_nisja">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_person"/>
+            android:src="@drawable/start"
+            android:paddingTop="3dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nisja"
-            android:textColor="#000000"
+            android:textColor="#112F41"
             android:textSize="21sp"
             android:layout_marginLeft="7dp"/>
 
@@ -52,7 +76,9 @@
         android:layout_marginLeft="50dp"
         android:hint="Zgjidh qytetin e nisjes"
         android:id="@+id/emailRegister"
-        android:completionThreshold="1"/>
+        android:completionThreshold="1"
+        android:imeOptions="actionNext"
+        android:inputType="text"/>
 
 
 
@@ -68,13 +94,14 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_person"/>
+            android:src="@drawable/finish"
+            android:paddingTop="1dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Destinacioni"
-            android:textColor="#000000"
+            android:textColor="#112F41"
             android:textSize="21sp"
             android:layout_marginLeft="7dp"/>
 
@@ -88,7 +115,9 @@
         android:layout_marginLeft="50dp"
         android:hint="Zgjidh qytetin e mberritjes"
         android:id="@+id/passRegister"
-        android:completionThreshold="1"/>
+        android:completionThreshold="1"
+        android:imeOptions="actionNext"
+        android:inputType="text"/>
 
 
     <RelativeLayout
@@ -112,14 +141,16 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_person"
+                android:src="@drawable/calendar_time_icon"
+                android:paddingTop="2dp"
+
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Data e nisjes"
-                android:textColor="#000000"
+                android:textColor="#112F41"
                 android:textSize="21sp"
                 android:layout_marginLeft="7dp"/>
 
@@ -148,7 +179,7 @@
             android:id="@+id/txt_ora"
 
             android:text="Ora e nisjes"
-            android:textColor="#000000"
+            android:textColor="#112F41"
             android:textSize="21sp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="15dp"
@@ -175,7 +206,7 @@
            android:layout_toStartOf="@+id/txt_ora"
             android:layout_marginRight="15dp"
 
-            android:background="#000000"
+            android:background="#f9ae50"
 
 
 
@@ -205,14 +236,15 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_person"
+                android:src="@drawable/car_seat_with_seatbelt"
+                android:paddingTop="2dp"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Numri i vendeve"
-                android:textColor="#000000"
+                android:text="Vendet"
+                android:textColor="#112F41"
                 android:textSize="21sp"
                 android:layout_marginLeft="7dp"/>
 
@@ -226,7 +258,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           android:hint="Vendet             "
+           android:hint="3                  "
             android:textSize="15dp"
             android:layout_below="@+id/linear_pasagjer"
             android:layout_marginLeft="60dp"
@@ -244,7 +276,7 @@
             android:id="@+id/txt_cmimi"
 
             android:text="Cmimi"
-            android:textColor="#000000"
+            android:textColor="#112F41"
             android:textSize="21sp"
             android:layout_marginRight="99dp"
             android:layout_marginTop="15dp"
@@ -273,7 +305,7 @@
             android:layout_toStartOf="@+id/txt_cmimi"
             android:layout_marginRight="15dp"
 
-            android:background="#000000"
+            android:background="#f9ae50"
 
 
 
@@ -296,10 +328,11 @@
         android:layout_marginBottom="20dp"
         android:textAllCaps="false"
         android:background="@drawable/button_post"
+        android:textColor="#ffff"
         />
 
 
 
-
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,27 +42,18 @@ import java.util.Map;
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText  txtName, txtPhone, txtBirthday, txtPersonalIdNumber,txtEmail, txtPass;
-   private  TextView txtVFoto;
-   private AutoCompleteTextView txtGener;
-
-    private Button btnRegister, btnPersonalPhoto;
+    private TextView txtVFoto;
+    private AutoCompleteTextView txtGener;
+    private Button btnRegister;
     private FirebaseAuth mAuth;
-
     private Uri filePath;
-
     private final int PICK_IMAGE_REQUEST = 1;
-
-
     private StorageReference mStorageRef;
-
     private DatabaseReference mDatabaseRef;
-
-
-
+    private ProgressBar progressBar;
 
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-
     DatabaseReference databaseUsers = database.getReference("users");
 
     private String userid;
@@ -81,9 +73,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         txtPersonalIdNumber = findViewById(R.id.cardIdNumberRegister);
        // btnPersonalPhoto = findViewById(R.id.btn_foto_personale_register);
         txtVFoto = findViewById(R.id.btn_foto_personale_register);
-
         btnRegister =  findViewById(R.id.buttonRegister);
+        progressBar = findViewById(R.id.progres_register_activity);
+        progressBar.setVisibility(View.INVISIBLE);
+
+
         mAuth = FirebaseAuth.getInstance();
+
+
 
 
         String[] modeliArray = getResources().getStringArray(R.array.gener);
@@ -137,10 +134,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         if (v == btnRegister) {
-            uploadFile();
+           // uploadFile();
             registerUser();
         }
     }
+
+
 
 
     private void registerUser() {
@@ -153,7 +152,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         final String gener = txtGener.getText().toString().trim();
         final String personalIdNumber = txtPersonalIdNumber.getText().toString().trim();
 
-        if (!name.isEmpty() && !phone.isEmpty() && !birthday.isEmpty() &&  !gener.isEmpty() && !personalIdNumber.isEmpty()) {
+        if (!name.isEmpty() && !phone.isEmpty() && !birthday.isEmpty() &&  !gener.isEmpty() && !personalIdNumber.isEmpty() && filePath != null) {
 
 
             mAuth.createUserWithEmailAndPassword(email, pass)
@@ -173,6 +172,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                     users users = new users(id, name, phone, birthday, gener, personalIdNumber);
 
                                     databaseUsers.child(id).setValue(users);
+
+
+                                    uploadFile();
 
 
 
@@ -227,18 +229,21 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-   //------------------------------------------------------------- choose Image
-
+   //-------------------------------------------------------------
 
 
     private void uploadFile() {
 
+
+
+       progressBar.setVisibility(View.VISIBLE);
         Log.v("DEta", "shjion");
 
         if (filePath != null) {
 
 
             final StorageReference fileRefernce = mStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(filePath));
+
 
 
             fileRefernce.putFile(filePath).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -248,6 +253,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         throw task.getException();
                     }
 
+
+
                     return fileRefernce.getDownloadUrl();
                 }
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -256,10 +263,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
 
+
                         String stringUri = downloadUri.toString();
 
-                        Log.v("klick", stringUri);
-                        Log.v("String","benibeniebenibeiniebni");
+
 
 
 
@@ -297,6 +304,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
 
+                    progressBar.setVisibility(View.INVISIBLE);
+
+
 
 
                     Toast.makeText(RegisterActivity.this, "Foto u ngarkua me sukses", Toast.LENGTH_LONG).show();
@@ -315,10 +325,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
 
+
         }
 
 
     }
+
+
+
 
 
 

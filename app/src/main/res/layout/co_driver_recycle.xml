@@ -2,7 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/driver_relative"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="10dp"
+    android:background="#f5f5f5">
+
 
 
 
@@ -12,8 +20,14 @@
 
 
 
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/co_driver_recycle_list"></android.support.v7.widget.RecyclerView>
+        android:id="@+id/co_driver_recycle_list"
+        tools:listitem="@layout/list_vod_layout_item"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+
 
 </RelativeLayout>

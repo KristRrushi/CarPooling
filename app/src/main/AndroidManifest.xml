@@ -8,23 +8,26 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Beni"
+        android:label="CarpoolingRR"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
 
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"> <!--AppTheme-->
         <activity
             android:name=".LoginActivity"
-            android:label="Beni"
-
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="CarpoolingRR"
+            android:theme="@style/AppTheme"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
         </activity>
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".RegisterActivity"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".MainActivity" />
         <activity android:name=".DetajeActivity" />
 
@@ -38,7 +41,7 @@
         </activity>
         <activity
             android:name=".PopUpCoDriver"
-            android:theme="@style/Theme.AppCompat.Dialog"
+            android:theme="@style/Theme.AppCompat.Light.Dialog"
 
             >
 
@@ -49,13 +52,16 @@
 
 
         <activity android:name=".PopUpDriver"
-            android:theme="@style/Theme.AppCompat.Dialog"
+            android:theme="@style/Theme.AppCompat.Light.Dialog"
            />
 
 
-        <activity android:name=".ProveLayoutFsho" />
+        <activity android:name=".ProfiliEdit" />
+        <activity android:name=".MakinaEdit" />
 
-
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
 
     </application>

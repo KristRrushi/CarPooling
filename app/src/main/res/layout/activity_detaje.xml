@@ -5,22 +5,32 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/relative_main"
-    android:background="#ffffff">
+    android:background="#00AD76">
 
 
 
 
-
-    <ImageView
+    <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/main_imag_posto"
-        android:src="@drawable/fromatob"
-        android:scaleType="centerCrop"
-        android:elevation="3dp"
-        />
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbarRegjMakine"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        android:theme="@style/ToolBarStyle"
+        app:title="Udhetimet"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+
+        app:titleTextColor="#ffffff">
+
+    </android.support.v7.widget.Toolbar>
 
 
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbarRegjMakine"
+        android:background="@drawable/layout_upper_corners">
 
 
 
@@ -28,21 +38,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/main_imag_posto"
+
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="50dp"
         android:id="@+id/linear_nisja">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_person"/>
+            android:src="@drawable/car"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Marka"
-            android:textColor="#000000"
+            android:textColor="#112F41"
             android:textSize="21sp"
             android:layout_marginLeft="7dp"/>
 
@@ -75,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Modeli"
-            android:textColor="#000000"
+            android:textColor="#112F41"
             android:textSize="21sp"
             android:layout_marginLeft="37dp"
             />
@@ -109,7 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Targa"
-            android:textColor="#000000"
+            android:textColor="#112F41"
             android:textSize="21sp"
             android:layout_marginLeft="37dp"
             />
@@ -161,7 +171,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ngjyra"
-                android:textColor="#000000"
+                android:textColor="#112F41"
                 android:textSize="21sp"
                 android:layout_marginLeft="40dp"
                 />
@@ -192,7 +202,7 @@
             android:id="@+id/txt_ora"
 
             android:text="Foto e makines"
-            android:textColor="#000000"
+            android:textColor="#112F41"
             android:textSize="21sp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
@@ -211,6 +221,9 @@
             android:layout_marginTop="2dp"
             android:id="@+id/btn_foto_personale_register"
             android:textSize="18dp"
+            android:background="@drawable/button_post"
+            android:padding="3dp"
+            android:textColor="#ffff"
             />
 
         <View
@@ -220,7 +233,7 @@
             android:layout_toStartOf="@+id/txt_ora"
             android:layout_marginRight="15dp"
 
-            android:background="#000000"
+            android:background="#ef793e"
 
 
 
@@ -230,6 +243,34 @@
     </RelativeLayout>
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_below="@id/relative_data_ora"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+
+
+        android:paddingLeft="57dp"
+
+        >
+
+
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            style="?android:attr/progressBarStyleHorizontal"
+            android:id="@+id/progres_detajet_activity"
+            android:indeterminate="true"
+            android:indeterminateTint="#ef793e"
+            android:layout_marginTop="20dp"
+
+            />
+
+
+
+
+    </LinearLayout>
 
 
 
@@ -237,17 +278,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:text="POSTO"
+        android:text="Posto"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:id="@+id/buttonRegister"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
         android:background="@drawable/button_post"
+        android:textColor="#fff"
+        android:textAllCaps="false"
+        android:textSize="18sp"
         />
 
 
 
+    </RelativeLayout>
 
 
 </RelativeLayout>

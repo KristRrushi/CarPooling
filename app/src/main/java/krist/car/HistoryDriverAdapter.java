@@ -3,6 +3,8 @@ package krist.car;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,8 +20,11 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -32,6 +37,8 @@ public class HistoryDriverAdapter extends RecyclerView.Adapter<HistoryDriverAdap
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference dataTrips = database.getReference("trips");
+
+
 
 
     public  class ViewHolder extends RecyclerView.ViewHolder {
@@ -63,12 +70,12 @@ public class HistoryDriverAdapter extends RecyclerView.Adapter<HistoryDriverAdap
 
             list_item_view = v;
 
-            imageView = list_item_view.findViewById(R.id.img_mak);
+           // imageView = list_item_view.findViewById(R.id.img_mak);
             vNisja = list_item_view.findViewById(R.id.new_nisja);
             vMberritja = list_item_view.findViewById(R.id.new_mberritja);
             data = list_item_view.findViewById(R.id.new_ora);
             ora = list_item_view.findViewById(R.id.new_data);
-            vendet = list_item_view.findViewById(R.id.new_vendet);
+            //vendet = list_item_view.findViewById(R.id.new_vendet);
 
            // vendetkrist = list_item_view.findViewById(R.id.krist_vendet);
 
@@ -79,6 +86,7 @@ public class HistoryDriverAdapter extends RecyclerView.Adapter<HistoryDriverAdap
 
             idauth = FirebaseAuth.getInstance().getCurrentUser();
             mStorageRef = FirebaseStorage.getInstance().getReference();
+
 
 
 
@@ -101,7 +109,7 @@ public class HistoryDriverAdapter extends RecyclerView.Adapter<HistoryDriverAdap
     @Override
     public HistoryDriverAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View trips_view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.trips_list_item_2,parent,false);
+                .inflate(R.layout.list_vod_layout_item,parent,false);
 
 
 
@@ -111,14 +119,6 @@ public class HistoryDriverAdapter extends RecyclerView.Adapter<HistoryDriverAdap
     }
 
 
-    public void deleteItem(TripsModel model){
-
-
-        dataTrips.child(model.getTripID()).removeValue();
-
-        //notifyItemRemoved(position);
-        notifyDataSetChanged();
-    }
 
 
 
@@ -129,13 +129,44 @@ public class HistoryDriverAdapter extends RecyclerView.Adapter<HistoryDriverAdap
         holder.vNisja.setText(dataSet.get(position).getvNisja());
         holder.data.setText(dataSet.get(position).getData());
         holder.ora.setText(dataSet.get(position).getOra());
-        holder.vendet.setText(dataSet.get(position).getVendet());
-        Picasso.get().load(dataSet.get(position).getUri()).fit().centerCrop().into(holder.imageView);
+        //holder.vendet.setText(dataSet.get(position).getVendet());
+        //Picasso.get().load(dataSet.get(position).getUri()).fit().centerCrop().into(holder.imageView);
 
 
 
 
-       // String id = dataSet.get(position).getTripID();
+
+
+        String id = dataSet.get(position).getTripID();
+
+
+        DatabaseReference databaseReference = database.getReference("trips").child(id).child("passengers");
+
+
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                System.out.println("Pasagjeret : " + dataSnapshot.getChildrenCount());
+
+                if(dataSnapshot.getChildrenCount() == 0){
+
+
+
+                }else {
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
 
 

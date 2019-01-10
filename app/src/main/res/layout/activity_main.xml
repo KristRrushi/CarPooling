@@ -6,7 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    tools:openDrawer="start"
+    android:clickable="true"
+    android:focusableInTouchMode="true">
 
 
 
@@ -21,7 +23,8 @@
         android:layout_height="match_parent"
         android:layout_above="@id/main_nav"
         android:background="#64ffffff"
-
+        android:clickable="true"
+        android:focusableInTouchMode="true"
         >
 
     </FrameLayout>
@@ -34,7 +37,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        app:menu="@menu/nav_items"></android.support.design.widget.BottomNavigationView>
+        app:menu="@menu/nav_items"
+        android:background="#ffff"
+        android:elevation="1dp"></android.support.design.widget.BottomNavigationView>
 
 
 

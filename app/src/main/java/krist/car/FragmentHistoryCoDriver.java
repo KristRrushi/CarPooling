@@ -100,13 +100,14 @@ public class FragmentHistoryCoDriver extends Fragment {
 
 
 
-                tripsModelList.clear();
-                TripsModel trip = dataSnapshot.getValue(TripsModel.class);
+
+               TripsModel trip = dataSnapshot.getValue(TripsModel.class);
+                trip.setTripID(dataSnapshot.getKey());
 
                     tripsModelList.add(trip);
 
                 adapter.notifyDataSetChanged();
-                Log.v(TAG, "notifyDAtaSetCHanged");
+                Log.v(TAG, "notifyDAtaSetCHanged gjetja");
             }
 
             @Override

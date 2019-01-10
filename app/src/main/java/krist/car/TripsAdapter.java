@@ -146,6 +146,8 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
     }
 
 
+
+
     public void deleteItem(int position){
 
         dataSet.remove(position);
@@ -171,35 +173,11 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
 
 
 
-
-
-                //.fit().centerCrop().into(holder.imageView);
-
-        //Picasso.get().load(dataSet.get(position).getIdShofer()).into(holder.imageView);
-
- /*            StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
-        FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
-        idauth.getUid();
-        String id = idauth.getUid();nem
-        mStorageRef.child(id).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-
-                Picasso.get().load( dataSet.get(position).getMap()).resize(90,70).centerCrop().into(holder.imageView);
-
-            }
-        });
-*/
-
-
-
-
         holder.list_item_view.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-              // Toast.makeText(v.getContext(), dataSet.get(position).getTripID(), Toast.LENGTH_SHORT).show();
-                //Krijo Dialog per tripID kalo te trpi  id e usert qe e zgjedh ///
+
 
                 FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -234,7 +212,6 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
 
                    v.getContext().startActivity(myIntent, optionsCompat.toBundle());
 
-                    //v.getContext().startActivity(myIntent);
 
                 }
 
@@ -245,40 +222,6 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                // ngjit id e userit te tripi
-
-
-               /* String tripId = dataSet.get(position).getTripID();
-
-                FirebaseUser idauth;
-                idauth = FirebaseAuth.getInstance().getCurrentUser();
-                String id = idauth.getUid();
-
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-
-                DatabaseReference databaseUsers = database.getReference("trips");
-
-                databaseUsers.child(tripId).push().setValue(id);
-
-*/
 
 
             }

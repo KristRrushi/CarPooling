@@ -25,6 +25,7 @@ public class HistoryFragment extends Fragment implements OnFragmentInteractionLi
     private OnFragmentInteractionListener mListener;
     HistoryPagerAdapter historyPagerAdapter;
     ViewPager viewPager;
+    TabLayout tabLayout;
 
 
     public HistoryFragment() {
@@ -50,10 +51,23 @@ public class HistoryFragment extends Fragment implements OnFragmentInteractionLi
 
 
         viewPager.setAdapter(historyPagerAdapter);
-        TabLayout tabLayout = view.findViewById(R.id.result_tabs);
+        tabLayout = view.findViewById(R.id.result_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+
+        setupTabIcons();
+
         return view;
+
+
+
+    }
+
+
+    private void setupTabIcons(){
+
+        tabLayout.getTabAt(0).setIcon(R.drawable.steering_wheel);
+        tabLayout.getTabAt(1).setIcon(R.drawable.car_seat_with_seatbelt_white);
 
     }
 

@@ -23,15 +23,13 @@ public class TripsModel {
     private String usersId;
     private String uri;
     private String cmimi;
-    private Map<String, Object> map = new HashMap<>();
-
-
     private String tripID;
+    private String search;
 
 
     public TripsModel(){}
 
-    public TripsModel(String idShofer,String vNisja, String vMberritja, String data, String ora, String vendet, String uri,String tripID, String cmimi){
+    public TripsModel(String idShofer,String vNisja, String vMberritja, String data, String ora, String vendet, String uri,String tripID, String cmimi, String search){
 
         this.idShofer = idShofer;
         this.vNisja = vNisja;
@@ -40,27 +38,30 @@ public class TripsModel {
         this.ora = ora;
         this.vendet = vendet;
         this.uri = uri;
-
         this.tripID = tripID;
         this.cmimi = cmimi;
+        this.search = search;
 
 
     }
 
-    public TripsModel(String idShofer,String vNisja, String vMberritja, String data, String ora, String vendet, String uri){
+    public TripsModel(String idShofer,String vNisja, String vMberritja, String data, String ora, String tripID){
 
         this.idShofer = idShofer;
         this.vNisja = vNisja;
         this.vMberritja = vMberritja;
         this.data = data;
         this.ora = ora;
-        this.vendet = vendet;
-        this.uri = uri;
+        this.tripID = tripID;
+
 
 
 
 
     }
+
+
+
 
 
     public String getCmimi() {
@@ -133,6 +134,14 @@ public class TripsModel {
 
     public void setIdShofer(String idShofer) {
         this.idShofer = idShofer;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
     }
 
 

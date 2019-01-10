@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FF7C5B">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_main_pop_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        android:theme="@style/ToolBarStyle"
+        app:title="Udhetimet"
+        app:titleTextColor="#ffffff"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        android:elevation="4dp"
+
+        >
+
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/layout_upper_corners">
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="50dp"
+        >
+
+
+
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/txt_shofer_info"
+            android:id="@+id/shofer_photo"
+            android:src="@drawable/capture"
+            app:civ_border_width="1dp"
+            app:civ_border_color="#2f000000"
+
+
+
+
+            />
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Krist Rrushi"
+                android:textSize="20sp"
+                android:id="@+id/emri_pop_main"
+                android:textColor="#000000"
+                android:textScaleX="1.07"
+               />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mashkull"
+                    android:id="@+id/gjinia_pop_main"
+                    android:textSize="16sp"
+                    android:textScaleX="1.07"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="16sp"
+                    android:text="25"
+                    android:id="@+id/mosha_pop_main"
+                    android:textScaleX="1.07"
+
+                    />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0682343552"
+                android:textSize="18sp"
+
+                android:textColor="#488bbe"
+                android:textScaleX="1.1"
+                android:id="@+id/tel_pop_main"
+                android:inputType="phone"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:id="@+id/ratingbar"
+            android:isIndicator="true"
+            android:rating="4.5"
+            android:theme="@style/RatingBar"
+
+
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:id="@+id/txtRating"
+            android:text="4.5"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:layout_marginLeft="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+
+            android:textColor="#000000"
+
+             />
+
+
+
+    </LinearLayout>
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:src="@drawable/capture"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="20dp"
+        android:id="@+id/makina_photo"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:transitionName="transition"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fiat"
+            android:textSize="18sp"
+            android:id="@+id/marka_pop_main"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Panda"
+            android:paddingLeft="10dp"
+            android:textSize="18sp"
+            android:id="@+id/modeli_pop_main"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            />
+
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jeshile"
+        android:paddingLeft="10dp"
+        android:textSize="18sp"
+        android:id="@+id/ngjyra_pop_main"
+            android:textStyle="bold"
+            android:textColor="#000000"
+        />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AA814EK"
+            android:textSize="18sp"
+            android:id="@+id/targa_pop_main"
+            android:textStyle="bold"
+            android:paddingLeft="25dp"
+            android:textColor="#000000"
+
+
+
+
+
+            />
+
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Cmimi total i udhetimi per person eshte : 200 Lek"
+        android:paddingLeft="20dp"
+        android:textSize="19sp"
+        android:textColor="#9cff0000"
+        android:id="@+id/cmimi_pop_main"
+        />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+           >
+
+
+
+
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Konfirmo"
+        android:textSize="18dp"
+        android:textAllCaps="false"
+        android:id="@+id/konfirmo_pop_main"
+        android:background="@drawable/button_post"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+
+
+
+
+        />
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+
+</LinearLayout>

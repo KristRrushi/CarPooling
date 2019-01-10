@@ -54,12 +54,12 @@ public class CoDriverAdapter extends RecyclerView.Adapter<CoDriverAdapter.ViewHo
 
             list_item_view = v;
 
-            imageView = list_item_view.findViewById(R.id.img_mak);
+           // imageView = list_item_view.findViewById(R.id.img_mak);
             vNisja = list_item_view.findViewById(R.id.new_nisja);
             vMberritja = list_item_view.findViewById(R.id.new_mberritja);
             data = list_item_view.findViewById(R.id.new_ora);
             ora = list_item_view.findViewById(R.id.new_data);
-            vendet = list_item_view.findViewById(R.id.new_vendet);
+           // vendet = list_item_view.findViewById(R.id.new_vendet);
 
 
 
@@ -106,8 +106,8 @@ public class CoDriverAdapter extends RecyclerView.Adapter<CoDriverAdapter.ViewHo
         holder.vNisja.setText(dataSet.get(position).getvNisja());
         holder.data.setText(dataSet.get(position).getData());
         holder.ora.setText(dataSet.get(position).getOra());
-        holder.vendet.setText(dataSet.get(position).getVendet());
-        Picasso.get().load(dataSet.get(position).getUri()).fit().centerCrop().into(holder.imageView);
+       // holder.vendet.setText(dataSet.get(position).getVendet());
+        //Picasso.get().load(dataSet.get(position).getUri()).fit().centerCrop().into(holder.imageView);
 
 
 

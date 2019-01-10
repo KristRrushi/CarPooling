@@ -10,7 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,6 +21,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PopUpCoDriver extends AppCompatActivity {
 
@@ -32,6 +37,9 @@ public class PopUpCoDriver extends AppCompatActivity {
     private TextView metGjinia;
     private TextView metNgjyra;
     private ImageView imgShofer, imgMak;
+    private RatingBar ratingBar;
+
+
 
 
     private String shoferId;
@@ -45,7 +53,10 @@ public class PopUpCoDriver extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pop_up_co_driver);
-        setTitle("Shofer detaje");
+        setTitle("Shoferi detaje");
+
+
+
 
         metEmri = findViewById(R.id.pop_co_emri);
         metTel = findViewById(R.id.pop_co_tel);
@@ -59,6 +70,9 @@ public class PopUpCoDriver extends AppCompatActivity {
 
         imgShofer = findViewById(R.id.pop_co_shofer_photo);
         imgMak = findViewById(R.id.pop_co_makina_photo);
+        ratingBar = findViewById(R.id.ratingbar1);
+
+
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
@@ -115,7 +129,7 @@ public class PopUpCoDriver extends AppCompatActivity {
 
 
 
-/*
+
 
         btn_mbyll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +138,7 @@ public class PopUpCoDriver extends AppCompatActivity {
             }
         });
 
-*/
+
 
 
 
@@ -138,8 +152,57 @@ public class PopUpCoDriver extends AppCompatActivity {
 
 
     private void mbyll(){
-        Intent intent = new Intent(PopUpCoDriver.this ,MainActivity.class);
-        startActivity(intent);
+
+
+
+
+
+
+        if(ratingBar.getRating() == 0.0){
+            Toast.makeText(PopUpCoDriver.this, "Shoferi nuk u vleresua", Toast.LENGTH_LONG).show();
+        }else {
+
+            database.getReference("users").child(shoferId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    users users = dataSnapshot.getValue(krist.car.users.class);
+
+                    if (users.getRating() == 0) {
+                        Map<String, Object> mapUri = new HashMap<String, Object>();
+                        mapUri.put("rating", ratingBar.getRating());
+
+
+                        database.getReference("users").child(shoferId).updateChildren(mapUri);
+                    } else {
+
+
+
+                        Float totalRating = (users.getRating() + ratingBar.getRating()) / 2;
+
+                        System.out.println(totalRating);
+
+                        Map<String, Object> mapUri = new HashMap<String, Object>();
+                        mapUri.put("rating", totalRating);
+
+
+                        database.getReference("users").child(shoferId).updateChildren(mapUri);
+
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+
+           Toast.makeText(PopUpCoDriver.this, "Shoferi u vleresua me " + ratingBar.getRating() + " yje." , Toast.LENGTH_LONG ).show();
+
+        }
+
+        finish();
 
     }
 

@@ -16,6 +16,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+
 import static krist.car.R.layout.loginactivity;
 
 /**
@@ -37,7 +40,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.loginactivity);
+        setContentView(R.layout.login_insta_layout);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -52,6 +55,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         logIn.setOnClickListener(this);
 
 
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        format.setTimeZone(TimeZone.getTimeZone("GMT"));
+
+
+
 
 
 
@@ -63,6 +71,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         final String email = editTextEmail.getText().toString().trim();
         final String pass = editTextPassword.getText().toString().trim();
 
+
+        final String emailTest = "kristrrushi@gmail.com";
+        final String passTest = "123456789";
 
 
        /* if (TextUtils.isEmpty(email)) {
@@ -83,7 +94,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialog.show();*/
 
         //firebaseAuth.signInWithEmailAndPassword("krist2@gmail.com", "123456789")
-        firebaseAuth.signInWithEmailAndPassword(email, pass)
+        firebaseAuth.signInWithEmailAndPassword(emailTest, passTest)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

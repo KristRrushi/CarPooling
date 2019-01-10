@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#009BCE"
+    >
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_makina"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        android:theme="@style/ToolBarStyle"
+        app:title="Makina"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+
+        app:titleTextColor="#ffff"
+
+        >
+
+
+    </android.support.v7.widget.Toolbar>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar_makina"
+        android:background="@drawable/layout_upper_corners"
+        android:paddingTop="10dp"
+        android:focusableInTouchMode="true"
+        android:clickable="true">
+
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relative_foto_makine"
+        android:paddingBottom="10dp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:id="@+id/foto_makine_edit"
+            app:civ_border_width="1dp"
+            app:civ_border_color="#2f000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ndrysho foto makine"
+            android:textColor="@color/colorPrimary"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/foto_makine_edit"
+            android:layout_marginTop="50dp"
+            android:id="@+id/txt_view_ndrysho_foto_makine_edit"
+            />
+
+
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear_makina_info"
+        android:layout_below="@+id/relative_foto_makine"
+        android:orientation="vertical"
+        android:background="#ffffff"
+        android:paddingLeft="20dp"
+        >
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relative_emri"
+            android:layout_marginBottom="5dp"
+            android:paddingRight="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+
+                android:text="Marka"
+                android:textColor="#000000"
+                android:textSize="18dp" />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Fiat"
+                android:layout_centerVertical="true"
+                android:textSize="16dp"
+                android:layout_marginLeft="100dp"
+                android:id="@+id/user_info_marka_edit"
+                android:maxLines="1"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+
+
+                />
+
+
+
+
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relative_email"
+            android:layout_marginBottom="5dp"
+            android:paddingRight="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Modeli"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:layout_centerVertical="true"/>
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Panda"
+                android:layout_centerVertical="true"
+                android:textSize="16dp"
+                android:layout_marginLeft="100dp"
+                android:id="@+id/user_info_modeli_edit"
+                android:maxLines="1"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+
+                />
+
+
+
+
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relative_tel"
+            android:layout_marginBottom="5dp"
+            android:paddingRight="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Targa"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:layout_centerVertical="true"/>
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="AA814EK"
+                android:layout_centerVertical="true"
+                android:textSize="16dp"
+                android:layout_marginLeft="100dp"
+                android:id="@+id/user_info_targa_edit"
+                android:maxLines="1"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+
+                />
+
+
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relative_gjinia"
+            android:layout_marginBottom="5dp"
+            android:paddingRight="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ngjyra"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:layout_centerVertical="true"/>
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mashkull"
+                android:layout_centerVertical="true"
+                android:textSize="16dp"
+                android:layout_marginLeft="100dp"
+                android:id="@+id/user_info_ngjyra_edit"
+                android:maxLines="1"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+
+                />
+
+
+
+
+        </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+
+
+</RelativeLayout>

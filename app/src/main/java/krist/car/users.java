@@ -12,6 +12,7 @@ public class users {
     String birthday;
     String gener;
     String personalIdNumber;
+    Float rating;
 
 
     public users(){};
@@ -24,6 +25,7 @@ public class users {
         this.birthday = birthday;
         this.gener = gener;
         this.personalIdNumber = personalIdNumber;
+        this.rating = 0f;
     }
 
 
@@ -70,4 +72,13 @@ public class users {
     public void setId(String id) {
         this.id = id;
     }
+
+    public Float getRating() {
+        return rating;
+    }
+
+    public void setRating(Float rating) {
+        this.rating = rating;
+    }
+
 }

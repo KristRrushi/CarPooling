@@ -35,9 +35,7 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by pampers on 1/12/2018.
- */
+import krist.car.Api.ApiSingleton;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -45,13 +43,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private TextView txtVFoto;
     private AutoCompleteTextView txtGener;
     private Button btnRegister;
-    private FirebaseAuth mAuth;
     private Uri filePath;
     private final int PICK_IMAGE_REQUEST = 1;
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
     private ProgressBar progressBar;
-
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseUsers = database.getReference("users");
@@ -71,16 +67,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         txtBirthday = findViewById(R.id.birthdayRegister);
         txtGener = findViewById(R.id.generRegister);
         txtPersonalIdNumber = findViewById(R.id.cardIdNumberRegister);
-       // btnPersonalPhoto = findViewById(R.id.btn_foto_personale_register);
         txtVFoto = findViewById(R.id.btn_foto_personale_register);
         btnRegister =  findViewById(R.id.buttonRegister);
         progressBar = findViewById(R.id.progres_register_activity);
         progressBar.setVisibility(View.INVISIBLE);
-
-
-        mAuth = FirebaseAuth.getInstance();
-
-
 
 
         String[] modeliArray = getResources().getStringArray(R.array.gener);
@@ -89,58 +79,36 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         txtGener.setAdapter(adapterMarka);
 
-
-
         databaseUsers = FirebaseDatabase.getInstance().getReference("users");
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("imageUploads");
 
-
-        Bundle bundle = getIntent().getBundleExtra("auth");
-        String email = bundle.getString("email");
-        String pass = bundle.getString("password");
-
-
-        txtEmail.setText(email);
-        txtPass.setText(pass);
-
-
-
-
+        //Check if user is comming from unsuccesfull login
+        Bundle extra = getIntent().getExtras();
+        if(extra != null) {
+            Bundle bundle = extra.getBundle("auth");
+            assert bundle != null;
+            String email = bundle.getString("email");
+            String pass = bundle.getString("password");
+            txtEmail.setText(email);
+            txtPass.setText(pass);
+        }
 
         btnRegister.setOnClickListener(this);
-
-    /*    btnPersonalPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chooseImage();
-            }
-        });*/
-
-
         txtVFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 chooseImage();
             }
         });
-
-       // btnRegister.setVisibility(View.GONE);
-
-
     }
-
 
     @Override
     public void onClick(View v) {
         if (v == btnRegister) {
-           // uploadFile();
             registerUser();
         }
     }
-
-
-
 
     private void registerUser() {
 
@@ -154,56 +122,26 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         if (!name.isEmpty() && !phone.isEmpty() && !birthday.isEmpty() &&  !gener.isEmpty() && !personalIdNumber.isEmpty() && filePath != null) {
 
-
-            mAuth.createUserWithEmailAndPassword(email, pass)
+            ApiSingleton.getInstance().firebaseAuth.createUserWithEmailAndPassword(email, pass)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                String id  = ApiSingleton.getInstance().firebaseAuth.getCurrentUser().getUid();
+                                users users = new users(id, name, phone, birthday, gener, personalIdNumber);
 
+                                ApiSingleton.getInstance().getDatebaseReferenceToThisEndPoint("users").setValue(users);
+                                uploadFile();
 
                                 Toast.makeText(RegisterActivity.this, "suskese", Toast.LENGTH_SHORT).show();
-
-                                FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
-                                idauth.getUid();
-                                String id = idauth.getUid();
-
-
-                                    users users = new users(id, name, phone, birthday, gener, personalIdNumber);
-
-                                    databaseUsers.child(id).setValue(users);
-
-
-                                    uploadFile();
-
-
-
-
-
-
                             }
                             else Toast.makeText(RegisterActivity.this,task.getException().getMessage() , Toast.LENGTH_LONG).show();
                         }
                     });
-
-
-
-
         }else {
             Toast.makeText(this, "Plotesoni te gjitha te dhenat", Toast.LENGTH_SHORT).show();
         }
-        /*if (name.isEmpty() || phone.isEmpty() || birthday.isEmpty() ||  gener.isEmpty() || !personalIdNumber.isEmpty()) {
-            //pass bosh
-
-        }*/
-
-
-
-
     }
-
-
-   //---------------------------------------- choose Image
 
     private void chooseImage(){
         Intent intent = new Intent();
@@ -228,23 +166,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         return mine.getExtensionFromMimeType(cR.getType(uri));
     }
 
-
-   //-------------------------------------------------------------
-
-
     private void uploadFile() {
-
-
-
-       progressBar.setVisibility(View.VISIBLE);
-        Log.v("DEta", "shjion");
-
+        progressBar.setVisibility(View.VISIBLE);
         if (filePath != null) {
-
-
-            final StorageReference fileRefernce = mStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(filePath));
-
-
+            final StorageReference fileRefernce =
+                    ApiSingleton.getInstance().getFirebaseStorageToThisEndPoint("uploads").child(System.currentTimeMillis() + "." + getFileExtension(filePath));
 
             fileRefernce.putFile(filePath).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
@@ -252,9 +178,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     if (!task.isComplete()) {
                         throw task.getException();
                     }
-
-
-
                     return fileRefernce.getDownloadUrl();
                 }
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -263,86 +186,27 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
 
-
                         String stringUri = downloadUri.toString();
-
-
-
-
-
 
                         FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
                         String id = idauth.getUid();
 
-
-
-
                         UploadUsersImage uploadUsersImage = new UploadUsersImage(stringUri);
-
-
-
-
                         mDatabaseRef.child(id).setValue(uploadUsersImage);
-
-
-
-
-
-
-
-
-
-
-
-
                     }
                 }
             }).addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
-
-
-
-
                     progressBar.setVisibility(View.INVISIBLE);
-
-
-
-
                     Toast.makeText(RegisterActivity.this, "Foto u ngarkua me sukses", Toast.LENGTH_LONG).show();
                     Intent myIntent = new Intent(RegisterActivity.this,
                             MainActivity.class);
 
                     startActivity(myIntent);
 
-
                 }
             });
-
-
-
-
-
-
-
-
         }
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

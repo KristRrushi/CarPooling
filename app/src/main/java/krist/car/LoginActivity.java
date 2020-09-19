@@ -1,148 +1,93 @@
 package krist.car;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
+import android.widget.TextView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.text.SimpleDateFormat;
-import java.util.TimeZone;
-
-import static krist.car.R.layout.loginactivity;
-
-/**
- * Created by pampers on 1/12/2018.
- */
+import krist.car.Api.ApiSingleton;
+import krist.car.Utils.Constants;
+import krist.car.Utils.Helpers;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
-
 
     private Button logIn;
     private EditText editTextEmail;
     private EditText editTextPassword;
-    private ProgressDialog progressDialog;
-    private FirebaseAuth firebaseAuth;
-
-
-
+    private TextView registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_insta_layout);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-
         editTextEmail = findViewById(R.id.emailLogIn);
         editTextPassword =  findViewById(R.id.passwordLogIn);
-
         logIn =  findViewById(R.id.buttonLogIn);
-
-        progressDialog = new ProgressDialog(this);
-
+        registerButton = findViewById(R.id.register_button);
 
         logIn.setOnClickListener(this);
-
-
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        format.setTimeZone(TimeZone.getTimeZone("GMT"));
-
-
-
-
-
-
-
-    }
-
-    private void registerUser() {
-
-        final String email = editTextEmail.getText().toString().trim();
-        final String pass = editTextPassword.getText().toString().trim();
-
-
-        final String emailTest = "kristrrushi@gmail.com";
-        final String passTest = "123456789";
-
-
-       /* if (TextUtils.isEmpty(email)) {
-            //email bosh
-            Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
-
-            return;
-        }
-        if (TextUtils.isEmpty(pass)) {
-            //pass bosh
-            Toast.makeText(this, "Please enter Password", Toast.LENGTH_SHORT).show();
-
-            return;
-        }*/
-
-
-       /* progressDialog.setMessage("");
-        progressDialog.show();*/
-
-        //firebaseAuth.signInWithEmailAndPassword("krist2@gmail.com", "123456789")
-        firebaseAuth.signInWithEmailAndPassword(emailTest, passTest)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("D", "signInWithEmail:onComplete:" + task.isSuccessful());
-
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Intent myIntent = new Intent(LoginActivity.this,
-                                    RegisterActivity.class);
-                            Bundle bundle = new Bundle();
-                            bundle.putString("email", email);
-                            bundle.putString("password", pass);
-                            myIntent.putExtra("auth", bundle);
-
-                            Toast toast = Toast.makeText(LoginActivity.this, "Regjistrim i  metejshem", Toast.LENGTH_SHORT);
-                            toast.show();
-
-                            startActivity(myIntent);
-
-
-                        } else {
-                            Intent myIntent = new Intent(LoginActivity.this,
-                                    MainActivity.class);
-
-                            Toast toast = Toast.makeText(LoginActivity.this, "Hyrje e suksesshme", Toast.LENGTH_LONG);
-                            toast.show();
-
-                            startActivity(myIntent);
-                        }
-
-
-                    }
-                });
-
-
-
+        registerButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if (v == logIn) {
-            registerUser();
+        switch (v.getId()) {
+            case R.id.buttonLogIn:
+                attemptLogin();
+                break;
+            case R.id.register_button:
+                goToRegisterActivity();
+                break;
         }
     }
 
+    private void attemptLogin() {
+        final String email = editTextEmail.getText().toString().trim();
+        final String pass = editTextPassword.getText().toString().trim();
 
+        if(!Helpers.validateStringBaseOnRegex(email, Constants.EMAIL_REGEX)) {
+            editTextEmail.setError("Plotesoni fushen ne formatin e duhur");
+            return;
+        }
 
+        if(!Helpers.validateStringBaseOnRegex(pass, Constants.PASSWORD_REGEX)) {
+            editTextPassword.setError("Plotesoni fushen ne formatin e duhur");
+            return;
+        }
 
+        final String emailTest = "kristrrushi@gmail.com";
+        final String passTest = "123456789";
+
+        ApiSingleton.getInstance().firebaseAuth.signInWithEmailAndPassword(emailTest, passTest)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (!task.isSuccessful()) {
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString("email", email);
+                            bundle.putString("password", pass);
+
+                            Helpers.goToActivityAttachBundle(LoginActivity.this, RegisterActivity.class, "auth", bundle);
+                            Helpers.showToastMessage(LoginActivity.this, "Regjistrimi i metejshem");
+
+                        } else {
+                            Helpers.goToActivity(LoginActivity.this, MainActivity.class);
+                            Helpers.showToastMessage(LoginActivity.this, "Hyrje e sukseshme");
+                        }
+                    }
+                });
+    }
+
+    private void goToRegisterActivity() {
+        Helpers.goToActivity(this, RegisterActivity.class);
+    }
 }

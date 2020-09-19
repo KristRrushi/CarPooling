@@ -88,6 +88,7 @@
                 android:text="Krijo profilin tend."
                 android:textColor="#ffff"/>
             <TextView
+                android:id="@+id/register_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Kliko ketu."

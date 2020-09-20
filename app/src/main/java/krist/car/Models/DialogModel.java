@@ -1,4 +1,4 @@
-package krist.car;
+package krist.car.Models;
 
 public class DialogModel {
   private String emri;

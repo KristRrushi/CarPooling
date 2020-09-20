@@ -1,8 +1,11 @@
 package krist.car;
 
+import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,11 +13,12 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 
 import krist.car.Api.ApiSingleton;
+import krist.car.Models.LoginFormModel;
 import krist.car.Utils.Constants;
 import krist.car.Utils.Helpers;
+import krist.car.auth.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -22,6 +26,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText editTextEmail;
     private EditText editTextPassword;
     private TextView registerButton;
+    private LoginViewModel loginViewModel;
+    private String userName, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,56 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         logIn.setOnClickListener(this);
         registerButton.setOnClickListener(this);
+
+        initLoginViewModel();
+    }
+
+    private void initLoginViewModel() {
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+    }
+
+    private void attemptLogin() {
+        userName = editTextEmail.getText().toString().trim();
+        password = editTextPassword.getText().toString().trim();
+
+        if(!validateCredentials()) {
+            return;
+        }
+
+        loginViewModel.signInWithEmailAndPassword(buildLoginRequest());
+        loginViewModel.isLoginSuccess().observe(this, isSuccess -> {
+            if(isSuccess) {
+                Helpers.goToActivity(this, MainActivity.class);
+                Helpers.showToastMessage(LoginActivity.this, "Hyrje e sukseshme");
+            }else {
+                Bundle bundle = new Bundle();
+                bundle.putString("email", userName);
+                bundle.putString("password", password);
+
+                Helpers.goToActivityAttachBundle(LoginActivity.this, RegisterActivity.class, "auth", bundle);
+                Helpers.showToastMessage(LoginActivity.this, "Regjistrimi i metejshem");
+            }
+        });
+    }
+
+    private LoginFormModel buildLoginRequest() {
+        return new LoginFormModel(userName, password);
+    }
+
+    private Boolean validateCredentials() {
+        if(!Helpers.validateStringBaseOnRegex(userName, Constants.EMAIL_REGEX)) {
+            editTextEmail.setError("Plotesoni fushen ne formatin e duhur");
+            return false;
+        }else if(!Helpers.validateStringBaseOnRegex(password, Constants.PASSWORD_REGEX)) {
+            editTextPassword.setError("Plotesoni fushen ne formatin e duhur");
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+    private void goToRegisterActivity() {
+        Helpers.goToActivity(this, RegisterActivity.class);
     }
 
     @Override
@@ -47,47 +103,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 goToRegisterActivity();
                 break;
         }
-    }
-
-    private void attemptLogin() {
-        final String email = editTextEmail.getText().toString().trim();
-        final String pass = editTextPassword.getText().toString().trim();
-
-        if(!Helpers.validateStringBaseOnRegex(email, Constants.EMAIL_REGEX)) {
-            editTextEmail.setError("Plotesoni fushen ne formatin e duhur");
-            return;
-        }
-
-        if(!Helpers.validateStringBaseOnRegex(pass, Constants.PASSWORD_REGEX)) {
-            editTextPassword.setError("Plotesoni fushen ne formatin e duhur");
-            return;
-        }
-
-        final String emailTest = "kristrrushi@gmail.com";
-        final String passTest = "123456789";
-
-        ApiSingleton.getInstance().firebaseAuth.signInWithEmailAndPassword(emailTest, passTest)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (!task.isSuccessful()) {
-
-                            Bundle bundle = new Bundle();
-                            bundle.putString("email", email);
-                            bundle.putString("password", pass);
-
-                            Helpers.goToActivityAttachBundle(LoginActivity.this, RegisterActivity.class, "auth", bundle);
-                            Helpers.showToastMessage(LoginActivity.this, "Regjistrimi i metejshem");
-
-                        } else {
-                            Helpers.goToActivity(LoginActivity.this, MainActivity.class);
-                            Helpers.showToastMessage(LoginActivity.this, "Hyrje e sukseshme");
-                        }
-                    }
-                });
-    }
-
-    private void goToRegisterActivity() {
-        Helpers.goToActivity(this, RegisterActivity.class);
     }
 }

@@ -1,17 +1,17 @@
-package krist.car;
+package krist.car.Models;
 
 public class DetajetModel {
 
-    String id;
-    String markaMak;
-    String modeliMak;
-    String targaMak;
-    String emri;
-    String phone;
-    String birthday;
-    String gener;
-    String personalIdNumber;
-    String ngjyraMak;
+   private String id;
+   private String markaMak;
+   private String modeliMak;
+   private String targaMak;
+   private String emri;
+   private String phone;
+   private String birthday;
+   private String gener;
+   private String personalIdNumber;
+   private String ngjyraMak;
 
 
     public String getBirthday() {

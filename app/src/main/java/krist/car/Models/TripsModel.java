@@ -1,4 +1,4 @@
-package krist.car;
+package krist.car.Models;
 
 import android.net.Uri;
 import android.widget.ProgressBar;
@@ -6,9 +6,6 @@ import android.widget.ProgressBar;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by pampers on 12/19/2017.
- */
 
 
 public class TripsModel {

@@ -30,7 +30,7 @@
     </FrameLayout>
 
 
-    <android.support.design.widget.BottomNavigationView
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_nav"
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -39,7 +39,7 @@
         android:layout_alignParentStart="true"
         app:menu="@menu/nav_items"
         android:background="#ffff"
-        android:elevation="1dp"></android.support.design.widget.BottomNavigationView>
+        android:elevation="1dp"></com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
 

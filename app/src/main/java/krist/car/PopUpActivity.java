@@ -2,10 +2,10 @@ package krist.car;
 
 import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +26,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import krist.car.Models.DialogModel;
+import krist.car.Models.PassToTripsModel;
+import krist.car.Models.TripsModel;
+import krist.car.Models.Upload;
+import krist.car.Models.UploadUsersImage;
+import krist.car.Models.users;
 
 public class PopUpActivity extends AppCompatActivity {
 
@@ -471,7 +478,7 @@ public class PopUpActivity extends AppCompatActivity {
                 mTarga.setText(model.getTargaMak());
                 mNgjyra.setText(model.getNgjyraMak());
 
-                users users = dataSnapshot.getValue(krist.car.users.class);
+                users users = dataSnapshot.getValue(krist.car.Models.users.class);
 
                 ratingBar.setRating(users.getRating());
 

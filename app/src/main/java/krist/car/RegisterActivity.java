@@ -2,13 +2,10 @@ package krist.car;
 
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.drm.DrmStore;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
@@ -32,10 +29,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import krist.car.Api.ApiSingleton;
+import krist.car.Models.UploadUsersImage;
+import krist.car.Models.users;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 

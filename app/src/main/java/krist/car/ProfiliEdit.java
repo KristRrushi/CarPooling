@@ -6,14 +6,11 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,8 +20,6 @@ import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,7 +30,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
@@ -43,13 +37,16 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
+import krist.car.Models.DetajetModel;
+import krist.car.Models.UploadUsersImage;
+
 public class ProfiliEdit extends AppCompatActivity {
 
     private static final String TAG = "Profili Edit" ;
     private EditText mName, mPhone, mGener, mYear, mId, mEmail;
     private TextView mPhotoUser;
     private Database mDatabase;
-    private android.support.v7.widget.Toolbar toolbar;
+    private androidx.appcompat.widget.Toolbar toolbar;
     private ImageView mImageView;
 
 
@@ -69,7 +66,7 @@ public class ProfiliEdit extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profil_edit_layout);
-        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar1);
+        toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar);
 
 

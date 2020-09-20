@@ -1,17 +1,11 @@
-package krist.car;
+package krist.car.Models;
 
 public class PassToTripsModel {
-    String emri;
-    String phone;
-    String mosha;
-    String gjinia;
-    String imageUrl;
-
-
-
-
-
-
+    private String emri;
+    private String phone;
+    private String mosha;
+    private String gjinia;
+    private String imageUrl;
 
     public PassToTripsModel(String name, String phonel, String mosha, String gjinia) {
         this.emri = name;
@@ -19,7 +13,6 @@ public class PassToTripsModel {
         this.mosha = mosha;
         this.gjinia = gjinia;
     }
-
 
     public String getMosha() {
         return mosha;
@@ -45,9 +38,7 @@ public class PassToTripsModel {
         this.imageUrl = imageUrl;
     }
 
-    public PassToTripsModel(){
-
-    }
+    public PassToTripsModel(){}
 
     public String getEmri() {
         return emri;

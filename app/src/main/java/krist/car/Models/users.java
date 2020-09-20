@@ -1,19 +1,14 @@
-package krist.car;
-
-/**
- * Created by pampers on 1/12/2018.
- */
+package krist.car.Models;
 
 public class users {
 
-    String emri;
-    String phone;
-    String id;
-    String birthday;
-    String gener;
-    String personalIdNumber;
-    Float rating;
-
+    private String emri;
+    private String phone;
+    private String id;
+    private String birthday;
+    private String gener;
+    private String personalIdNumber;
+    private Float rating;
 
     public users(){};
 

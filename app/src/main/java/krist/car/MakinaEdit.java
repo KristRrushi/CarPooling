@@ -6,10 +6,10 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +34,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import krist.car.Models.DetajetModel;
+import krist.car.Models.UploadUsersImage;
 
 public class MakinaEdit extends AppCompatActivity implements View.OnFocusChangeListener{
 
@@ -67,7 +70,7 @@ public class MakinaEdit extends AppCompatActivity implements View.OnFocusChangeL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.makina_edit_layout);
 
-        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar_makina);
+        toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar_makina);
         setSupportActionBar(toolbar);
 
 

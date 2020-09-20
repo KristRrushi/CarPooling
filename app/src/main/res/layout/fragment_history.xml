@@ -8,7 +8,7 @@
     tools:context=".HistoryFragment"
     android:background="#d10b0b">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/toolbar_historia"
@@ -17,12 +17,12 @@
         app:title="Historia"
         android:background="#72C674"
 
-        ></android.support.v7.widget.Toolbar>
+        ></androidx.appcompat.widget.Toolbar>
 
 
 
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,7 +32,7 @@
 
         >
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
 
         >
 
-        <android.support.design.widget.TabLayout
+        <com.google.android.material.tabs.TabLayout
             app:tabMaxWidth="0dp"
             app:tabGravity="fill"
             android:id="@+id/result_tabs"
@@ -55,13 +55,13 @@
 
             />
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
 
 
 
 
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
 
             android:id="@+id/history_view_pager"
             android:layout_width="match_parent"
@@ -74,7 +74,7 @@
 
 
 
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
 

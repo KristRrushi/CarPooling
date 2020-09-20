@@ -1,10 +1,9 @@
-package krist.car;
+package krist.car.Models;
 
 public class UploadUsersImage {
 
 
     private String imageUrl;
-
     private String imageCarUrl;
 
 

@@ -1,11 +1,9 @@
 package krist.car;
 
-import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,12 +16,16 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import krist.car.Models.DialogModel;
+import krist.car.Models.Upload;
+import krist.car.Models.UploadUsersImage;
+import krist.car.Models.users;
 
 public class PopUpCoDriver extends AppCompatActivity {
 
@@ -165,7 +167,7 @@ public class PopUpCoDriver extends AppCompatActivity {
             database.getReference("users").child(shoferId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    users users = dataSnapshot.getValue(krist.car.users.class);
+                    users users = dataSnapshot.getValue(krist.car.Models.users.class);
 
                     if (users.getRating() == 0) {
                         Map<String, Object> mapUri = new HashMap<String, Object>();

@@ -1,24 +1,21 @@
-package krist.car;
+package krist.car.auth.login;
 
 import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 
-import krist.car.Api.ApiSingleton;
+import krist.car.MainActivity;
 import krist.car.Models.LoginFormModel;
+import krist.car.R;
+import krist.car.auth.register.RegisterActivity;
 import krist.car.Utils.Constants;
 import krist.car.Utils.Helpers;
-import krist.car.auth.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 

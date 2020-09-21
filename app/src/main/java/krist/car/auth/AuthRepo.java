@@ -13,11 +13,11 @@ import krist.car.Models.LoginFormModel;
 public class AuthRepo {
     private ApiSingleton api;
 
-    AuthRepo() {
+    public AuthRepo() {
         api = ApiSingleton.getInstance();
     }
 
-    MutableLiveData<Boolean> firebaseSignInWithEmailAndPassword(LoginFormModel loginModel) {
+    public MutableLiveData<Boolean> firebaseSignInWithEmailAndPassword(LoginFormModel loginModel) {
         final MutableLiveData<Boolean> isLoginSuccess = new MutableLiveData<>();
         api.firebaseAuth.signInWithEmailAndPassword(loginModel.getName(), loginModel.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override

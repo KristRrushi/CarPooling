@@ -1,4 +1,4 @@
-package krist.car;
+package krist.car.auth.register;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -30,8 +30,10 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import krist.car.Api.ApiSingleton;
+import krist.car.MainActivity;
 import krist.car.Models.UploadUsersImage;
 import krist.car.Models.users;
+import krist.car.R;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 

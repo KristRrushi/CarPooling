@@ -32,7 +32,7 @@ import krist.car.Models.PassToTripsModel;
 import krist.car.Models.TripsModel;
 import krist.car.Models.Upload;
 import krist.car.Models.UploadUsersImage;
-import krist.car.Models.users;
+import krist.car.Models.UserModel;
 
 public class PopUpActivity extends AppCompatActivity {
 
@@ -478,7 +478,7 @@ public class PopUpActivity extends AppCompatActivity {
                 mTarga.setText(model.getTargaMak());
                 mNgjyra.setText(model.getNgjyraMak());
 
-                users users = dataSnapshot.getValue(krist.car.Models.users.class);
+                UserModel users = dataSnapshot.getValue(UserModel.class);
 
                 ratingBar.setRating(users.getRating());
 

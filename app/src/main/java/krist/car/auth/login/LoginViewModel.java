@@ -10,18 +10,19 @@ public class LoginViewModel extends ViewModel {
     private AuthRepo authRepo;
 
     private MutableLiveData<Boolean> loginStatus;
-    public LiveData<Boolean> isLoginSuccess() {
+
+    public LoginViewModel() {
+        authRepo = new AuthRepo();
+    }
+
+    LiveData<Boolean> isLoginSuccess() {
         if(loginStatus == null) {
             loginStatus = new MutableLiveData<>();
         }
         return loginStatus;
     }
 
-    public LoginViewModel() {
-        authRepo = new AuthRepo();
-    }
-
-    public void signInWithEmailAndPassword(LoginFormModel loginModel) {
+    void signInWithEmailAndPassword(LoginFormModel loginModel) {
         loginStatus = authRepo.firebaseSignInWithEmailAndPassword(loginModel);
     }
 }

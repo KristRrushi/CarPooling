@@ -32,7 +32,7 @@ import com.google.firebase.storage.UploadTask;
 import krist.car.Api.ApiSingleton;
 import krist.car.MainActivity;
 import krist.car.Models.UploadUsersImage;
-import krist.car.Models.users;
+import krist.car.Models.UserModel;
 import krist.car.R;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
@@ -126,7 +126,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 String id  = ApiSingleton.getInstance().firebaseAuth.getCurrentUser().getUid();
-                                users users = new users(id, name, phone, birthday, gener, personalIdNumber);
+                                UserModel users = new UserModel(id, name, phone, birthday, gener, personalIdNumber);
 
                                 ApiSingleton.getInstance().getDatebaseReferenceToThisEndPoint("users").setValue(users);
                                 uploadFile();

@@ -1,18 +1,18 @@
 package krist.car.Models;
 
-public class users {
+public class UserModel {
 
     private String emri;
     private String phone;
-    private String id;
+    private String id = "";
     private String birthday;
     private String gener;
     private String personalIdNumber;
     private Float rating;
 
-    public users(){};
+    public UserModel(){};
 
-    public users(String id, String emri, String phone, String birthday, String gener, String personalIdNumber) {
+    public UserModel(String id, String emri, String phone, String birthday, String gener, String personalIdNumber) {
 
         this.id = id;
         this.emri = emri;

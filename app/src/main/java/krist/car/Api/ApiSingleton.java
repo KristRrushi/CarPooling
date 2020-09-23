@@ -32,4 +32,8 @@ public class ApiSingleton {
     public StorageReference getFirebaseStorageToThisEndPoint(String endPoint) {
         return storage.getReference(endPoint);
     }
+
+    public String getUserUId() {
+        return firebaseAuth.getUid();
+    }
 }

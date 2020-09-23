@@ -25,7 +25,7 @@ import java.util.Map;
 import krist.car.Models.DialogModel;
 import krist.car.Models.Upload;
 import krist.car.Models.UploadUsersImage;
-import krist.car.Models.users;
+import krist.car.Models.UserModel;
 
 public class PopUpCoDriver extends AppCompatActivity {
 
@@ -167,7 +167,7 @@ public class PopUpCoDriver extends AppCompatActivity {
             database.getReference("users").child(shoferId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    users users = dataSnapshot.getValue(krist.car.Models.users.class);
+                    UserModel users = dataSnapshot.getValue(UserModel.class);
 
                     if (users.getRating() == 0) {
                         Map<String, Object> mapUri = new HashMap<String, Object>();

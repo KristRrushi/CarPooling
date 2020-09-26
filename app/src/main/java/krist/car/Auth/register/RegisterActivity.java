@@ -99,29 +99,30 @@ public class RegisterActivity extends AppCompatActivity {
         viewModel.createUserWithEmailAndPassword(model.getEmail(), model.getPassword());
         viewModel.isUserCreatedSuccessfully().observe(this, isSuccess -> {
             if(isSuccess) {
-                registerUserData(model);
-                uploadIdImg();
+                uploadIdImg(model);
             }
         });
     }
 
-    private void registerUserData(RegisterUserModelValidation model) {
-        viewModel.registerUserData(new UserModel("", model.getName(), model.getPhone(), model.getBirthday(), model.getGener(), model.getPersonalIdNumber()));
+    private void registerUserData(UserModel model) {
+        viewModel.registerUserData(model);
         viewModel.isUserRegisterSuccessfully().observe(RegisterActivity.this, isRegisterSuccesfully -> {
             if(isRegisterSuccesfully) {
-                Helpers.showToastMessage(this, "Te dhenat u ngarkuan me sukses");
+                Helpers.showToastMessage(this, "Regjistrim i sukseshem");
+                Helpers.goToActivity(this, MainActivity.class);
             }
         });
     }
 
-    private void uploadIdImg() {
+    private void uploadIdImg(RegisterUserModelValidation model) {
         String fileExtension = Helpers.getFileExtension(this, filePath);
 
         viewModel.uploadImage(filePath,fileExtension);
-        viewModel.isImgUploadedSuccessfully().observe(this, isSuccess -> {
-            if(isSuccess) {
-                Helpers.showToastMessage(this, "Regjistrim i sukseshem");
-                Helpers.goToActivity(this, MainActivity.class);
+        viewModel.isImgUploadedSuccessfully().observe(this, imgRef -> {
+            if(!imgRef.isEmpty()) {
+
+                UserModel userModel = new UserModel("", model.getName(), model.getPhone(), model.getBirthday(), model.getGener(), model.getPersonalIdNumber(), imgRef);
+                registerUserData(userModel);
             }
         });
     }

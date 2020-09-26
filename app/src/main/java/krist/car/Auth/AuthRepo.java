@@ -45,8 +45,8 @@ public class AuthRepo {
         return isUserRegisterSuccessfully;
     }
 
-    public MutableLiveData<Boolean> uploadPhoto(Uri imgFilePath, String fileExtension) {
-        final MutableLiveData<Boolean> isSuccess = new MutableLiveData<>();
+    public MutableLiveData<String> uploadPhoto(Uri imgFilePath, String fileExtension) {
+        final MutableLiveData<String> isSuccess = new MutableLiveData<>();
         StorageReference reference = api.getFirebaseStorageToThisEndPoint("uploads").child(System.currentTimeMillis() + "." + fileExtension);
 
         reference.putFile(imgFilePath).continueWithTask( task -> {
@@ -58,10 +58,7 @@ public class AuthRepo {
         }).addOnCompleteListener( task -> {
             String imageUri = task.getResult().toString();
             //Todo fix this model class
-            UploadUsersImage userImage = new UploadUsersImage(imageUri);
-            api.getDatebaseReferenceToThisEndPoint("imageUploads").child(api.getUserUId()).setValue(userImage);
-        }).addOnSuccessListener( uri -> {
-            isSuccess.setValue(true);
+            isSuccess.setValue(imageUri);
         });
 
         return isSuccess;

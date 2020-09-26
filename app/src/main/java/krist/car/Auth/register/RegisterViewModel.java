@@ -15,7 +15,7 @@ public class RegisterViewModel extends ViewModel {
 
     private MutableLiveData<Boolean> createUserStatus;
     private MutableLiveData<Boolean> registerUserStatus;
-    private MutableLiveData<Boolean> imgUploadStatus;
+    private MutableLiveData<String> imgUploadStatus;
 
     public RegisterViewModel() {authRepo = new AuthRepo();}
 
@@ -33,7 +33,7 @@ public class RegisterViewModel extends ViewModel {
         return registerUserStatus;
     }
 
-    LiveData<Boolean> isImgUploadedSuccessfully() {
+    LiveData<String> isImgUploadedSuccessfully() {
         if(imgUploadStatus == null) {
             imgUploadStatus = new MutableLiveData<>();
         }

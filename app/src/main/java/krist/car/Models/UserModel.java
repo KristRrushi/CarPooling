@@ -9,10 +9,11 @@ public class UserModel {
     private String gener;
     private String personalIdNumber;
     private Float rating;
+    private String userImgRef;
 
     public UserModel(){};
 
-    public UserModel(String id, String emri, String phone, String birthday, String gener, String personalIdNumber) {
+    public UserModel(String id, String emri, String phone, String birthday, String gener, String personalIdNumber, String userImgRef) {
 
         this.id = id;
         this.emri = emri;
@@ -21,6 +22,7 @@ public class UserModel {
         this.gener = gener;
         this.personalIdNumber = personalIdNumber;
         this.rating = 0f;
+        this.userImgRef = userImgRef;
     }
 
 
@@ -76,4 +78,11 @@ public class UserModel {
         this.rating = rating;
     }
 
+    public String getUserImgRef() {
+        return userImgRef;
+    }
+
+    public void setUserImgRef(String userImgRef) {
+        this.userImgRef = userImgRef;
+    }
 }

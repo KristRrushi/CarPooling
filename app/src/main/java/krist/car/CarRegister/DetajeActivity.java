@@ -49,13 +49,7 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
     private Uri filePath;
     private Toolbar toolbar;
 
-
-
     private final int PICK_IMAGE_REQUEST = 1;
-
-
-
-
     private StorageReference mStorageRef;
 
     private FirebaseAuth mAuth;
@@ -119,8 +113,6 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("imageUploads");
 
 
-
-
         zgjidhFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -134,35 +126,16 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
         btnNgarko.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
                 uploadDetails2();
-
-
-
-
 
             }
         });
 
-
-
-
         viewHideSoftKeyBoard();
-
-
-
     }
 
-
-
-
-
    private void uploadDetails2(){
-
-
-       final String marka = acMarka.getText().toString().trim();
+        final String marka = acMarka.getText().toString().trim();
        final String modeli = acModeli.getText().toString().trim();
        final String targa = txttarga.getText().toString().trim().toUpperCase();
        final String ngjyra = acNgjyra.getText().toString().trim();
@@ -201,11 +174,6 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
 
    }
 
-
-
-
-
-
     private void chooseImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -220,12 +188,7 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
                 && data != null && data.getData() != null) {
 
             filePath = data.getData();
-
-
-
         }
-
-
     }
 
 
@@ -239,8 +202,6 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
     private void uploadFile() {
 
         mProgresBar.setVisibility(View.VISIBLE);
-
-        Log.v("DEta", "shjion");
 
         if (filePath != null) {
 
@@ -271,70 +232,32 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
                         FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
                         String id = idauth.getUid();
 
-
-
-
-
                         Map<String, Object> mapUri = new HashMap<String, Object>();
                         mapUri.put("imageCarUrl", stringUri);
-
-
-
-
                         mDatabaseRef.child(id).updateChildren(mapUri);
 
                         Toast.makeText(DetajeActivity.this, "downloadUri.toString()",Toast.LENGTH_LONG);
-
-
-
-
-
-
-
-
                     }
                 }
             }).addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
-
                     mProgresBar.setVisibility(View.INVISIBLE);
-
                     Toast.makeText(DetajeActivity.this, "Image Done", Toast.LENGTH_LONG).show();
-
                     startMainActivity();
-
-
-
-
-
-
                 }
             });
-
-
-
-
-
-
-
         }
-
-
     }
-
 
     private void startMainActivity(){
         Intent intent = new Intent(DetajeActivity.this, MainActivity.class);
         startActivity(intent);
     }
 
-
-
     private void hideKeyboard(View view){
         InputMethodManager inputMethodManager =(InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-
     }
 
 
@@ -350,6 +273,5 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
         acModeli.setOnFocusChangeListener(this);
         acNgjyra.setOnFocusChangeListener(this);
         txttarga.setOnFocusChangeListener(this);
-
     }
 }

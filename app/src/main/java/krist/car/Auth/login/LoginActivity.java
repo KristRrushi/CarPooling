@@ -1,4 +1,4 @@
-package krist.car.auth.login;
+package krist.car.Auth.login;
 
 import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import android.widget.TextView;
 import krist.car.MainActivity;
 import krist.car.Models.LoginFormModel;
 import krist.car.R;
-import krist.car.auth.register.RegisterActivity;
+import krist.car.Auth.register.RegisterActivity;
 import krist.car.Utils.Constants;
 import krist.car.Utils.Helpers;
 

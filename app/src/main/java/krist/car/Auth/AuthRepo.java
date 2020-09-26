@@ -1,4 +1,4 @@
-package krist.car.auth;
+package krist.car.Auth;
 
 import android.net.Uri;
 import androidx.lifecycle.MutableLiveData;
@@ -35,9 +35,10 @@ public class AuthRepo {
     public MutableLiveData<Boolean> registerUserData(UserModel userModel) {
         final MutableLiveData<Boolean> isUserRegisterSuccessfully = new MutableLiveData<>();
 
-        userModel.setId(api.getUserUId());
+        String userId = api.getUserUId();
+        userModel.setId(userId);
 
-        api.getDatebaseReferenceToThisEndPoint("users").setValue(userModel).addOnCompleteListener(task -> {
+        api.getDatebaseReferenceToThisEndPoint("users").child(userId).setValue(userModel).addOnCompleteListener(task -> {
             isUserRegisterSuccessfully.setValue(task.isComplete());
         });
 

@@ -81,7 +81,6 @@
 
         android:id="@+id/emailRegister"
         android:completionThreshold="1"
-        android:enabled="false"
         android:layout_marginTop="-10dp"
         />
 
@@ -119,8 +118,7 @@
         android:hint="*************"
         android:id="@+id/passRegister"
         android:completionThreshold="1"
-        android:enabled="false"
-        android:inputType="numberPassword"
+        android:inputType="textPassword"
         android:layout_marginTop="-8dp"/>
 
 

@@ -1,4 +1,4 @@
-package krist.car.auth.register;
+package krist.car.Auth.register;
 
 import android.net.Uri;
 
@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import krist.car.Models.LoginFormModel;
 import krist.car.Models.UserModel;
-import krist.car.auth.AuthRepo;
+import krist.car.Auth.AuthRepo;
 
 public class RegisterViewModel extends ViewModel {
     private AuthRepo authRepo;
@@ -16,6 +16,8 @@ public class RegisterViewModel extends ViewModel {
     private MutableLiveData<Boolean> createUserStatus;
     private MutableLiveData<Boolean> registerUserStatus;
     private MutableLiveData<Boolean> imgUploadStatus;
+
+    public RegisterViewModel() {authRepo = new AuthRepo();}
 
     LiveData<Boolean> isUserCreatedSuccessfully() {
         if(createUserStatus == null) {
@@ -38,13 +40,12 @@ public class RegisterViewModel extends ViewModel {
         return imgUploadStatus;
     }
 
-    void createUserWithEmailAndPassword(LoginFormModel loginModel) {
-        createUserStatus = authRepo.createUserWithEmailAndPassword(loginModel);
+    void createUserWithEmailAndPassword(String email, String password) {
+        LoginFormModel model = new LoginFormModel(email, password);
+        createUserStatus = authRepo.createUserWithEmailAndPassword(model);
     }
 
-    void registerUserDate(UserModel user) {
-        registerUserStatus = authRepo.registerUserData(user);
-    }
+    void registerUserData(UserModel user) { registerUserStatus = authRepo.registerUserData(user); }
 
     void uploadImage(Uri imgUri, String fileExtension) {
         imgUploadStatus = authRepo.uploadPhoto(imgUri, fileExtension);

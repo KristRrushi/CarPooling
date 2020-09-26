@@ -1,10 +1,10 @@
-package krist.car.auth.login;
+package krist.car.Auth.login;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import krist.car.Models.LoginFormModel;
-import krist.car.auth.AuthRepo;
+import krist.car.Auth.AuthRepo;
 
 public class LoginViewModel extends ViewModel {
     private AuthRepo authRepo;

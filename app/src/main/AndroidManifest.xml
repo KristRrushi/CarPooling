@@ -14,7 +14,7 @@
 
         android:theme="@style/AppTheme"> <!--AppTheme-->
         <activity
-            android:name=".auth.login.LoginActivity"
+            android:name=".Auth.login.LoginActivity"
             android:label="CarpoolingRR"
             android:theme="@style/AppTheme"
             >
@@ -26,7 +26,7 @@
 
 
         </activity>
-        <activity android:name=".auth.register.RegisterActivity"
+        <activity android:name=".Auth.register.RegisterActivity"
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".MainActivity" />
         <activity android:name=".DetajeActivity" />

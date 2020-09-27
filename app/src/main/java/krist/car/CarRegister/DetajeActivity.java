@@ -1,4 +1,4 @@
-package krist.car;
+package krist.car.CarRegister;
 
 
 
@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
+
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -38,6 +40,11 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 import java.util.Map;
 
+import krist.car.MainActivity;
+import krist.car.Models.RegisterCarModel;
+import krist.car.R;
+import krist.car.Utils.Helpers;
+
 public class DetajeActivity extends AppCompatActivity  implements View.OnFocusChangeListener{
 
 
@@ -48,10 +55,9 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
     private ProgressBar mProgresBar;
     private Uri filePath;
     private Toolbar toolbar;
-
     private final int PICK_IMAGE_REQUEST = 1;
+    private CarRegisterViewModel viewModel;
     private StorageReference mStorageRef;
-
     private FirebaseAuth mAuth;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -69,7 +75,6 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
 
         mAuth = FirebaseAuth.getInstance();
 
-
         acMarka = findViewById(R.id.emailRegister);
         acModeli =  findViewById(R.id.passRegister);
         acNgjyra = findViewById(R.id.cardIdNumberRegister);
@@ -78,60 +83,41 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
         btnNgarko = findViewById(R.id.buttonRegister);
         mProgresBar = findViewById(R.id.progres_detajet_activity);
         mProgresBar.setVisibility(View.INVISIBLE);
-
-        toolbar = (Toolbar) findViewById(R.id.toolbarRegjMakine);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                startMainActivity();
-            }
-        });
-
-
-
-
-        String[] modeliArray = getResources().getStringArray(R.array.modelet_makina);
-        String[] markaArray = getResources().getStringArray(R.array.marka_makina);
-        String[] ngjyraArray = getResources().getStringArray(R.array.ngjyrat_makina);
-
-
-
-
-        ArrayAdapter<String> adapterMarka = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, markaArray);
-        ArrayAdapter<String> adapterModeli = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, modeliArray);
-        ArrayAdapter<String> adapterNgjyra = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ngjyraArray);
-
-
-
-        acMarka.setAdapter(adapterMarka);
-        acModeli.setAdapter(adapterModeli);
-        acNgjyra.setAdapter(adapterNgjyra);
+        toolbar = findViewById(R.id.toolbarRegjMakine);
 
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("imageUploads");
 
 
-        zgjidhFoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chooseImage();
-            }
-        });
-
-
-
-
-        btnNgarko.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                uploadDetails2();
-
-            }
-        });
-
         viewHideSoftKeyBoard();
+        setupAdaptersForFields();
+        setupListeners();
+        setupRegisterCarViewModel();
+    }
+
+    private void setupRegisterCarViewModel() {
+        viewModel = new ViewModelProvider(this).get(CarRegisterViewModel.class);
+    }
+
+    private void setupListeners() {
+        toolbar.setNavigationOnClickListener(view -> startMainActivity());
+        zgjidhFoto.setOnClickListener(view -> chooseImage());
+        btnNgarko.setOnClickListener(view -> attemptCarRegister());
+    }
+
+    private void setupAdaptersForFields() {
+        String[] modeliArray = getResources().getStringArray(R.array.modelet_makina);
+        String[] markaArray = getResources().getStringArray(R.array.marka_makina);
+        String[] ngjyraArray = getResources().getStringArray(R.array.ngjyrat_makina);
+
+        ArrayAdapter<String> adapterMarka = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, markaArray);
+        ArrayAdapter<String> adapterModeli = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, modeliArray);
+        ArrayAdapter<String> adapterNgjyra = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ngjyraArray);
+
+        acMarka.setAdapter(adapterMarka);
+        acModeli.setAdapter(adapterModeli);
+        acNgjyra.setAdapter(adapterNgjyra);
     }
 
    private void uploadDetails2(){
@@ -141,6 +127,10 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
        final String ngjyra = acNgjyra.getText().toString().trim();
 
        String id;
+
+
+
+
 
        id = mAuth.getCurrentUser().getUid();
 
@@ -168,10 +158,64 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
        Toast.makeText(DetajeActivity.this, "Plotesoni te gjitha te dhenat" , Toast.LENGTH_LONG).show();
        }
 
+   }
 
+   private void attemptCarRegister() {
+       String make = acMarka.getText().toString().trim();
+       String carModel = acModeli.getText().toString().trim();
+       String plate = txttarga.getText().toString().trim().toUpperCase();
+       String color = acNgjyra.getText().toString().trim();
 
+       RegisterCarModel model = new RegisterCarModel(make, carModel, plate, color, "");
 
+       if(!validateFields(model)){
+           return;
+       }
 
+       uploadCarImg(model);
+   }
+
+   private void uploadCarImg(RegisterCarModel model) {
+        viewModel.uploadImg(filePath, Helpers.getFileExtension(this, filePath));
+        viewModel.isImgUploadedSucessfully().observe(this, imgRef -> {
+            if(!imgRef.isEmpty()) {
+                model.setCarImgRef(imgRef);
+                registerCarDetails(model);
+            }
+        });
+   }
+
+   private void registerCarDetails(RegisterCarModel model) {
+        viewModel.registerCar(model);
+        viewModel.isCarRegisterSuccessfully().observe(this, isSuccess -> {
+            if(isSuccess) {
+                Helpers.goToActivity(this, MainActivity.class);
+                Helpers.showToastMessage(this, "Regjistrim i suksesshem");
+            }else {
+                Helpers.showToastMessage(this, "Pati nje problem ne regjistrim, provo perseri");
+            }
+        });
+   }
+
+   private Boolean validateFields(RegisterCarModel model) {
+        if(model.getCarMarks().isEmpty()) {
+            acMarka.setError("Zgjidhni marken");
+            return false;
+        }else if(model.getCarModel().isEmpty()) {
+            acModeli.setError("Zgjidhni modelin");
+            return false;
+        }else if(model.getCarColor().isEmpty()){
+            acNgjyra.setError("Zgjidhni ngjyren");
+            return false;
+        }else if(model.getCarPlate().isEmpty()) {
+            txttarga.setError("Plotesoni targen");
+            return false;
+        }else if(filePath == null) {
+            Helpers.showToastMessage(this, "Mungon foto e makines");
+            return false;
+        }else {
+            return true;
+        }
    }
 
     private void chooseImage() {

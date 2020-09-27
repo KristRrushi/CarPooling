@@ -33,13 +33,6 @@ import java.util.List;
 
 import krist.car.Models.TripsModel;
 
-//import com.firebase.ui.database.FirebaseRecyclerAdapter;
-//import com.google.firebase.auth.FirebaseAuth;
-
-/**
- * Created by pampers on 12/19/2017.
- */
-
 public class SearchFragment extends Fragment {
 
 

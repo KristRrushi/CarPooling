@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import krist.car.CarRegister.DetajeActivity;
+import krist.car.ProfileInfo.UserInfo;
 
 public class MainActivity extends AppCompatActivity{
     private BottomNavigationView mMainNav;

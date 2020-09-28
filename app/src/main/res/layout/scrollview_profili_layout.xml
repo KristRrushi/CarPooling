@@ -3,21 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-
-
-
-
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/relative_main"
         android:background="#009BCE">
-
-
-
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -26,24 +16,14 @@
                 app:popupTheme="@style/AppTheme.PopupOverlay"
                 android:theme="@style/ToolBarStyle"
                 app:title="Profili"
-                app:titleMarginStart="25dp"
-
-                />
-
-
-
-
+                app:titleMarginStart="25dp" />
 
         <RelativeLayout
             android:layout_below="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/relative_foto_makine"
-            android:background="@drawable/layout_upper_corners"
-
-
-            >
-
+            android:background="@drawable/layout_upper_corners">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="100dp"
@@ -53,18 +33,8 @@
                 android:layout_marginTop="60dp"
                 android:layout_marginBottom="20dp"
                 app:civ_border_width="1dp"
-                app:civ_border_color="#2f000000"
-
-
-
-                />
-
-
-
-
-
+                app:civ_border_color="#2f000000" />
         </RelativeLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,20 +43,14 @@
             android:layout_below="@+id/relative_foto_makine"
             android:orientation="vertical"
             android:background="#ffffff"
-
-            android:paddingLeft="20dp"
-
-            >
-
-
+            android:paddingLeft="20dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/relative_emri"
                 android:layout_marginBottom="5dp"
-                android:paddingRight="20dp"
-                >
+                android:paddingRight="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -298,42 +262,15 @@
                     android:id="@+id/user_info_personalNumber"
                     android:enabled="false"
                     android:textColor="#6b6b6b"
-                    android:maxLines="1"
-
-
-                    />
-
-
-
-
+                    android:maxLines="1" />
             </RelativeLayout>
-
-
-
-
-
-
-
-
-
-
-
         </LinearLayout>
 
-
-
-
-
-            <include
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                layout="@layout/scrollview_makina_layout"
-                android:layout_below="@+id/linear_makina_info"
-                android:id="@+id/include_relative_makina"/>
-
-
-
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cars_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/linear_makina_info" />
 
 
     </RelativeLayout>

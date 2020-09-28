@@ -83,10 +83,6 @@ public class ProfiliEdit extends AppCompatActivity {
         mDatabase = new Database();
 
 
-
-
-
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

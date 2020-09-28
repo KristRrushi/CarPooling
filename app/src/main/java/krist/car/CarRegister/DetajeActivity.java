@@ -42,6 +42,7 @@ import java.util.Map;
 
 import krist.car.MainActivity;
 import krist.car.Models.RegisterCarModel;
+import krist.car.ProfileInfo.Models.CarModel;
 import krist.car.R;
 import krist.car.Utils.Helpers;
 
@@ -120,53 +121,13 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
         acNgjyra.setAdapter(adapterNgjyra);
     }
 
-   private void uploadDetails2(){
-        final String marka = acMarka.getText().toString().trim();
-       final String modeli = acModeli.getText().toString().trim();
-       final String targa = txttarga.getText().toString().trim().toUpperCase();
-       final String ngjyra = acNgjyra.getText().toString().trim();
-
-       String id;
-
-
-
-
-
-       id = mAuth.getCurrentUser().getUid();
-
-       if(!marka.isEmpty() && !modeli.isEmpty() && !targa.isEmpty() && !ngjyra.isEmpty() && filePath != null) {
-
-
-           Map<String, Object> mapMak = new HashMap<String, Object>();
-
-           mapMak.put("markaMak", marka);
-           mapMak.put("modeliMak", modeli);
-           mapMak.put("targaMak", targa);
-           mapMak.put("ngjyraMak", ngjyra);
-
-
-           databaseUsers.child(id).updateChildren(mapMak);
-
-           uploadFile();
-
-
-
-
-
-       }else {
-
-       Toast.makeText(DetajeActivity.this, "Plotesoni te gjitha te dhenat" , Toast.LENGTH_LONG).show();
-       }
-
-   }
-
    private void attemptCarRegister() {
        String make = acMarka.getText().toString().trim();
        String carModel = acModeli.getText().toString().trim();
        String plate = txttarga.getText().toString().trim().toUpperCase();
        String color = acNgjyra.getText().toString().trim();
 
-       RegisterCarModel model = new RegisterCarModel(make, carModel, plate, color, "");
+       CarModel model = new CarModel(make, carModel, plate, color, "");
 
        if(!validateFields(model)){
            return;
@@ -175,9 +136,9 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
        uploadCarImg(model);
    }
 
-   private void uploadCarImg(RegisterCarModel model) {
+   private void uploadCarImg(CarModel model) {
         viewModel.uploadImg(filePath, Helpers.getFileExtension(this, filePath));
-        viewModel.isImgUploadedSucessfully().observe(this, imgRef -> {
+        viewModel.isImgUploadedSuccessfully().observe(this, imgRef -> {
             if(!imgRef.isEmpty()) {
                 model.setCarImgRef(imgRef);
                 registerCarDetails(model);
@@ -185,9 +146,9 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
         });
    }
 
-   private void registerCarDetails(RegisterCarModel model) {
-        viewModel.registerCar(model);
-        viewModel.isCarRegisterSuccessfully().observe(this, isSuccess -> {
+   private void registerCarDetails(CarModel model) {
+       viewModel.registerCarNewWay(model);
+       viewModel.isCarRegisterSuccessfully().observe(this, isSuccess -> {
             if(isSuccess) {
                 Helpers.goToActivity(this, MainActivity.class);
                 Helpers.showToastMessage(this, "Regjistrim i suksesshem");
@@ -197,7 +158,7 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
         });
    }
 
-   private Boolean validateFields(RegisterCarModel model) {
+   private Boolean validateFields(CarModel model) {
         if(model.getCarMarks().isEmpty()) {
             acMarka.setError("Zgjidhni marken");
             return false;
@@ -232,65 +193,6 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
                 && data != null && data.getData() != null) {
 
             filePath = data.getData();
-        }
-    }
-
-
-    private String getFileExtension(Uri uri) {
-        ContentResolver cR = getContentResolver();
-        MimeTypeMap mine = MimeTypeMap.getSingleton();
-        return mine.getExtensionFromMimeType(cR.getType(uri));
-    }
-
-
-    private void uploadFile() {
-
-        mProgresBar.setVisibility(View.VISIBLE);
-
-        if (filePath != null) {
-
-
-            final StorageReference fileRefernce = mStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(filePath));
-
-
-            fileRefernce.putFile(filePath).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if (!task.isComplete()) {
-                        throw task.getException();
-                    }
-
-                    return fileRefernce.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    if (task.isSuccessful()) {
-                        Uri downloadUri = task.getResult();
-
-                        String stringUri = downloadUri.toString();
-
-                        Log.v("klick", stringUri);
-
-
-                        FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
-                        String id = idauth.getUid();
-
-                        Map<String, Object> mapUri = new HashMap<String, Object>();
-                        mapUri.put("imageCarUrl", stringUri);
-                        mDatabaseRef.child(id).updateChildren(mapUri);
-
-                        Toast.makeText(DetajeActivity.this, "downloadUri.toString()",Toast.LENGTH_LONG);
-                    }
-                }
-            }).addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    mProgresBar.setVisibility(View.INVISIBLE);
-                    Toast.makeText(DetajeActivity.this, "Image Done", Toast.LENGTH_LONG).show();
-                    startMainActivity();
-                }
-            });
         }
     }
 

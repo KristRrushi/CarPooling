@@ -5,8 +5,7 @@ import android.net.Uri;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-import krist.car.Models.RegisterCarModel;
+import krist.car.ProfileInfo.Models.CarModel;
 
 public class CarRegisterViewModel extends ViewModel {
     private CarRegisterRepo repo;
@@ -23,7 +22,7 @@ public class CarRegisterViewModel extends ViewModel {
         return isCarRegisterSuccessfully;
     }
 
-    LiveData<String> isImgUploadedSucessfully() {
+    LiveData<String> isImgUploadedSuccessfully() {
         if(imgPathRef == null) {
             imgPathRef = new MutableLiveData<>();
         }
@@ -34,7 +33,5 @@ public class CarRegisterViewModel extends ViewModel {
         imgPathRef = repo.uploadPhoto(imgUri, imgExt);
     }
 
-    void registerCar(RegisterCarModel model) {
-        isCarRegisterSuccessfully = repo.registerCarDetails(model);
-    }
+    void registerCarNewWay(CarModel model) { isCarRegisterSuccessfully = repo.addCar(model);}
 }

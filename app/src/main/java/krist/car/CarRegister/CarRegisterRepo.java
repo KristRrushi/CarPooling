@@ -27,7 +27,7 @@ public class CarRegisterRepo {
 
         String userId = api.getUserUId();
 
-        api.getDatebaseReferenceToThisEndPoint("user_cars").child(userId).setValue(model)
+        api.getDatebaseReferenceToThisEndPoint("user_cars").child(userId + "/cars").setValue(model)
                 .addOnCompleteListener(task -> {
                     isCarRegisterSuccessfully.setValue(task.isComplete());
                 });
@@ -56,7 +56,7 @@ public class CarRegisterRepo {
 
         String userId = api.getUserUId();
 
-        DatabaseReference ref = api.getDatebaseReferenceToThisEndPoint("user_cars").child(userId).push();
+        DatabaseReference ref = api.getDatebaseReferenceToThisEndPoint("user_cars").child(userId).child("cars").push();
 
         ref.setValue(carModel, (databaseError, databaseReference) -> {
             isCarRegisterSuccessfully.setValue(true);

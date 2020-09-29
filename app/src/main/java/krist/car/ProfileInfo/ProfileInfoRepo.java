@@ -49,7 +49,7 @@ public class ProfileInfoRepo {
 
         String userId = api.getUserUId();
 
-        api.getDatebaseReferenceToThisEndPoint("user_cars").child(userId).addValueEventListener(new ValueEventListener() {
+        api.getDatebaseReferenceToThisEndPoint("user_cars").child(userId).child("cars").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot carSnapshot: dataSnapshot.getChildren()) {
@@ -76,7 +76,7 @@ public class ProfileInfoRepo {
         selectedCarUpdate.put("selected_car", carRef);
 
         String userId = api.getUserUId();
-        api.getDatebaseReferenceToThisEndPoint("users").child(userId).updateChildren(selectedCarUpdate).addOnCompleteListener(task -> {
+        api.getDatebaseReferenceToThisEndPoint("user_cars").child(userId).updateChildren(selectedCarUpdate).addOnCompleteListener(task -> {
             isSuccess.setValue(task.isSuccessful());
         });
 

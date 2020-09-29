@@ -24,7 +24,8 @@ public class CarCheckAsyncTask extends AsyncTask<Void , Void, Boolean> {
         db.getmDatabaseRefUsers().child(uID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                check = dataSnapshot.hasChild("targaMak");
+                check = dataSnapshot.hasChild("selected_car");
+                check = false;
             }
 
             @Override

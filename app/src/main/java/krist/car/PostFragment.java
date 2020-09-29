@@ -43,7 +43,7 @@ public class PostFragment extends Fragment {
 
     Button btnPost;
     Calendar myCalendar = Calendar.getInstance();
-    String uRL;
+    String uRL = "";
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference dataPost = database.getReference("trips");
     DatabaseReference imageUp = database.getReference("imageUploads");
@@ -66,8 +66,8 @@ public class PostFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
               Upload upload = dataSnapshot.getValue(Upload.class);
-                String uID = upload.getImageCarUrl().toString();
-                uRL = uID;
+                //String uID = upload.getImageCarUrl().toString();
+                //uRL = uID;
             }
 
             @Override

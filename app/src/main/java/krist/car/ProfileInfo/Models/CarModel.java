@@ -1,6 +1,7 @@
 package krist.car.ProfileInfo.Models;
 
 public class CarModel {
+    private String carKey = "";
     private String carMarks;
     private String carModel;
     private String carPlate;
@@ -9,7 +10,8 @@ public class CarModel {
 
     public CarModel() {}
 
-    public CarModel(String carMarks, String carModel, String carPlate, String carColor, String carImgRef) {
+    public CarModel(String carKey, String carMarks, String carModel, String carPlate, String carColor, String carImgRef) {
+        this.carKey = carKey;
         this.carMarks = carMarks;
         this.carModel = carModel;
         this.carPlate = carPlate;
@@ -56,4 +58,8 @@ public class CarModel {
     public void setCarImgRef(String carImgRef) {
         this.carImgRef = carImgRef;
     }
+
+    public String getCarKey() { return carKey; }
+
+    public void setCarKey(String carKey) { this.carKey = carKey; }
 }

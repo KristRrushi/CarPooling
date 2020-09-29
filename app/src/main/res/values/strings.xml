@@ -174,12 +174,6 @@
         <item>Verdhe</item>
         <item>Vishnje</item>
         <item>Portokalli</item>
-
-
-
-
-
-
     </string-array>
 
 
@@ -216,4 +210,7 @@
     <string name="nav_kerko">Kerko</string>
     <string name="nav_posto">Posto</string>
     <string name="nav_profili">Profil</string>
+
+    <string name="profile">Profili</string>
+    <string name="cars">Makinat</string>
 </resources>

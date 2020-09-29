@@ -13,6 +13,7 @@ public class ProfileInfoViewModel extends ViewModel {
     private ProfileInfoRepo repo;
     private MutableLiveData<ProfileInfoModel> userProfileInfo;
     private MutableLiveData<ArrayList<CarModel>> userCars;
+    private MutableLiveData<Boolean> isCarSelectedFinishSuccessfully;
 
     public ProfileInfoViewModel() {repo = new ProfileInfoRepo();}
 
@@ -30,11 +31,22 @@ public class ProfileInfoViewModel extends ViewModel {
         return userCars;
     }
 
+    LiveData<Boolean> isCarRegisterSuccessfully() {
+        if(isCarSelectedFinishSuccessfully == null) {
+            isCarSelectedFinishSuccessfully = new MutableLiveData<>();
+        }
+        return isCarSelectedFinishSuccessfully;
+    }
+
     void getUserProfile() {
         userProfileInfo = repo.getUserInfo();
     }
 
     void getUserCars() {
         userCars = repo.getUserCars();
+    }
+
+    void registerCarSelected(String carRef) {
+        isCarSelectedFinishSuccessfully = repo.addSelectedCar(carRef);
     }
 }

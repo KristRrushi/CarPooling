@@ -10,6 +10,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import krist.car.Api.ApiSingleton;
 import krist.car.ProfileInfo.Models.CarModel;
@@ -52,6 +54,8 @@ public class ProfileInfoRepo {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot carSnapshot: dataSnapshot.getChildren()) {
                     CarModel car = carSnapshot.getValue(CarModel.class);
+                    assert car != null;
+                    car.setCarKey(carSnapshot.getKey());
                     cars.add(car);
                 }
                 userCars.setValue(cars);
@@ -63,5 +67,19 @@ public class ProfileInfoRepo {
             }
         });
         return userCars;
+    }
+
+    public MutableLiveData<Boolean> addSelectedCar(String carRef) {
+        final MutableLiveData<Boolean> isSuccess = new MutableLiveData<>();
+
+        Map<String, Object> selectedCarUpdate = new HashMap<>();
+        selectedCarUpdate.put("selected_car", carRef);
+
+        String userId = api.getUserUId();
+        api.getDatebaseReferenceToThisEndPoint("users").child(userId).updateChildren(selectedCarUpdate).addOnCompleteListener(task -> {
+            isSuccess.setValue(task.isSuccessful());
+        });
+
+        return isSuccess;
     }
 }

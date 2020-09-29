@@ -127,7 +127,7 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
        String plate = txttarga.getText().toString().trim().toUpperCase();
        String color = acNgjyra.getText().toString().trim();
 
-       CarModel model = new CarModel(make, carModel, plate, color, "");
+       CarModel model = new CarModel("", make, carModel, plate, color, "");
 
        if(!validateFields(model)){
            return;

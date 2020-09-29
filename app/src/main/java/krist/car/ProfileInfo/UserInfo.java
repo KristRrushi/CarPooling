@@ -20,6 +20,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,45 +40,34 @@ import krist.car.Models.DetajetModel;
 import krist.car.Models.UploadUsersImage;
 import krist.car.ProfileInfo.Models.CarModel;
 import krist.car.ProfileInfo.Models.ProfileInfoModel;
+import krist.car.ProfileInfo.adapter.CarSelectedListener;
 import krist.car.ProfileInfo.adapter.CarsAdapter;
 import krist.car.ProfiliEdit;
 import krist.car.R;
+import krist.car.Utils.Helpers;
 
-public class UserInfo extends Fragment {
-    private EditText emri, tel, mosha, gjinia, numriPersona, marka, modeli, targa, ngjyra, email;
-    private View myView;
-    private RecyclerView carList;
-    private ImageView imgUser;
+public class UserInfo extends Fragment implements CarSelectedListener {
+    private ImageView userImg;
+    private TextView nameTV, phoneTV, ageTV, generTV;
+    private RecyclerView userCarList;
     private ProfileInfoViewModel viewModel;
-
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.scrollview_profili_layout, container, false);
+        return inflater.inflate(R.layout.user_cars_info_layout, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Toolbar actionToolBar = view.findViewById(R.id.toolbar);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(actionToolBar);
-        setHasOptionsMenu(true);
-
-        email = view.findViewById(R.id.user_info_email);
-        emri = view.findViewById(R.id.user_info_emri_mbiemri);
-        tel = view.findViewById(R.id.user_info_tel);
-        marka = view.findViewById(R.id.user_info_marka);
-        modeli = view.findViewById(R.id.user_info_modeli);
-        targa = view.findViewById(R.id.user_info_targa);
-        mosha = view.findViewById(R.id.user_info_mosha);
-        gjinia = view.findViewById(R.id.user_info_gjinia);
-        numriPersona = view.findViewById(R.id.user_info_personalNumber);
-        ngjyra = view.findViewById(R.id.user_info_ngjyra);
-        imgUser = view.findViewById(R.id.foto_user);
-        carList = view.findViewById(R.id.cars_recyclerView);
+        userImg = view.findViewById(R.id.user_info_img);
+        nameTV = view.findViewById(R.id.user_info_name);
+        phoneTV = view.findViewById(R.id.user_info_phone);
+        ageTV = view.findViewById(R.id.user_info_age);
+        generTV = view.findViewById(R.id.user_info_gener);
+        userCarList = view.findViewById(R.id.user_info_car_list);
 
         setupCarRecyclerView();
         setupUserProfileViewModel();
@@ -100,47 +91,30 @@ public class UserInfo extends Fragment {
     private void getUserCars() {
         viewModel.getUserCars();
         viewModel.userCars().observe(getViewLifecycleOwner(), carModels -> {
-            CarsAdapter adapter = new CarsAdapter(carModels);
-            carList.setAdapter(adapter);
+            CarsAdapter adapter = new CarsAdapter(carModels, this);
+            userCarList.setAdapter(adapter);
         });
     }
 
     private void populateUserInfoField(ProfileInfoModel userInfo) {
-        emri.setText(userInfo.getEmri());
-        tel.setText(userInfo.getPhone());
-        mosha.setText(userInfo.getBirthday());
-        gjinia.setText(userInfo.getGener());
-        numriPersona.setText(userInfo.getPersonalIdNumber());
-        Picasso.get().load(userInfo.getUserImgRef()).fit().centerCrop().into(imgUser);
+        nameTV.setText(userInfo.getEmri());
+        phoneTV.setText(userInfo.getPhone());
+        ageTV.setText(userInfo.getBirthday());
+        generTV.setText(userInfo.getGener());
+        Picasso.get().load(userInfo.getUserImgRef()).fit().centerCrop().into(userImg);
     }
 
     private void setupCarRecyclerView() {
-        carList.setLayoutManager(new LinearLayoutManager(getContext()));
+        userCarList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
     }
 
-
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.toolbarmenu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.profil_menu:
-                Intent intent = new Intent(getActivity(), ProfiliEdit.class);
-                startActivity(intent);
-                break;
-            case R.id.makina_menu:
-                break;
-            case R.id.dil:
-                Intent intent2 = new Intent(getActivity(), DetajeActivity.class);
-                startActivity(intent2);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
+    public void onCarSelected(String carRef) {
+        viewModel.registerCarSelected(carRef);
+        viewModel.isCarRegisterSuccessfully().observe(getViewLifecycleOwner(), isSuccess -> {
+            if(isSuccess) {
+                Helpers.showToastMessage(getContext(), "Makina u ruajt me sukses");
+            }
+        });
     }
 }

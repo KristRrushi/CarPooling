@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import krist.car.CarRegister.DetajeActivity;
+import krist.car.PostTrips.PostFragment;
 import krist.car.ProfileInfo.UserInfo;
 
 public class MainActivity extends AppCompatActivity{
@@ -27,17 +28,10 @@ public class MainActivity extends AppCompatActivity{
     private HistoryFragment historyFragment;
     private UserInfo userInfoFragment;
 
-    //
-    private CarCheckAsyncTask carCheckAsyncTask;
-    DatabaseReference databaseReference;
-    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        carCheckAsyncTask = new CarCheckAsyncTask();
 
         //----- nav menu 4 items
         searchFragment = new SearchFragment();
@@ -45,16 +39,9 @@ public class MainActivity extends AppCompatActivity{
         historyFragment = new HistoryFragment();
         userInfoFragment = new UserInfo();
 
-        //Database
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = firebaseUser.getUid();
-
-        databaseReference = firebaseDatabase.getReference("users").child(uid);
-
         mMainFrame = findViewById(R.id.main_frame);
         mMainNav = findViewById(R.id.main_nav);
 
-        carCheckAsyncTask.execute();
         setFragment(searchFragment);
 
         mMainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -65,13 +52,7 @@ public class MainActivity extends AppCompatActivity{
                         setFragment(searchFragment);
                         return true;
                     case R.id.nav_posto:
-                       if(carCheckAsyncTask.check){
-                           setFragment(postFragment);
-                       }else {
-                           Intent intent = new Intent(MainActivity.this, DetajeActivity.class);
-                           startActivity(intent);
-                           Toast.makeText(MainActivity.this, "duhet te regjistorsh makinen ", Toast.LENGTH_LONG).show();
-                       }
+                        setFragment(postFragment);
                     return true;
                     case R.id.nav_profili:
                         setFragment(historyFragment);

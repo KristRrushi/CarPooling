@@ -58,6 +58,8 @@ public class CarRegisterRepo {
 
         DatabaseReference ref = api.getDatebaseReferenceToThisEndPoint("user_cars").child(userId).child("cars").push();
 
+        carModel.setCarKey(ref.getKey());
+
         ref.setValue(carModel, (databaseError, databaseReference) -> {
             isCarRegisterSuccessfully.setValue(true);
         });

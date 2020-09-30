@@ -51,6 +51,7 @@ public class UserInfo extends Fragment implements CarSelectedListener {
     private TextView nameTV, phoneTV, ageTV, generTV;
     private RecyclerView userCarList;
     private ProfileInfoViewModel viewModel;
+    private ImageView addCarButton;
 
     @Nullable
     @Override
@@ -68,6 +69,11 @@ public class UserInfo extends Fragment implements CarSelectedListener {
         ageTV = view.findViewById(R.id.user_info_age);
         generTV = view.findViewById(R.id.user_info_gener);
         userCarList = view.findViewById(R.id.user_info_car_list);
+        addCarButton = view.findViewById(R.id.user_info_add_car);
+
+        addCarButton.setOnClickListener(v -> {
+            Helpers.goToActivity(getContext(), DetajeActivity.class);
+        });
 
         setupCarRecyclerView();
         setupUserProfileViewModel();

@@ -1,4 +1,4 @@
-package krist.car;
+package krist.car.PostTrips;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -9,7 +9,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,43 +39,27 @@ import java.util.Locale;
 
 import krist.car.Models.TripsModel;
 import krist.car.Models.Upload;
+import krist.car.PostTrips.PostTripsViewModel;
+import krist.car.R;
+import krist.car.SearchFragment;
+import krist.car.Utils.Helpers;
 
 public class PostFragment extends Fragment {
 
-
-    Button btnPost;
     Calendar myCalendar = Calendar.getInstance();
-    String uRL = "";
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference dataPost = database.getReference("trips");
-    DatabaseReference imageUp = database.getReference("imageUploads");
+
 
     private AutoCompleteTextView mNisja, mMberritja;
     private TextView mData, mOra;
     private EditText mCmimi, mVendet;
     private Button posto;
+    private PostTripsViewModel viewModel;
 
     public PostFragment(){ }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //if user has car
-        FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
-        final String id = idauth.getUid();
-
-        imageUp.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-              Upload upload = dataSnapshot.getValue(Upload.class);
-                //String uID = upload.getImageCarUrl().toString();
-                //uRL = uID;
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) { }
-        });
-
         return inflater.inflate(R.layout.posto_new_layout, container, false);
     }
 
@@ -108,17 +94,29 @@ public class PostFragment extends Fragment {
             }
         });
 
-        posto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseUser idauth = FirebaseAuth.getInstance().getCurrentUser();
-                final String id = idauth.getUid();
-                postUserInfo(id);
-            }
+        posto.setOnClickListener(v -> {
+            postUserInfo();
         });
 
         hideAllViewsKeyBoard();
+        setupViewModel();
+        checkIfCarsExists();
     }
+
+    private void checkIfCarsExists() {
+        viewModel.checkIfUserHaveCar();
+        viewModel.doesUserHaveCar().observe(getViewLifecycleOwner(), haveRegisterCar -> {
+            if(!haveRegisterCar) {
+                Helpers.showToastMessage(getContext(), "Nuk keni makine te regjistruar");
+            }
+        });
+    }
+
+    private void setupViewModel() {
+        viewModel =  new ViewModelProvider(this).get(PostTripsViewModel.class);
+    }
+
+
 
     public void dataPicker(){
         new DatePickerDialog(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog, date, myCalendar
@@ -171,22 +169,26 @@ public class PostFragment extends Fragment {
         mOra.setText(sdf.format(myCalendar.getTime()));
     }
 
-    private void postUserInfo(String id) {
+    private void postUserInfo() {
         final String ora = mOra.getText().toString().trim();
         final String data = mData.getText().toString().trim();
         final String nisja = mNisja.getText().toString();
         final String mberritja = mMberritja.getText().toString();
         final String vendet = mVendet.getText().toString();
-        final String uri = uRL;
         final String price = mCmimi.getText().toString().trim();
 
         final String search = nisja.toLowerCase() + " " + mberritja.toLowerCase();
 
         if(!ora.isEmpty() && !data.isEmpty() && !nisja.isEmpty() && !mberritja.isEmpty() && !vendet.isEmpty() && !price.isEmpty()){
+            TripsModel userspost = new TripsModel("",nisja,mberritja, data, ora, vendet,"", price, search);
+            viewModel.postTrip(userspost);
+            viewModel.isTripPosted().observe(getViewLifecycleOwner(), isSuccess -> {
+                Log.d("lol", isSuccess.toString());
+            });
 
-            String pushKey = dataPost.push().getKey();
+           /* String pushKey = dataPost.push().getKey();
 
-            TripsModel userspost = new TripsModel(id,nisja,mberritja, data, ora, vendet,uRL,pushKey, price, search);
+            TripsModel userspost = new TripsModel("",nisja,mberritja, data, ora, vendet,uRL,pushKey, price, search);
 
             dataPost.child(pushKey).setValue(userspost);
 
@@ -195,7 +197,7 @@ public class PostFragment extends Fragment {
             FragmentTransaction t = this.getFragmentManager().beginTransaction();
             Fragment fragment1 = new SearchFragment();
             t.replace(R.id.main_frame, fragment1);
-            t.commit();
+            t.commit();*/
 
         }else {
             Toast.makeText(getActivity(), "Plotesoni te gjitha te dhenat", Toast.LENGTH_LONG).show();

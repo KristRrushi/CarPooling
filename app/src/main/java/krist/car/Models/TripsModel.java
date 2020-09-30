@@ -26,7 +26,7 @@ public class TripsModel {
 
     public TripsModel(){}
 
-    public TripsModel(String idShofer,String vNisja, String vMberritja, String data, String ora, String vendet, String uri,String tripID, String cmimi, String search){
+    public TripsModel(String idShofer,String vNisja, String vMberritja, String data, String ora, String vendet, String uri, String cmimi, String search){
 
         this.idShofer = idShofer;
         this.vNisja = vNisja;

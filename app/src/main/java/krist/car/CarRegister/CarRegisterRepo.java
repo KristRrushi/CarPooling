@@ -60,8 +60,8 @@ public class CarRegisterRepo {
 
         carModel.setCarKey(ref.getKey());
 
-        ref.setValue(carModel, (databaseError, databaseReference) -> {
-            isCarRegisterSuccessfully.setValue(true);
+        ref.setValue(carModel).addOnCompleteListener(task -> {
+            isCarRegisterSuccessfully.setValue(task.isSuccessful());
         });
         return isCarRegisterSuccessfully;
     }

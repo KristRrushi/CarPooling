@@ -133,6 +133,15 @@
         android:textStyle="bold"
         />
 
+    <ImageView
+        android:id="@+id/user_info_add_car"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="@id/user_info_container"
+        app:layout_constraintTop_toTopOf="@id/cars_label"
+        app:layout_constraintBottom_toBottomOf="@id/cars_label"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/user_info_car_list"

@@ -21,7 +21,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
-import krist.car.Models.TripsModel;
+import krist.car.models.TripsModel;
 
 import static android.content.ContentValues.TAG;
 

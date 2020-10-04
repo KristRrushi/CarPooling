@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import krist.car.Models.PopUpDriverListModel;
+import krist.car.models.PopUpDriverListModel;
 
 public class PopUpDriverAdapter extends BaseAdapter{
 

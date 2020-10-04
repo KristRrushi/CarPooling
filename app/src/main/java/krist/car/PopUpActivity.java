@@ -27,12 +27,12 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
-import krist.car.Models.DialogModel;
-import krist.car.Models.PassToTripsModel;
-import krist.car.Models.TripsModel;
-import krist.car.Models.Upload;
-import krist.car.Models.UploadUsersImage;
-import krist.car.Models.UserModel;
+import krist.car.models.DialogModel;
+import krist.car.models.PassToTripsModel;
+import krist.car.models.TripsModel;
+import krist.car.models.Upload;
+import krist.car.models.UploadUsersImage;
+import krist.car.models.UserModel;
 
 public class PopUpActivity extends AppCompatActivity {
 

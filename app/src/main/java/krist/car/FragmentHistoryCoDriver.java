@@ -24,7 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import krist.car.Models.TripsModel;
+import krist.car.models.TripsModel;
 
 import static android.content.ContentValues.TAG;
 

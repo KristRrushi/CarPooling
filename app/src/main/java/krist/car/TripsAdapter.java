@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import krist.car.Models.TripsModel;
+import krist.car.models.TripsModel;
 
 import static android.content.ContentValues.TAG;
 
@@ -87,17 +87,14 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
     }
 
 
+    public TripsAdapter(){
+        dataSet = new ArrayList();
+    };
 
-
-
-    public TripsAdapter(List<TripsModel> dataSet){
-
-        this.dataSet = dataSet;
-        dataSetFiltered = new ArrayList<>(dataSet);
+    public void setTrips(ArrayList<TripsModel> trips) {
+        this.dataSet = trips;
+        notifyDataSetChanged();
     }
-
-    public TripsAdapter(){};
-
 
 
     public void setSearchOperation(List<TripsModel> newList){

@@ -1,7 +1,7 @@
 package krist.car.core
 
-import krist.car.Api.ApiSingleton
+import krist.car.api.ApiSingleton
 
 open class BaseRepo(val api: ApiSingleton? = ApiSingleton.getInstance()) {
-    val userId = api!!.userUId
+    val userId: String = api!!.userUId
 }

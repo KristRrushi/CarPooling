@@ -15,60 +15,51 @@
         app:title="Kerko Udhetim"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         android:theme="@style/ToolBarStyle"
-
-
-
-
-        android:elevation="4dp"
-        app:titleTextColor="#ffffff"
-        android:background="#FF7C5B"
-
-
-
-
-
-
-
-        >
-
+        app:titleTextColor="#000">
 
     </androidx.appcompat.widget.Toolbar>
 
-<!--    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txt_edit_search"
-        android:hint="Kerko ketu"
-
-        android:background="@drawable/button_rectangle"
-        android:padding="10dp"
-
-        android:layout_marginTop="5dp"
-        android:drawableRight="@drawable/ic_delete_kerko"
-        android:elevation="4dp"
-        />-->
-
-
 
     <androidx.recyclerview.widget.RecyclerView
-
-
-
-
         android:layout_below="@id/toolbar_kerko"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/list_trips"
         tools:listitem="@layout/ketubehetcdogje"
         android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-
-
-       >
-
-
+        android:paddingRight="5dp">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/search_container"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/search_view_backgroud"
+        android:visibility="gone"
+        android:padding="6dp">
+
+        <EditText
+            android:id="@+id/search_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Kerko"
+            android:drawableLeft="@drawable/car"
+            android:drawablePadding="16dp"
+            android:paddingStart="16dp"
+            android:background="@color/whiteColor"
+            android:paddingVertical="8dp"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_view_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+
 
 
 

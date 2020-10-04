@@ -35,8 +35,8 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
-import krist.car.Models.DetajetModel;
-import krist.car.Models.UploadUsersImage;
+import krist.car.models.DetajetModel;
+import krist.car.models.UploadUsersImage;
 
 public class MakinaEdit extends AppCompatActivity implements View.OnFocusChangeListener{
 

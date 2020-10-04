@@ -22,10 +22,10 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
-import krist.car.Models.DialogModel;
-import krist.car.Models.Upload;
-import krist.car.Models.UploadUsersImage;
-import krist.car.Models.UserModel;
+import krist.car.models.DialogModel;
+import krist.car.models.Upload;
+import krist.car.models.UploadUsersImage;
+import krist.car.models.UserModel;
 
 public class PopUpCoDriver extends AppCompatActivity {
 

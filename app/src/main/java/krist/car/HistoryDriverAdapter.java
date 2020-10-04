@@ -15,17 +15,14 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
-import krist.car.Models.TripsModel;
+import krist.car.models.TripsModel;
 
 public class HistoryDriverAdapter extends RecyclerView.Adapter<HistoryDriverAdapter.ViewHolder> {
 
@@ -135,9 +132,10 @@ public class HistoryDriverAdapter extends RecyclerView.Adapter<HistoryDriverAdap
         String id = dataSet.get(position).getTripID();
 
 
-        DatabaseReference databaseReference = database.getReference("trips").child(id).child("passengers");
+        //DatabaseReference databaseReference = database.getReference("trips").child(id).child("passengers");
 
 
+/*
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -161,6 +159,7 @@ public class HistoryDriverAdapter extends RecyclerView.Adapter<HistoryDriverAdap
 
             }
         });
+*/
 
 
 

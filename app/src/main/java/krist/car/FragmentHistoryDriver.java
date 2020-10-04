@@ -26,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import krist.car.Models.TripsModel;
+import krist.car.models.TripsModel;
 
 
 /**
@@ -97,20 +97,7 @@ public class FragmentHistoryDriver extends Fragment  {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-
-
-
-
-
-
-
-
                 adapter.removeItem(viewHolder.getAdapterPosition());
-
-
-
-
-
             }
 
 
@@ -143,17 +130,6 @@ public class FragmentHistoryDriver extends Fragment  {
 
 
         helper.attachToRecyclerView(recyclerView);
-
-
-
-
-
-
-
-
-
-
-
 
 
     }

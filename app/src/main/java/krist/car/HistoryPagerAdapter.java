@@ -16,7 +16,7 @@ public class HistoryPagerAdapter extends FragmentPagerAdapter {
 
 
 
-    public HistoryPagerAdapter(FragmentManager fm) {
+    HistoryPagerAdapter(FragmentManager fm) {
         super(fm);
 
     }
@@ -31,7 +31,7 @@ public class HistoryPagerAdapter extends FragmentPagerAdapter {
         return fragmentTitleList.size();
     }
 
-    public void addFragment(Fragment fragment, String title) {
+    void addFragment(Fragment fragment, String title) {
         fragmentList.add(fragment);
         fragmentTitleList.add(title);
     }

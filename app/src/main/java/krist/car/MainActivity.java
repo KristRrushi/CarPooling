@@ -1,6 +1,5 @@
 package krist.car;
 
-import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -9,16 +8,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import krist.car.CarRegister.DetajeActivity;
-import krist.car.PostTrips.PostFragment;
-import krist.car.ProfileInfo.UserInfo;
+import krist.car.post_trips.PostFragment;
+import krist.car.profile_info.UserInfo;
+import krist.car.search_trips.SearchFragment;
 
 public class MainActivity extends AppCompatActivity{
     private BottomNavigationView mMainNav;

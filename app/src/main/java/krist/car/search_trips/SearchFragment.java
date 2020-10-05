@@ -1,21 +1,18 @@
 package krist.car.search_trips;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,16 +22,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +36,12 @@ import java.util.List;
 import krist.car.R;
 import krist.car.TripsAdapter;
 import krist.car.models.TripsModel;
+import krist.car.search_trips.adapters.SearchSuggestionAdapter;
+import krist.car.search_trips.adapters.SuggestionSelectionListener;
+import krist.car.utils.Animations;
+import krist.car.utils.Helpers;
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment implements SuggestionSelectionListener {
 
 
     private RecyclerView recyclerView;
@@ -60,33 +58,15 @@ public class SearchFragment extends Fragment {
     private RecyclerView searchRecycler;
     private SearchTripsViewModel viewModel;
     private SearchSuggestionAdapter searchSuggestionAdapter;
+    private TextView showAllTrips;
     androidx.appcompat.widget.Toolbar toolbar;
-
-
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
-
-
         setHasOptionsMenu(true);
-
-
-
-
-        databaseReferenceQuery = firebaseDatabase.getReference("trips");
-
-
         return inflater.inflate(R.layout.kerko_final, container, false);
-
-
-
-
-
     }
 
 
@@ -98,6 +78,7 @@ public class SearchFragment extends Fragment {
         searchEditText = view.findViewById(R.id.search_edit_text);
         recyclerView = view.findViewById(R.id.list_trips);
         searchRecycler = view.findViewById(R.id.search_view_recycler_view);
+        showAllTrips = view.findViewById(R.id.show_all_trips);
 
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
@@ -135,18 +116,25 @@ public class SearchFragment extends Fragment {
         });
     }
 
-
     @SuppressLint("ClickableViewAccessibility")
     private void setupListeners() {
         searchContainer.setOnClickListener(null);
+        showAllTrips.setOnClickListener(view -> {
+            getAllTrips();
+            hideSearchView();
+        });
 
         searchEditText.setOnTouchListener((v, event) -> {
             final int DRAWABLE_LEFT = 0;
+            final int DRAWABLE_RIGHT = 2;
 
             if(event.getAction() == MotionEvent.ACTION_UP) {
                 if(event.getRawX() <= (searchEditText.getCompoundDrawables()[DRAWABLE_LEFT].getBounds().width() + 12)) {
                     hideSearchView();
                     return true;
+                }
+                if(event.getRawX() >= searchEditText.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()) {
+                    onSuggestionClicked(searchEditText.getText().toString());
                 }
             }
             return false;
@@ -178,17 +166,18 @@ public class SearchFragment extends Fragment {
 
     private void setupSearchViewSuggestionAdapter() {
         searchRecycler.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-        searchSuggestionAdapter = new SearchSuggestionAdapter();
+        searchSuggestionAdapter = new SearchSuggestionAdapter(this);
         searchRecycler.setAdapter(searchSuggestionAdapter);
     }
 
     private void showSearchView() {
         searchContainer.setVisibility(View.VISIBLE);
+        Animations.animateViewHHeightTopToBottom(searchContainer, Helpers.getScreenHeight(getActivity()));
         searchEditText.requestFocus();
     }
 
     private void hideSearchView() {
-        searchContainer.setVisibility(View.GONE);
+        Animations.animateViewHHeightBottomToTop(searchContainer, 0);
     }
 
     @Override
@@ -281,20 +270,17 @@ public class SearchFragment extends Fragment {
         }
     }
 
-    private void changeSearchTextColor(View view){
-
-        if(view != null){
-            if(view instanceof TextView){
-                ((TextView) view).setTextColor(Color.WHITE);
-                return;
-            }else if(view instanceof ViewGroup) {
-                ViewGroup viewGroup = (ViewGroup) view;
-                for(int i=0; i < viewGroup.getChildCount(); i++){
-                    changeSearchTextColor(viewGroup.getChildAt(i));
-                }
+    @Override
+    public void onSuggestionClicked(@NotNull String query) {
+        viewModel.getTripsForQuery(query);
+        viewModel.getQueryTrips().observe(getViewLifecycleOwner(), queryTrips -> {
+            if(queryTrips.size() != 0) {
+                adapter.setTrips(queryTrips);
+            }else {
+                Helpers.showToastMessage(getContext(), "Nuk u gjet asnje udhetim me kete te dhena");
             }
-        }
 
-
+        });
+        hideSearchView();
     }
 }

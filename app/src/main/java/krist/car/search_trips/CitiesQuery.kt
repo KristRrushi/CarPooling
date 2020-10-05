@@ -7,7 +7,6 @@ import kotlin.collections.ArrayList
 
 open class CitiesQuery {
     companion object {
-
         fun getCitesArrayForQuery(context: Context): List<String> {
             val cites = context.resources.getStringArray(R.array.qytetet_shqiperis)
             val citestAfterModicvation = ArrayList<String>()
@@ -19,7 +18,6 @@ open class CitiesQuery {
                     }
                 }
             }
-
             return citestAfterModicvation
         }
     }

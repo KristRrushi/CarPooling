@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import krist.car.core.BaseRepo
 import krist.car.models.TripsModel
 
@@ -27,7 +28,7 @@ class SearchTripsRepo: BaseRepo() {
             }
 
             override fun onChildRemoved(p0: DataSnapshot) {
-                TODO("Not yet implemented")
+
             }
 
             override fun onChildMoved(p0: DataSnapshot, p1: String?) {
@@ -42,5 +43,4 @@ class SearchTripsRepo: BaseRepo() {
 
         return  trips
     }
-
 }

@@ -34,10 +34,6 @@ import krist.car.models.TripsModel;
 
 import static android.content.ContentValues.TAG;
 
-/**
- * Created by tagolli on 5/31/18.
- */
-
 public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> implements Filterable{
 
 

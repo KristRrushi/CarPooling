@@ -1,7 +1,6 @@
 package krist.car.search_trips;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,20 +33,23 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import krist.car.PopUpActivity;
 import krist.car.R;
-import krist.car.TripsAdapter;
+import krist.car.search_trips.adapters.OnTripClickedListener;
+import krist.car.search_trips.adapters.TripsAdapter;
 import krist.car.models.TripsModel;
 import krist.car.search_trips.adapters.SearchSuggestionAdapter;
 import krist.car.search_trips.adapters.SuggestionSelectionListener;
+import krist.car.search_trips.adapters.TripsAdapterKt;
 import krist.car.utils.Animations;
 import krist.car.utils.Helpers;
 
-public class SearchFragment extends Fragment implements SuggestionSelectionListener {
+public class SearchFragment extends Fragment implements SuggestionSelectionListener, OnTripClickedListener {
 
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private TripsAdapter adapter;
+    private TripsAdapterKt adapter;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private List<TripsModel> tripsModelList;
@@ -84,10 +87,9 @@ public class SearchFragment extends Fragment implements SuggestionSelectionListe
         recyclerView.setLayoutManager(layoutManager);
 
         tripsModelList = new ArrayList<>();
-        adapter = new TripsAdapter();
+        adapter = new TripsAdapterKt(this);
         recyclerView.setAdapter(adapter);
 
-        tripsAdapter = new TripsAdapter();
 
         toolbar = view.findViewById(R.id.toolbar_kerko);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
@@ -282,5 +284,17 @@ public class SearchFragment extends Fragment implements SuggestionSelectionListe
 
         });
         hideSearchView();
+    }
+
+    @Override
+    public void onTripsClicked(@NotNull TripsModel model) {
+        String shoferId = model.getIdShofer();
+        String tripId = model.getTripID();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("shoferID", shoferId);
+        bundle.putString("tripID", tripId);
+
+        Helpers.goToActivityAttachBundle(getContext(), PopUpActivity.class, "bS", bundle);
     }
 }

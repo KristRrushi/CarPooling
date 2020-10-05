@@ -1,4 +1,4 @@
-package krist.car;
+package krist.car.search_trips.adapters;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -30,17 +30,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import krist.car.PopUpActivity;
+import krist.car.R;
 import krist.car.models.TripsModel;
 
 import static android.content.ContentValues.TAG;
 
-public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> implements Filterable{
+public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> {
 
 
     private List<TripsModel> dataSet;
-    private List<TripsModel> dataSetFiltered;
-
-
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
@@ -93,17 +92,6 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
     }
 
 
-    public void setSearchOperation(List<TripsModel> newList){
-
-      dataSet = new ArrayList<>();
-      dataSet.addAll(newList);
-      notifyDataSetChanged();
-
-
-    }
-
-
-
     @NonNull
     @Override
     public TripsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -139,12 +127,6 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
         holder.ora.setText(dataSet.get(position).getOra());
         holder.vendet.setText(dataSet.get(position).getVendet());
         Picasso.get().load(dataSet.get(position).getUri()).fit().centerCrop().into(holder.imageView);
-
-
-
-
-
-
 
         holder.list_item_view.setOnClickListener(new View.OnClickListener() {
 
@@ -214,51 +196,5 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
     public int getItemCount() {
         return dataSet.size();
     }
-
-
-
-
-
-
-    @Override
-    public Filter getFilter() {
-
-        return dataFiltered;
-    }
-
-
-    private Filter dataFiltered = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence charSequence) {
-            List<TripsModel> filteredList = new ArrayList<>();
-            if(charSequence == null || charSequence.length() == 0){
-                filteredList.addAll(dataSetFiltered);
-            }else {
-                String filterPatternn = charSequence.toString().toLowerCase().trim();
-
-                for (TripsModel model : dataSetFiltered){
-                    if (model.getvNisja().toLowerCase().contains(filterPatternn)){
-                        filteredList.add(model);
-                    }
-                }
-            }
-
-            FilterResults results = new FilterResults();
-            results.values = filteredList;
-            return results;
-        }
-
-        @Override
-        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-
-            dataSet.clear();
-            dataSet.addAll((List) filterResults.values);
-            notifyDataSetChanged();
-
-        }
-    };
-
-
-
 
 }

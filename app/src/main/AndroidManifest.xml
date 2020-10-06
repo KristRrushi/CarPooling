@@ -32,7 +32,7 @@
         <activity android:name=".car_register.DetajeActivity" />
 
         <activity
-            android:name=".PopUpActivity"
+            android:name=".search_trips.driver_info.TripBookingInfoActivity"
 
             >
 

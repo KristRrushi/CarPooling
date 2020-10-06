@@ -12,10 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -33,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import krist.car.PopUpActivity;
+import krist.car.search_trips.driver_info.TripBookingInfoActivity;
 import krist.car.R;
 import krist.car.search_trips.adapters.OnTripClickedListener;
 import krist.car.search_trips.adapters.TripsAdapter;
@@ -102,6 +99,12 @@ public class SearchFragment extends Fragment implements SuggestionSelectionListe
         getAllTrips();
         getSearchSuggestion();
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getAllTrips();
     }
 
     private void intViewModel() {
@@ -183,86 +186,6 @@ public class SearchFragment extends Fragment implements SuggestionSelectionListe
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-       /* inflater.inflate(R.menu.search_toolbar, menu);
-
-        MenuItem mSearch = menu.findItem(R.id.action_search);
-
-        SearchView mSearchView = (SearchView) mSearch.getActionView();
-
-        mSearchView.setQueryHint("Kerko");
-
-        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-
-
-                *//*
-                 if (newText.length() > 0) {
-
-                     newText = newText.substring(0,1).toUpperCase() + newText.substring(1);
-
-                }
-                    *//*
-
-
-
-                    
-                Query firebaseQuery = databaseReferenceQuery.orderByChild("search").startAt(newText.toString()).endAt(newText.toString() + "\uf8ff");
-
-                
-                firebaseQuery.addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        TripsModel trip = dataSnapshot.getValue(TripsModel.class);
-                        //trip.setTripID(dataSnapshot.getKey());
-                        tripsModelList.add(trip);
-                        adapter.notifyDataSetChanged();
-
-                    }
-
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-                adapter.getFilter().filter(newText.toString());
-
-                return true;
-            }
-        });
-
-
-        changeSearchTextColor(mSearchView);
-*/
-
-    }
-
-    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home :
@@ -290,11 +213,17 @@ public class SearchFragment extends Fragment implements SuggestionSelectionListe
     public void onTripsClicked(@NotNull TripsModel model) {
         String shoferId = model.getIdShofer();
         String tripId = model.getTripID();
+        String tripPrice = model.getCmimi();
 
-        Bundle bundle = new Bundle();
-        bundle.putString("shoferID", shoferId);
-        bundle.putString("tripID", tripId);
+        if(Integer.parseInt(model.getVendet()) != 0) {
+            Bundle bundle = new Bundle();
+            bundle.putString("shoferID", shoferId);
+            bundle.putString("tripID", tripId);
+            bundle.putString("tripPrice", tripPrice);
 
-        Helpers.goToActivityAttachBundle(getContext(), PopUpActivity.class, "bS", bundle);
+            Helpers.goToActivityAttachBundle(getContext(), TripBookingInfoActivity.class, "bS", bundle);
+        }else {
+            Helpers.showToastMessage(getContext(), "Ky udhetim nuk ka vende te lira");
+        }
     }
 }

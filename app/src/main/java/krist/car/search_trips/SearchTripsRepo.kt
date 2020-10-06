@@ -24,11 +24,21 @@ class SearchTripsRepo: BaseRepo() {
             }
 
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-                TODO("Not yet implemented")
+                val tripsModel = p0.getValue(TripsModel::class.java)
+                tripsModel?.tripID = p0.key
+
+                tripsModel?.let { tripsS.add(it) }
+
+                trips.value = tripsS
             }
 
             override fun onChildRemoved(p0: DataSnapshot) {
+                val tripsModel = p0.getValue(TripsModel::class.java)
+                tripsModel?.tripID = p0.key
 
+                tripsModel?.let { tripsS.add(it) }
+
+                trips.value = tripsS
             }
 
             override fun onChildMoved(p0: DataSnapshot, p1: String?) {

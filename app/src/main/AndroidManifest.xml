@@ -40,7 +40,7 @@
 
         </activity>
         <activity
-            android:name=".PopUpCoDriver"
+            android:name=".history.PopUpCoDriver"
             android:theme="@style/Theme.AppCompat.Light.Dialog"
 
             >
@@ -51,7 +51,7 @@
 
 
 
-        <activity android:name=".PopUpDriver"
+        <activity android:name=".history.driver.PopUpDriver"
             android:theme="@style/Theme.AppCompat.Light.Dialog"
            />
 

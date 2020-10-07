@@ -1,4 +1,4 @@
-package krist.car;
+package krist.car.history.driver;
 
 import android.graphics.Canvas;
 import android.net.Uri;
@@ -6,10 +6,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.ItemTouchHelper;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +26,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import krist.car.R;
+import krist.car.history.driver.adapter.HistoryDriverAdapter;
 import krist.car.models.TripsModel;
 
 
@@ -35,7 +42,7 @@ import krist.car.models.TripsModel;
  * {@link FragmentHistoryDriver.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class FragmentHistoryDriver extends Fragment  {
+public class FragmentHistoryDriver extends Fragment  implements OnPostTripClickedListener {
 
     private OnFragmentInteractionListener mListener;
 
@@ -46,6 +53,7 @@ public class FragmentHistoryDriver extends Fragment  {
     private DatabaseReference databaseReference;
     private List<TripsModel> tripsModelList;
     FirebaseUser idauth;
+    private DriverHistoryViewModel viewModel;
 
 
     public FragmentHistoryDriver() {
@@ -81,7 +89,7 @@ public class FragmentHistoryDriver extends Fragment  {
         recyclerView.setLayoutManager(layoutManager);
 
         tripsModelList = new ArrayList<>();
-        adapter = new HistoryDriverAdapter(tripsModelList);
+        adapter = new HistoryDriverAdapter(this);
         recyclerView.setAdapter(adapter);
 
 
@@ -89,7 +97,7 @@ public class FragmentHistoryDriver extends Fragment  {
         recyclerView.addItemDecoration(divider);
 
 
-        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+       /* ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 return false;
@@ -125,27 +133,35 @@ public class FragmentHistoryDriver extends Fragment  {
 
 
 
-        });
+        });*/
 
 
 
-        helper.attachToRecyclerView(recyclerView);
+        //helper.attachToRecyclerView(recyclerView);
 
+
+        initViewModel();
 
     }
-
 
 
     @Override
     public void onStart() {
         super.onStart();
-        getAllTrips();
-
-
+        getAllPostedTrips();
     }
 
 
+    private void initViewModel() {
+        viewModel = new ViewModelProvider(this).get(DriverHistoryViewModel.class);
+    }
 
+    private void getAllPostedTrips() {
+        viewModel.getTrips();
+        viewModel.getPostedTrips().observe(getViewLifecycleOwner(), postedTrips -> {
+            adapter.setTrips(postedTrips);
+        });
+    }
 
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -155,53 +171,19 @@ public class FragmentHistoryDriver extends Fragment  {
         }
     }
 
-    private void getAllTrips(){
-
-
-        final String id = idauth.getUid();
-
-        databaseReference.child("trips").addChildEventListener(new ChildEventListener() {
-
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-
-                TripsModel trip = dataSnapshot.getValue(TripsModel.class);
-                if(trip.getIdShofer().equals(id))
-                    tripsModelList.add(trip);
-
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getActivity(),databaseError.getMessage(),Toast.LENGTH_LONG).show();
-            }
-        });
-
-
-    }
-
-
-
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onTripClicked(@NotNull String tripID) {
+        viewModel.getPassengersBaseOnTripId(tripID);
+        viewModel.getPassengers().observe(getViewLifecycleOwner(), passToTripsModels -> {
+            //todo open bottomsheet dialog to display pasengers
+        });
     }
 
 

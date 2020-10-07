@@ -1,6 +1,9 @@
 package krist.car.models;
 
 
+import java.util.HashMap;
+import java.util.List;
+
 public class TripsModel {
 
 
@@ -15,6 +18,8 @@ public class TripsModel {
     private String cmimi;
     private String tripID;
     private String search;
+    private HashMap<String, PassToTripsModel> passengers;
+
 
 
     public TripsModel(){}
@@ -32,7 +37,16 @@ public class TripsModel {
         this.cmimi = cmimi;
         this.search = search;
 
+    }
 
+    public TripsModel(String idShofer,String vNisja, String vMberritja, String data, String ora, HashMap<String, PassToTripsModel> pass, String tripId) {
+        this.idShofer = idShofer;
+        this.vNisja = vNisja;
+        this.vMberritja = vMberritja;
+        this.data = data;
+        this.ora = ora;
+        this.passengers = pass;
+        this.tripID = tripId;
     }
 
     public TripsModel(String idShofer,String vNisja, String vMberritja, String data, String ora, String tripID){
@@ -134,5 +148,11 @@ public class TripsModel {
         this.search = search;
     }
 
+    public HashMap<String, PassToTripsModel> getPassengers() {
+        return passengers;
+    }
 
+    public void setPassengers(HashMap<String, PassToTripsModel> passengers) {
+        this.passengers = passengers;
+    }
 }

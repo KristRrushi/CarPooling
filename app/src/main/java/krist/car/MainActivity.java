@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import krist.car.history.HistoryFragment;
 import krist.car.post_trips.PostFragment;
 import krist.car.profile_info.UserInfo;
 import krist.car.search_trips.SearchFragment;

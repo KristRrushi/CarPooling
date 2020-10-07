@@ -92,7 +92,7 @@ class TripBookingInfoRepo: BaseRepo() {
                 val userInfo = p0.getValue(ProfileInfoModel::class.java)
 
                 userInfo?.let {
-                    val model = PassToTripsModel(it.emri, it.phone, it.birthday, it.gener)
+                    val model = PassToTripsModel(it.emri, it.phone, it.birthday, it.gener, it.userImgRef)
                     api.getDatebaseReferenceToThisEndPoint("trips").child(tripId).child("passengers").child(userId).setValue(model)
                 }
 

@@ -1,4 +1,4 @@
-package krist.car;
+package krist.car.history.adapter;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +21,8 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
+import krist.car.R;
+import krist.car.history.PopUpCoDriver;
 import krist.car.models.TripsModel;
 
 import static android.content.ContentValues.TAG;

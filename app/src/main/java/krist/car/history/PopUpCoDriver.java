@@ -1,4 +1,4 @@
-package krist.car;
+package krist.car.history;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -22,6 +22,7 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
+import krist.car.R;
 import krist.car.models.DialogModel;
 import krist.car.models.Upload;
 import krist.car.models.UploadUsersImage;

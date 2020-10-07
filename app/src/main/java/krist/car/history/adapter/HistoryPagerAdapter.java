@@ -1,4 +1,4 @@
-package krist.car;
+package krist.car.history.adapter;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -9,16 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryPagerAdapter extends FragmentPagerAdapter {
-
-
     private final List<Fragment> fragmentList = new ArrayList<>();
     private final List<String> fragmentTitleList = new ArrayList<>();
 
-
-
-    HistoryPagerAdapter(FragmentManager fm) {
+    public HistoryPagerAdapter(FragmentManager fm) {
         super(fm);
-
     }
 
     @Override
@@ -31,12 +26,10 @@ public class HistoryPagerAdapter extends FragmentPagerAdapter {
         return fragmentTitleList.size();
     }
 
-    void addFragment(Fragment fragment, String title) {
+    public void addFragment(Fragment fragment, String title) {
         fragmentList.add(fragment);
         fragmentTitleList.add(title);
     }
-
-
 
     @Nullable
     @Override

@@ -1,4 +1,4 @@
-package krist.car;
+package krist.car.history;
 
 
 import android.os.Bundle;
@@ -24,6 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import krist.car.R;
+import krist.car.history.adapter.CoDriverAdapter;
+import krist.car.history.driver.FragmentHistoryDriver;
 import krist.car.models.TripsModel;
 
 import static android.content.ContentValues.TAG;

@@ -1,4 +1,4 @@
-package krist.car;
+package krist.car.history;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,7 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import krist.car.FragmentHistoryDriver.OnFragmentInteractionListener;
+import krist.car.history.driver.FragmentHistoryDriver;
+import krist.car.history.driver.FragmentHistoryDriver.OnFragmentInteractionListener;
+import krist.car.R;
+import krist.car.history.adapter.HistoryPagerAdapter;
 
 
 /**
@@ -30,14 +33,12 @@ public class HistoryFragment extends Fragment implements OnFragmentInteractionLi
 
     public HistoryFragment() {
         // Required empty public constructor
-
     }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
     }
-
 
     @Nullable
     @Override
@@ -49,32 +50,22 @@ public class HistoryFragment extends Fragment implements OnFragmentInteractionLi
         historyPagerAdapter.addFragment(new FragmentHistoryDriver(),"Shofer");
         historyPagerAdapter.addFragment(new FragmentHistoryCoDriver(),"Pasagjer");
 
-
         viewPager.setAdapter(historyPagerAdapter);
         tabLayout = view.findViewById(R.id.result_tabs);
         tabLayout.setupWithViewPager(viewPager);
-
-
         setupTabIcons();
 
         return view;
-
-
-
     }
 
 
     private void setupTabIcons(){
-
         tabLayout.getTabAt(0).setIcon(R.drawable.steering_wheel);
         tabLayout.getTabAt(1).setIcon(R.drawable.car_seat_with_seatbelt_white);
-
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
+    public void onFragmentInteraction(Uri uri) { }
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

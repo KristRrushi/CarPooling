@@ -7,11 +7,12 @@ public class PassToTripsModel {
     private String gjinia;
     private String imageUrl;
 
-    public PassToTripsModel(String name, String phonel, String mosha, String gjinia) {
+    public PassToTripsModel(String name, String phonel, String mosha, String gjinia, String img) {
         this.emri = name;
         this.phone = phonel;
         this.mosha = mosha;
         this.gjinia = gjinia;
+        this.imageUrl = img;
     }
 
     public String getMosha() {

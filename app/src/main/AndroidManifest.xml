@@ -13,7 +13,7 @@
         android:supportsRtl="true"
 
         android:theme="@style/AppTheme"> <!--AppTheme-->
-        <activity
+      <activity
             android:name=".auth.login.LoginActivity"
             android:label="CarpoolingRR"
             android:theme="@style/AppTheme"
@@ -58,7 +58,6 @@
 
         <activity android:name=".ProfiliEdit" />
         <activity android:name=".MakinaEdit" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

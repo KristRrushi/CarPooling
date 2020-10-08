@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import krist.car.R
 import krist.car.history.driver.OnPostTripClickedListener
 import krist.car.history.driver.PopUpDriver
+import krist.car.models.PassToTripsModel
 import krist.car.models.TripsModel
 
 class HistoryDriverAdapter(val listener: OnPostTripClickedListener) : RecyclerView.Adapter<HistoryDriverAdapter.ViewHolder>() {
@@ -26,7 +27,14 @@ class HistoryDriverAdapter(val listener: OnPostTripClickedListener) : RecyclerVi
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.list_vod_layout_item, parent, false)
         return ViewHolder(view) {
-            listener.onTripClicked(dataSet.get(it).tripID)
+            val passenger = arrayListOf<PassToTripsModel>()
+            dataSet.get(it).passengers?.apply {
+                for((k, v) in this) {
+                    passenger.add(v)
+                }
+                listener.onTripClicked(passenger)
+            }
+
         }
     }
 

@@ -72,7 +72,8 @@ class TripBookingInfoRepo: BaseRepo() {
     }
 
     private fun attachTripToCurrentUser(trip: TripsModel, isSuccess: (Boolean) -> Unit) {
-        api!!.getDatebaseReferenceToThisEndPoint("users").child(userId).child("booked_trips").push().setValue(trip).addOnCompleteListener {
+        val bookTrip = BookTrips(trip.cmimi, trip.idShofer, trip.ora, trip.data, trip.getvNisja(), trip.getvMberritja())
+        api!!.getDatebaseReferenceToThisEndPoint("users").child(userId).child("booked_trips").push().setValue(bookTrip).addOnCompleteListener {
             isSuccess.invoke(it.isSuccessful)
         }
     }
@@ -93,7 +94,7 @@ class TripBookingInfoRepo: BaseRepo() {
 
                 userInfo?.let {
                     val model = PassToTripsModel(it.emri, it.phone, it.birthday, it.gener, it.userImgRef)
-                    api.getDatebaseReferenceToThisEndPoint("trips").child(tripId).child("passengers").child(userId).setValue(model)
+                    api.getDatebaseReferenceToThisEndPoint("trips").child(tripId).child("passengers").child(userId).push().setValue(model)
                 }
 
             }
@@ -108,4 +109,13 @@ class TripBookingInfoRepo: BaseRepo() {
 data class UserCarsModel(
         var selected_car: String = "",
         var cars : HashMap<String, CarModel> = hashMapOf()
+)
+
+data class BookTrips(
+        var cmimi: String = "",
+        var idShofer: String = "",
+        var ora: String = "",
+        var data: String = "",
+        var vNisja: String = "",
+        var vMberritja: String = ""
 )

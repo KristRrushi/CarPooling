@@ -24,7 +24,12 @@ class DriverHistoryRepo: BaseRepo() {
             }
 
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-                TODO("Not yet implemented")
+                val pT = p0.getValue(TripsModel::class.java)
+                if(pT!!.idShofer == userId) {
+                    tripss.add(pT)
+                }
+
+                trips.value = tripss
             }
 
             override fun onChildRemoved(p0: DataSnapshot) {

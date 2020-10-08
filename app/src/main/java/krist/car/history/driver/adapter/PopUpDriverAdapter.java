@@ -13,17 +13,22 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import krist.car.R;
+import krist.car.models.PassToTripsModel;
 import krist.car.models.PopUpDriverListModel;
 
 public class PopUpDriverAdapter extends BaseAdapter{
 
     Context c;
-    ArrayList<PopUpDriverListModel> dataSet;
+    ArrayList<PassToTripsModel> dataSet;
 
 
-    public PopUpDriverAdapter(Context c, ArrayList<PopUpDriverListModel> dataSet) {
+    public PopUpDriverAdapter(Context c) {
         this.c = c;
-        this.dataSet = dataSet;
+    }
+
+    public void setData(ArrayList<PassToTripsModel> passenger) {
+        this.dataSet = passenger;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -59,13 +64,14 @@ public class PopUpDriverAdapter extends BaseAdapter{
 
 
 
-        final  PopUpDriverListModel popUpDriverListModel = (PopUpDriverListModel) this.getItem(i);
+        //final  PopUpDriverListModel popUpDriverListModel = (PopUpDriverListModel) this.getItem(i);
+        final PassToTripsModel passenger = (PassToTripsModel) this.getItem(i);
 
-        name.setText(popUpDriverListModel.getEmri());
-        phone.setText(popUpDriverListModel.getPhone());
-        mosha.setText(popUpDriverListModel.getMosha());
-        gjinia.setText(popUpDriverListModel.getGjinia());
-        Picasso.get().load(popUpDriverListModel.getImageUrl()).fit().centerCrop().into(foto);
+        name.setText(passenger.getEmri());
+        phone.setText(passenger.getPhone());
+        mosha.setText(passenger.getMosha());
+        gjinia.setText(passenger.getGjinia());
+        Picasso.get().load(passenger.getImageUrl()).fit().centerCrop().into(foto);
 
 
 

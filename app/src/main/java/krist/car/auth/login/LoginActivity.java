@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         userName = editTextEmail.getText().toString().trim();
         password = editTextPassword.getText().toString().trim();
 
-        userName = "b@b.com";
+        userName = "k@q.com";
         password = "Admin123!";
 
         if(!validateCredentials()) {

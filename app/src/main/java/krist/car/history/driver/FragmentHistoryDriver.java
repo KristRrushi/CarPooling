@@ -1,8 +1,12 @@
 package krist.car.history.driver;
 
-import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -10,19 +14,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.ItemTouchHelper;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -33,6 +27,7 @@ import java.util.List;
 
 import krist.car.R;
 import krist.car.history.driver.adapter.HistoryDriverAdapter;
+import krist.car.models.PassToTripsModel;
 import krist.car.models.TripsModel;
 
 
@@ -179,24 +174,15 @@ public class FragmentHistoryDriver extends Fragment  implements OnPostTripClicke
     }
 
     @Override
-    public void onTripClicked(@NotNull String tripID) {
-        viewModel.getPassengersBaseOnTripId(tripID);
-        viewModel.getPassengers().observe(getViewLifecycleOwner(), passToTripsModels -> {
-            //todo open bottomsheet dialog to display pasengers
-        });
+    public void onTripClicked(@NotNull ArrayList<PassToTripsModel> passengers) {
+        if(!passengers.isEmpty()) {
+            PassengerListBottomSheetDialog dialog = new PassengerListBottomSheetDialog(passengers);
+            dialog.show(getParentFragmentManager(), "1");
+        }
     }
 
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

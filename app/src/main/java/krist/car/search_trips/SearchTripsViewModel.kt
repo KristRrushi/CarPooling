@@ -17,7 +17,8 @@ class SearchTripsViewModel(private val repo: SearchTripsRepo = SearchTripsRepo()
     fun getSuggestionBaseOnUserInput() : LiveData<List<String>> = searchSuggestionList
     fun getQueryTrips(): LiveData<ArrayList<TripsModel>> = queryTrips
 
-    fun getTrips() { trips = repo.getAllTrips() }
+    fun getTrips() {
+        trips = repo.getAllTrips() }
 
     fun getTripsForQuery(query: String) {
         val filterTrips = arrayListOf<TripsModel>()

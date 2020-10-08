@@ -8,12 +8,65 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:195411322198:android:c244a9f418be3e06",
+        "android_client_info": {
+          "package_name": "com.example.pampers.recycleviewtest_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "195411322198-f748r4hrim7e1bbqgt8qj90okjosd7uu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pampers.recycleviewtest_firebase",
+            "certificate_hash": "359e35a06a1883b59b275100d8e436f461808a24"
+          }
+        },
+        {
+          "client_id": "195411322198-astpbiq018tiqqq63lols5mvpts5p610.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvxCFdS7v1geYHLgGOFUP_Bpx-PHGwxWA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "195411322198-astpbiq018tiqqq63lols5mvpts5p610.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:195411322198:android:656213f37f235e88",
         "android_client_info": {
           "package_name": "krist.car"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "195411322198-uc0451fsedcf83n706v1va8iu9ac2pe0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "krist.car",
+            "certificate_hash": "a5116a4f8c05950b01219d486ffbb319673c3bf1"
+          }
+        },
+        {
+          "client_id": "195411322198-0sbh04jimmongvfs0cnlm57130uh3qgk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "krist.car",
+            "certificate_hash": "af689776a240a801c14b5d2b18ec08c1177005b9"
+          }
+        },
         {
           "client_id": "195411322198-vtkgcl7rrr7rvvbtc2lto7q8dhfif67m.apps.googleusercontent.com",
           "client_type": 1,
@@ -33,20 +86,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "195411322198-astpbiq018tiqqq63lols5mvpts5p610.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }

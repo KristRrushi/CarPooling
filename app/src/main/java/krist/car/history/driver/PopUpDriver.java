@@ -74,7 +74,7 @@ public class PopUpDriver extends AppCompatActivity {
 
         listView = findViewById(R.id.pop_up_driver_list);
         listPassToTrips = new ArrayList<>();
-        adapter = new PopUpDriverAdapter(this, listPassToTrips);
+        //adapter = new PopUpDriverAdapter(this, listPassToTrips);
 
         listView.setAdapter(adapter);
 

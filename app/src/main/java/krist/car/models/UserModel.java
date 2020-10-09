@@ -1,5 +1,7 @@
 package krist.car.models;
 
+import java.util.ArrayList;
+
 public class UserModel {
 
     private String emri;
@@ -10,6 +12,7 @@ public class UserModel {
     private String personalIdNumber;
     private Float rating;
     private String userImgRef;
+    private ArrayList<TripsModel> booked_trips;
 
     public UserModel(){};
 

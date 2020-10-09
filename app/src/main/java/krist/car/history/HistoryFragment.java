@@ -15,6 +15,7 @@ import krist.car.history.driver.FragmentHistoryDriver;
 import krist.car.history.driver.FragmentHistoryDriver.OnFragmentInteractionListener;
 import krist.car.R;
 import krist.car.history.adapter.HistoryPagerAdapter;
+import krist.car.history.passenger.FragmentHistoryCoDriver;
 
 
 /**

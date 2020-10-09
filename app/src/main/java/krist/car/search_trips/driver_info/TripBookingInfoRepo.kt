@@ -2,6 +2,7 @@ package krist.car.search_trips.driver_info
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.firebase.ui.auth.data.model.User
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -72,9 +73,12 @@ class TripBookingInfoRepo: BaseRepo() {
     }
 
     private fun attachTripToCurrentUser(trip: TripsModel, isSuccess: (Boolean) -> Unit) {
-        val bookTrip = BookTrips(trip.cmimi, trip.idShofer, trip.ora, trip.data, trip.getvNisja(), trip.getvMberritja())
-        api!!.getDatebaseReferenceToThisEndPoint("users").child(userId).child("booked_trips").push().setValue(bookTrip).addOnCompleteListener {
-            isSuccess.invoke(it.isSuccessful)
+        getDriverSelectedCarForBookedTrip(trip.idShofer) {
+            val bookTrip = BookTrips(trip.cmimi, trip.idShofer, trip.ora, trip.data, trip.getvNisja(), trip.getvMberritja(), carRef = it)
+
+            api!!.getDatebaseReferenceToThisEndPoint("users").child(userId).child("booked_trips").push().setValue(bookTrip).addOnCompleteListener {
+                isSuccess.invoke(it.isSuccessful)
+            }
         }
     }
 
@@ -104,6 +108,21 @@ class TripBookingInfoRepo: BaseRepo() {
             }
         })
     }
+
+    private fun getDriverSelectedCarForBookedTrip(driverId: String, callback: (String) -> Unit) {
+        api!!.getDatebaseReferenceToThisEndPoint("user_cars").child(driverId).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(p0: DataSnapshot) {
+                val data = p0.getValue(UserCarsModel::class.java)
+                data?.let {
+                    callback.invoke(it.selected_car)
+                }
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
 }
 
 data class UserCarsModel(
@@ -117,5 +136,6 @@ data class BookTrips(
         var ora: String = "",
         var data: String = "",
         var vNisja: String = "",
-        var vMberritja: String = ""
+        var vMberritja: String = "",
+        var carRef: String = ""
 )

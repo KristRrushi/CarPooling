@@ -12,37 +12,19 @@ import krist.car.models.TripsModel
 class DriverHistoryRepo: BaseRepo() {
     fun getTripsPostedByUser(): MutableLiveData<ArrayList<TripsModel>> {
         val trips = MutableLiveData<ArrayList<TripsModel>>()
-        api!!.getDatebaseReferenceToThisEndPoint("trips").addChildEventListener(object : ChildEventListener{
-            val tripss = ArrayList<TripsModel>()
-            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                val pT = p0.getValue(TripsModel::class.java)
-                if(pT!!.idShofer == userId) {
-                    pT.tripID = p0.key
-                    tripss.add(pT)
+        api!!.getDatebaseReferenceToThisEndPoint("trips").addValueEventListener(object : ValueEventListener{
+            var tripss = ArrayList<TripsModel>()
+
+            override fun onDataChange(p0: DataSnapshot) {
+                for(data: DataSnapshot in p0.children) {
+                    val pT = data.getValue(TripsModel::class.java)
+                    if(pT!!.idShofer == userId) {
+                        pT.tripID = p0.key
+                        tripss.add(pT)
+                    }
                 }
                 trips.value = tripss
-            }
-
-            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-                val pT = p0.getValue(TripsModel::class.java)
-                if(pT!!.idShofer == userId) {
-                    tripss.add(pT)
-                }
-
-                trips.value = tripss
-            }
-
-            override fun onChildRemoved(p0: DataSnapshot) {
-                val pT = p0.getValue(TripsModel::class.java)
-                if(pT!!.idShofer == userId) {
-                    tripss.add(pT)
-                }
-
-                trips.value = tripss
-            }
-
-            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-                TODO("Not yet implemented")
+                tripss = arrayListOf()
             }
 
             override fun onCancelled(p0: DatabaseError) {

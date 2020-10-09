@@ -72,13 +72,6 @@ public class CoDriverAdapter extends RecyclerView.Adapter<CoDriverAdapter.ViewHo
         }
     }
 
-
-    public CoDriverAdapter(List<TripsModel> dataSet){
-
-        this.dataSet = dataSet;
-
-    }
-
     public CoDriverAdapter(){};
 
 

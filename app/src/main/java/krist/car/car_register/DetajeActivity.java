@@ -44,15 +44,6 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
     private Toolbar toolbar;
     private final int PICK_IMAGE_REQUEST = 1;
     private CarRegisterViewModel viewModel;
-    private StorageReference mStorageRef;
-    private FirebaseAuth mAuth;
-
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-
-    DatabaseReference databaseUsers = database.getReference("users");
-
-
-    private DatabaseReference mDatabaseRef;
 
 
     @Override
@@ -60,7 +51,6 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detaje);
 
-        mAuth = FirebaseAuth.getInstance();
 
         acMarka = findViewById(R.id.emailRegister);
         acModeli =  findViewById(R.id.passRegister);
@@ -71,11 +61,6 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
         mProgresBar = findViewById(R.id.progres_detajet_activity);
         mProgresBar.setVisibility(View.INVISIBLE);
         toolbar = findViewById(R.id.toolbarRegjMakine);
-
-
-        mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("imageUploads");
-
 
         viewHideSoftKeyBoard();
         setupAdaptersForFields();
@@ -88,7 +73,7 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
     }
 
     private void setupListeners() {
-        toolbar.setNavigationOnClickListener(view -> startMainActivity());
+        toolbar.setNavigationOnClickListener(view -> finish());
         zgjidhFoto.setOnClickListener(view -> chooseImage());
         btnNgarko.setOnClickListener(view -> attemptCarRegister());
     }
@@ -180,11 +165,6 @@ public class DetajeActivity extends AppCompatActivity  implements View.OnFocusCh
 
             filePath = data.getData();
         }
-    }
-
-    private void startMainActivity(){
-        Intent intent = new Intent(DetajeActivity.this, MainActivity.class);
-        startActivity(intent);
     }
 
     private void hideKeyboard(View view){

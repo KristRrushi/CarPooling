@@ -39,16 +39,6 @@
 
 
         </activity>
-        <activity
-            android:name=".history.PopUpCoDriver"
-            android:theme="@style/Theme.AppCompat.Light.Dialog"
-
-            >
-
-
-
-        </activity>
-
 
 
         <activity android:name=".history.driver.PopUpDriver"

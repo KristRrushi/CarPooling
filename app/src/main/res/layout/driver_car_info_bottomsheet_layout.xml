@@ -43,6 +43,7 @@
         app:layout_constraintTop_toBottomOf="@id/driver_name"
         app:layout_constraintStart_toStartOf="@id/driver_name"
         android:numStars="5"
+        android:stepSize="1"
         android:layout_marginTop="8dp"
         style="?android:attr/ratingBarStyleIndicator"
         android:isIndicator="false"
@@ -84,7 +85,7 @@
     android:background="@color/colorPrimaryDark"
     app:layout_constraintTop_toBottomOf="@id/gener_icon"
     app:layout_constraintStart_toStartOf="parent"
-    android:layout_marginTop="28dp"
+    android:layout_marginTop="16dp"
     android:layout_marginStart="16dp"/>
 
     <TextView
@@ -104,7 +105,7 @@
         android:background="@color/colorPrimaryDark"
         app:layout_constraintTop_toBottomOf="@id/age_icon"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"/>
 
     <TextView

@@ -1,18 +1,20 @@
 package krist.car.profile_info.Models;
 
+import krist.car.history.passenger.RatingModel;
+
 public class ProfileInfoModel {
     private String emri;
     private String gener;
     private String id;
     private String personalIdNumber;
     private String phone;
-    private int rating;
+    private RatingModel rating;
     private String userImgRef;
     private String birthday;
 
     public ProfileInfoModel(){}
 
-    public ProfileInfoModel(String emri, String gener, String id, String personalIdNumber, String phone, int rating, String userImgRef, String birthday) {
+    public ProfileInfoModel(String emri, String gener, String id, String personalIdNumber, String phone, RatingModel rating, String userImgRef, String birthday) {
         this.emri = emri;
         this.gener = gener;
         this.id = id;
@@ -63,11 +65,11 @@ public class ProfileInfoModel {
         this.phone = phone;
     }
 
-    public int getRating() {
+    public RatingModel getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(RatingModel rating) {
         this.rating = rating;
     }
 

@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import krist.car.R;
+import krist.car.history.passenger.RatingModel;
 import krist.car.models.DialogModel;
 import krist.car.models.PassToTripsModel;
 import krist.car.models.TripsModel;
@@ -107,10 +108,17 @@ public class TripBookingInfoActivity extends AppCompatActivity {
             mMosha.setText(driverInfo.getBirthday());
             mGjinia.setText(driverInfo.getGener());
             mTel.setText(driverInfo.getPhone());
-            ratingBar.setRating(driverInfo.getRating());
-            txtRating.setText(driverInfo.getRating().toString());
+            calculateRating(driverInfo.getRating());
             Picasso.get().load(driverInfo.getUserImgRef()).fit().centerCrop().into(mUserImage);
         });
+    }
+
+    private void calculateRating(RatingModel model) {
+        int rating = (5 * model.getFive_star() + 4 * model.getFour_star() + 3 * model.getThree_star() + 2 * model.getTwo_star() + model.getOne_star()) /
+                (model.getFour_star() + model.getFour_star() + model.getThree_star() + model.getTwo_star() + model.getOne_star() + model.getOne_star());
+
+        ratingBar.setRating(Math.round(rating));
+        txtRating.setText(rating + ".0");
     }
 
     @SuppressLint("SetTextI18n")

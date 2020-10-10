@@ -2,6 +2,8 @@ package krist.car.models;
 
 import java.util.ArrayList;
 
+import krist.car.history.passenger.RatingModel;
+
 public class UserModel {
 
     private String emri;
@@ -10,7 +12,7 @@ public class UserModel {
     private String birthday;
     private String gener;
     private String personalIdNumber;
-    private Float rating;
+    private RatingModel rating;
     private String userImgRef;
     private ArrayList<TripsModel> booked_trips;
 
@@ -24,7 +26,7 @@ public class UserModel {
         this.birthday = birthday;
         this.gener = gener;
         this.personalIdNumber = personalIdNumber;
-        this.rating = 0f;
+        this.rating = new RatingModel();
         this.userImgRef = userImgRef;
     }
 
@@ -73,11 +75,11 @@ public class UserModel {
         this.id = id;
     }
 
-    public Float getRating() {
+    public RatingModel getRating() {
         return rating;
     }
 
-    public void setRating(Float rating) {
+    public void setRating(RatingModel rating) {
         this.rating = rating;
     }
 

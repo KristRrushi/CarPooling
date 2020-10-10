@@ -34,6 +34,40 @@ class PassengerRepo : BaseRepo() {
         return trips
     }
 
+    fun rateDriver(rate: Int, driverId: String) : MutableLiveData<Boolean> {
+        val isSuccess = MutableLiveData<Boolean>()
+
+        api!!.getDatebaseReferenceToThisEndPoint("users").child(driverId).child("rating").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(p0: DataSnapshot) {
+                val currentRate = p0.getValue(RatingModel::class.java)
+                currentRate?.let {
+                    rateParser(driverId, rate, it){
+                        isSuccess.value = it
+                    }
+                }
+            }
+
+            override fun onCancelled(p0: DatabaseError) { }
+        })
+        return isSuccess
+    }
+
+    private fun rateParser(driverId: String, rate: Int, ratingModel: RatingModel, isSuccess: (Boolean) -> Unit) {
+        val updateRating: HashMap<String, Any> = hashMapOf()
+        when(rate) {
+            0 -> updateRating["zero_star"] = ratingModel.zero_star + 1
+            1 -> updateRating["one_star"] = ratingModel.one_star + 1
+            2 -> updateRating["two_star"] = ratingModel.two_star + 1
+            3 -> updateRating["three_star"] = ratingModel.three_star + 1
+            4 -> updateRating["four_star"] = ratingModel.four_star + 1
+            5 -> updateRating["five_star"] = ratingModel.five_star + 1
+        }
+
+        api!!.getDatebaseReferenceToThisEndPoint("users").child(driverId).child("rating").updateChildren(updateRating).addOnCompleteListener {
+            isSuccess.invoke(it.isSuccessful)
+        }
+    }
+
     fun getGeneralDriverInfo(driverId: String, carRef: String): MutableLiveData<DriverInfoCarInfo>{
         val userGeneralInfo = MutableLiveData<DriverInfoCarInfo>()
         getDriverInfo(driverId) {generalInfo ->
@@ -65,6 +99,7 @@ class PassengerRepo : BaseRepo() {
             override fun onDataChange(p0: DataSnapshot) {
                 val data = p0.getValue(UserModel::class.java)
                 data?.let {
+                    generalInfo.driverId = it.id
                     generalInfo.driverName = it.emri
                     generalInfo.driverAge = it.birthday
                     generalInfo.driverGener = it.gener
@@ -85,6 +120,7 @@ class PassengerRepo : BaseRepo() {
 }
 
 data class DriverInfoCarInfo(
+        var driverId: String = "",
         var driverName: String = "",
         var driverAge: String = "",
         var driverGener: String = "",
@@ -94,4 +130,13 @@ data class DriverInfoCarInfo(
         var carModel: String = "",
         var carPlate: String = "",
         var carImg: String = ""
+)
+
+data class RatingModel(
+        var zero_star: Int = 0,
+        var one_star: Int = 0,
+        var two_star: Int = 0,
+        var three_star: Int = 0,
+        var four_star: Int = 0,
+        var five_star: Int = 0
 )

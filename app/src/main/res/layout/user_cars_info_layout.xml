@@ -30,7 +30,7 @@
         android:elevation="8dp"
         />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/user_info_img"
         android:layout_width="50dp"
         android:layout_height="50dp"

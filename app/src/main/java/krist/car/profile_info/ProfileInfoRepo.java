@@ -11,14 +11,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import krist.car.api.ApiSingleton;
+import krist.car.api.ApiModule;
 import krist.car.profile_info.Models.CarModel;
 import krist.car.profile_info.Models.ProfileInfoModel;
 
 class ProfileInfoRepo {
-    private ApiSingleton api;
+    private ApiModule api;
 
-    ProfileInfoRepo() {api = ApiSingleton.getInstance();}
+    ProfileInfoRepo() {api = ApiModule.getInstance();}
 
     MutableLiveData<ProfileInfoModel> getUserInfo() {
         final MutableLiveData<ProfileInfoModel> userInfo = new MutableLiveData<>();

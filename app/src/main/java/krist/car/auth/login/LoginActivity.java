@@ -5,18 +5,25 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
 import krist.car.MainActivity;
+import krist.car.api.FirebaseApiInterface;
+import krist.car.auth.AuthRepo;
 import krist.car.models.LoginFormModel;
 import krist.car.R;
 import krist.car.auth.register.RegisterActivity;
 import krist.car.utils.Constants;
 import krist.car.utils.Helpers;
 
+@AndroidEntryPoint
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button logIn;
@@ -25,6 +32,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView registerButton;
     private LoginViewModel loginViewModel;
     private String userName, password;
+
+    @Inject
+    FirebaseApiInterface api;
+
+    @Inject
+    AuthRepo repo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +53,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         registerButton.setOnClickListener(this);
 
         initLoginViewModel();
+
     }
 
     private void initLoginViewModel() {

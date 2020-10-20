@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +23,7 @@ import krist.car.profile_info.adapter.CarSelectedListener
 import krist.car.profile_info.adapter.CarsAdapter
 import krist.car.utils.Helpers
 import java.util.*
+import kotlin.collections.ArrayList
 
 class UserInfo : Fragment(), CarSelectedListener {
     private var userImg: ImageView? = null
@@ -63,18 +65,24 @@ class UserInfo : Fragment(), CarSelectedListener {
     private val userProfileDetails: Unit
         get() {
             viewModel!!.getUserProfile()
-            viewModel!!.userProfileDetails().observe(viewLifecycleOwner, { userData: ProfileInfoModel? -> userData?.let { populateUserInfoField(it) } })
+            viewModel!!.userProfileDetails().observe(viewLifecycleOwner, userDataObserver)
         }
     private val userCars: Unit
         get() {
             viewModel!!.getUserCars()
-            viewModel!!.userCars().observe(viewLifecycleOwner, { carModels: ArrayList<CarModel>? ->
-                carModels?.let {
-                    val adapter = CarsAdapter(it, this)
-                    userCarList!!.adapter = adapter
-                }
-            })
+            viewModel!!.userCars().observe(viewLifecycleOwner, carModelsObserver)
         }
+
+    private val userDataObserver = Observer<ProfileInfoModel> { userData ->
+        userData?.let { populateUserInfoField(it) }
+    }
+
+    private val carModelsObserver = Observer<ArrayList<CarModel>?> { carModels ->
+        carModels?.let {
+            val adapter = CarsAdapter(it, this)
+            userCarList!!.adapter = adapter
+        }
+    }
 
     private fun populateUserInfoField(userInfo: ProfileInfoModel) {
         nameTV!!.text = userInfo.emri
@@ -94,7 +102,7 @@ class UserInfo : Fragment(), CarSelectedListener {
 
     override fun onCarSelected(carRef: String) {
         viewModel!!.registerCarSelected(carRef)
-        viewModel!!.isCarRegisterSuccessfully.observe(viewLifecycleOwner, { isSuccess: Boolean ->
+        viewModel!!.isCarRegisterSuccessfully.observe(viewLifecycleOwner, Observer { isSuccess: Boolean ->
             if (isSuccess) {
                 Helpers.showToastMessage(context, "Makina u ruajt me sukses")
             }

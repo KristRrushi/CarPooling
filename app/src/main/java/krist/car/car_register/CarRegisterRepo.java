@@ -9,15 +9,15 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.Objects;
 
-import krist.car.api.ApiSingleton;
+import krist.car.api.ApiModule;
 import krist.car.models.RegisterCarModel;
 import krist.car.profile_info.Models.CarModel;
 
 public class CarRegisterRepo {
-    private ApiSingleton api;
+    private ApiModule api;
 
     public CarRegisterRepo() {
-        api = ApiSingleton.getInstance();
+        api = ApiModule.getInstance();
     }
 
     public MutableLiveData<Boolean> registerCarDetails(RegisterCarModel model) {

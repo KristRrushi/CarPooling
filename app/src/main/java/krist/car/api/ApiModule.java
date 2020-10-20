@@ -6,21 +6,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public class ApiSingleton {
-    private static ApiSingleton apiInstance;
+public class ApiModule {
+    private static ApiModule apiInstance;
     public FirebaseAuth firebaseAuth;
     private FirebaseDatabase database;
     private FirebaseStorage storage;
 
-    private ApiSingleton(){
+    private ApiModule(){
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         storage = FirebaseStorage.getInstance();
     }
 
-    public static ApiSingleton getInstance() {
+    public static ApiModule getInstance() {
         if(apiInstance == null) {
-            apiInstance = new ApiSingleton();
+            apiInstance = new ApiModule();
         }
         return apiInstance;
     }

@@ -11,6 +11,7 @@
         android:label="CarpoolingRR"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".MyApp"
 
         android:theme="@style/AppTheme"> <!--AppTheme-->
       <activity

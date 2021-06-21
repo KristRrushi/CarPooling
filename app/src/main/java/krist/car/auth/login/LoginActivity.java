@@ -1,6 +1,9 @@
 package krist.car.auth.login;
 
+import androidx.biometric.BiometricManager;
 import androidx.lifecycle.ViewModelProvider;
+
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 import krist.car.MainActivity;
 import krist.car.api.FirebaseApiInterface;
 import krist.car.auth.AuthRepo;
+import krist.car.biometric.BiometricAdapter;
 import krist.car.models.LoginFormModel;
 import krist.car.R;
 import krist.car.auth.register.RegisterActivity;
@@ -53,6 +57,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         registerButton.setOnClickListener(this);
 
         initLoginViewModel();
+
+
+        BiometricManager biometricManager = BiometricManager.from(this);
+        switch (biometricManager.canAuthenticate()) {
+            case BiometricManager.BIOMETRIC_SUCCESS:
+                Log.d("MY_APP_TAG", "App can authenticate using biometrics.");
+                break;
+            case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
+                Log.e("MY_APP_TAG", "No biometric features available on this device.");
+                break;
+            case BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE:
+                Log.e("MY_APP_TAG", "Biometric features are currently unavailable.");
+                break;
+            case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
+                Log.e("MY_APP_TAG", "The user hasn't associated " +
+                        "any biometric credentials with their account.");
+                break;
+        }
+
+        BiometricAdapter b = new BiometricAdapter(this);
 
     }
 

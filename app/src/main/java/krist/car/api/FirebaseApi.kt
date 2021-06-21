@@ -27,6 +27,7 @@ class FirebaseApi @Inject constructor(
     override fun createUserWithEmailAndPassword(email: String, password: String): Task<AuthResult> =
             firebaseAuth.createUserWithEmailAndPassword(email, password)
 
+
     override fun getDatabaseReferenceToThisEndPoint(endPoint: String): DatabaseReference =
             firebaseDatabase.getReference(endPoint)
 

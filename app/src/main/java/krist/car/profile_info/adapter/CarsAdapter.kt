@@ -39,6 +39,7 @@ class CarsAdapter(private val cars: ArrayList<CarModel> = arrayListOf(), private
         var carModel: TextView
         var carImg: ImageView
         var selectCarButton: Button
+        var editButton: View
 
         fun bind(model: CarModel) {
             carMake.text = model.carMarks
@@ -53,7 +54,10 @@ class CarsAdapter(private val cars: ArrayList<CarModel> = arrayListOf(), private
             carMake = itemView.findViewById(R.id.car_make)
             carModel = itemView.findViewById(R.id.car_model)
             selectCarButton = itemView.findViewById(R.id.select_car_button)
+            editButton = itemView.findViewById(R.id.edit_button)
+
             selectCarButton.setOnClickListener { v: View? -> listener.carPosition(adapterPosition) }
+            editButton.setOnClickListener {  }
         }
     }
 }
